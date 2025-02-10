@@ -1,0 +1,29 @@
+.header-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-image: url("../assets/astro-banner.jpg");
+  background-size: cover;
+  height: 15vh;
+
+  img {
+    padding-top: 7px;
+  }
+
+  a {
+    font-size: 1.15rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  a, a:active {
+    color: #E1E1BB;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color:  #FAFAB9;
+    text-decoration: none;
+  }
+}

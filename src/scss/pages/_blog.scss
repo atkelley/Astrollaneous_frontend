@@ -1,0 +1,8 @@
+.blog {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 40px;
+  min-height: 75vh;
+}
