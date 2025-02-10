@@ -3,10 +3,16 @@ import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  optimizeDeps: {
+  build: {
+    target: "es2022"
+  },
+  esbuild: {
+    target: "es2022"
+  },
+  optimizeDeps:{
     esbuildOptions: {
-      target: "esnext",
-    },
+      target: "es2022",
+    }
   },
   plugins: [react()],
 })
