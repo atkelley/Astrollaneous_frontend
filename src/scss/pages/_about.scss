@@ -1,7 +1,7 @@
 .about {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   row-gap: 40px;
 
@@ -60,14 +60,6 @@
         }
       }
     }
-
-
-  
-
-  }
-
-  section:first-of-type {
-    margin-top: 40px;
   }
 
   section:last-of-type {

@@ -27,10 +27,6 @@ export default function Navbar() {
       <li className="nav-list-item"><NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : '')}>About</NavLink></li>
       <li className="nav-list-item"><NavLink to="/contact" className={({ isActive }) => (isActive ? 'active' : '')}>Contact</NavLink></li>
       <li className="nav-list-item"><NavLink to="/blog" className={({ isActive }) => (isActive ? 'active' : '')}>Blog</NavLink></li>
-      <form>
-        <input type="search" placeholder="Search" aria-label="Search" />
-        <button className="btn btn-sm px-3 btn-outline-secondary" type="submit">Search</button>
-      </form>
 
       <div className="dropdown" ref={dropdownRef}>
         <img src={user} alt="user" onMouseOver={() => setIsOpen(true)} />
@@ -51,6 +47,11 @@ export default function Navbar() {
           </ul>
         }
       </div>
+      
+      <form>
+        <input type="search" placeholder="Search" aria-label="Search" />
+        <button className="btn btn-sm px-3 btn-outline-secondary" type="submit">Search</button>
+      </form>
     </ul>
   );
 }

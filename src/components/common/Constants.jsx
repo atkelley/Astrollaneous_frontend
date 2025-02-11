@@ -3,7 +3,7 @@ import backup_image_large from '../../assets/backup_image_large.jpg';
 
 import { getFormalDateString } from './Utilities';
 
-export const NASA_DAILY_PHOTO_BACKUP = {
+export const NASA_DAILY_PHOTO_BACKUP_DATA = {
   date: getFormalDateString(),
   media_type: 'image',
   title: 'Chandra Spots a Mega-Cluster of Galaxies in the Making',

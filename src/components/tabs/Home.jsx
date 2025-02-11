@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
-import { NASA_DAILY_PHOTO_BACKUP } from '../common/Constants';
+import { NASA_DAILY_PHOTO_BACKUP_DATA } from '../common/Constants';
 import { getDailyPhotoData } from '../../api/nasa.api';
 import { getFormalDateString } from '../common/Utilities';
 import Loader from '../common/Loader';
 
 export default function Home() {
-  const [data, setData] = useState(NASA_DAILY_PHOTO_BACKUP);
-  const { media_type, date, title, copyright, explanation, url, hdUrl, isLoaded, showModal } = data;
+  const [dailyData, setDailyData] = useState(NASA_DAILY_PHOTO_BACKUP_DATA);
+  const { media_type, date, title, copyright, explanation, url, hdUrl, isLoaded, showModal } = dailyData;
 
   useEffect(() => {
     async function getDailyPhoto() {
       await getDailyPhotoData().then(response => {
         let { media_type, title, date, copyright, explanation, hdurl, url } = response.data;
-        setData({
+
+        setDailyData({
           date: getFormalDateString(date),
           title, 
           media_type,
-          copyright: copyright ? copyright : data.copyright,
+          copyright: copyright ? copyright : dailyData.copyright,
           explanation: explanation.split(/Gallery:|Explore Your Universe:|Jigsaw Challenge:/)[0],
           hdUrl: (media_type == 'image') ? hdurl : url,
           url: (media_type == 'image') ? url : url,
@@ -55,7 +56,7 @@ export default function Home() {
     //     });
     //   } 
 
-  }, [data]);
+  }, [dailyData]);
 
   return (
     <main className="home">

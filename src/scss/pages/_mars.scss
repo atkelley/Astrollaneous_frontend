@@ -1,3 +1,123 @@
 .mars {
+  section {
+    background-color: white;
+    border-radius: 7px;
+    padding: 35px;
+    width: 80vw;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    .title-box {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 80px;
+      padding: 0px 100px;
+
+      img {
+        height: 200px;
+      }
+
+      .text-box {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: flex-start;
+        row-gap: 25px;
+
+        h1 {
+          font-size: 2.25rem;
+          font-weight: 800;
+        }
+
+        p {
+          font-size: 1.15rem;
+          font-weight: 400;
+        }
+
+        select, option {
+          padding: 2px 5px;
+          cursor: pointer;
+        }
+
+        select {
+          border-radius: 5px;
+          border: 2px solid grey;
+        }
+      }
+    }
+
+    table {
+      width: 900px;
+      margin: 20px auto;
+      border-spacing: 0;
+      border-collapse: separate;
+      border-radius: 5px;
+      border: 2px solid darkgrey;
+
+      thead {
+        text-align: center;
+        background-color: lightgrey;
+        color: black;
+        font-weight: 500;
+
+        tr th:first-of-type {
+          width: 40%
+        }
+
+        tr th {
+          width: 20%;
+          border-bottom: 2px solid darkgrey;
+          border-right: 2px solid darkgrey;
+        }
   
+        tr th:last-of-type {
+          border-right: none;
+        }
+      }
+
+      tbody {
+        tr td {
+          text-align: right;
+          border-bottom: 1px solid darkgrey;
+          border-right: 1px solid darkgrey;
+        }
+
+        tr td:first-of-type {
+          text-align: left;
+        }
+  
+        tr:last-of-type td {
+          border-bottom: none;
+        }
+  
+        tr td:last-of-type {
+          border-right: none;
+        }
+
+        tr td button {
+          border: none;
+          background-color: white;
+        }
+
+        tr td button:hover {
+          text-decoration: underline;
+          font-weight: 600;
+        }
+
+        .selected {
+          text-decoration: underline;
+          font-weight: 600;
+        }
+      }
+
+      th, td {
+        padding: 10px;
+      }
+    }
+  }
 }
