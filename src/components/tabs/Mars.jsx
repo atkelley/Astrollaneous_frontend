@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { getMarsWeatherData } from '../../api/nasa.api';
 import { getFormalDateString } from '../common/Utilities';
 import mars_orange from '../../assets/mars_round.png';
 import elysium_planitia from '../../assets/elysium_planitia.jpg';
 import Loader from '../common/Loader';
 
-export default function Mars() {
+export default function Mars({ sendModalData }) {
   const tdRefs = useRef([]);
   const [weatherData, setWeatherData] = useState({ 
     data: [], 
@@ -16,7 +18,6 @@ export default function Mars() {
     conversions: { 'temperature': 'celsius', 'pressure': 'pascal', 'speed': 'm/s' }, // DEFAULT: temperature => Celsius, pressure => Pascal, wind speed => m/s
   });
   const [isLoaded, setIsLoaded] = useState(false);
-
 
   useEffect(() => {
     async function getMarsWeather() {
@@ -112,7 +113,7 @@ export default function Mars() {
   }
 
   return (
-    <main className="mars">
+    <main className="mars">      
       {isLoaded ?
         <section>
           <div className="title-box">
@@ -120,7 +121,9 @@ export default function Mars() {
 
             <div className="text-box">
               <h1>Mars Daily Weather</h1>
-              <p>The InSight lander is taking daily weather measurements on Mars from <a className="mars-insight-link" data-toggle="modal" data-target="#mainModal"><b>Elysium Planitia</b></a> (a flat, smooth plain near Mars&apos; equator).</p>
+              <p>The <a href="https://en.wikipedia.org/wiki/InSight" target="_blank" rel="noopener noreferrer">InSight</a> lander took daily weather measurements on Mars from <Link className="elysium" onClick={() => sendModalData({ imgSrc: elysium_planitia, imgAlt: "Elysium Planitia", imgCaption: "NASA/JPL-Caltech © 2021" })}><b>Elysium Planitia</b></Link> (a flat, smooth plain near Mars&apos; equator).</p>
+              <p>Sadly, InSight stopped transmitting on <a href="https://www.nasa.gov/missions/insight/nasa-retires-insight-mars-lander-mission-after-years-of-science/" target="_blank" rel="noopener noreferrer">Dec. 15th, 2022</a>, but 
+              we preserved this page to illustrate some of the data that it was transmitting.</p>
               <p><a href="https://mars.nasa.gov/insight/" target="_blank" rel="noopener noreferrer">Click for more information about NASA&apos;s InSight program.</a></p>
 
     
@@ -162,20 +165,6 @@ export default function Mars() {
               </tr>
             </tbody>
           </table>
-
-
-
-          {/* <div className="modal fade bd-example-modal-lg" id="mainModal" tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-            <div className="modal-dialog modal-lg">
-              <div className="modal-content">
-                <div className="modal-body embed-responsive-16by9">
-                  <img itemProp="image" src="/static/mySpaceStuff/img/mars-surface.jpg" className="img-rounded" style={{ width: "100%", height: "auto" }} />
-                  <p className="modal-title float-left" id="modalLabel"><em>NASA/JPL-Caltech &copy; 2021</em></p>
-                  <button type="button" className="btn btn-secondary button-float-right" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div> */}
         </section>
       :
         <Loader />
@@ -183,3 +172,7 @@ export default function Mars() {
     </main>
   );
 }
+
+Mars.propTypes = {
+  sendModalData: PropTypes.func,
+};

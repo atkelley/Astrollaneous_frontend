@@ -28,6 +28,5 @@ export const NASA_DAILY_PHOTO_BACKUP_DATA = {
   each other for the first time.`,
   hdUrl: backup_image_large,
   url: backup_image,
-  showModal: false,
   isLoaded: false,
 };

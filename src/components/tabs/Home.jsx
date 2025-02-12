@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { NASA_DAILY_PHOTO_BACKUP_DATA } from '../common/Constants';
 import { getDailyPhotoData } from '../../api/nasa.api';
 import { getFormalDateString } from '../common/Utilities';
 import Loader from '../common/Loader';
 
-export default function Home() {
+export default function Home({ sendModalData }) {
   const [dailyData, setDailyData] = useState(NASA_DAILY_PHOTO_BACKUP_DATA);
-  const { media_type, date, title, copyright, explanation, url, hdUrl, isLoaded, showModal } = dailyData;
+  const { media_type, date, title, copyright, explanation, url, hdUrl, isLoaded } = dailyData;
 
   useEffect(() => {
     async function getDailyPhoto() {
@@ -17,7 +18,7 @@ export default function Home() {
           date: getFormalDateString(date),
           title, 
           media_type,
-          copyright: copyright ? copyright : dailyData.copyright,
+          copyright: copyright ? copyright : 'NASA © 2025',
           explanation: explanation.split(/Gallery:|Explore Your Universe:|Jigsaw Challenge:/)[0],
           hdUrl: (media_type == 'image') ? hdurl : url,
           url: (media_type == 'image') ? url : url,
@@ -29,34 +30,7 @@ export default function Home() {
     }
   
     getDailyPhoto();
-
-
-
-    // getPicOfTheDay = async () => {
-    //   try {
-    //     // let thumbnailUrl = '../images/default-space-thumbnail.jpg';
-    //     const { data } = await getDailyPhotoData.get();
-    //     let isImage = (data.media_type == 'image') ? true : false;
-  
-    //     // if (!isImage) {
-    //     //   if (data.url.includes('youtube')) {
-    //     //     let youtubeIdString = data.url.substring(30, data.url.length - 6);
-    //     //     thumbnailUrl = `https://img.youtube.com/vi/${youtubeIdString.split('?')[0]}/2.jpg`;
-    //     //   }
-    //     // }
-  
-    //     this.setState({
-    //       isImage,
-    //       isLoaded: true,
-    //       title: data.title,
-    //       description: data.explanation.split('Gallery:')[0],
-    //       author: ((data.copyright) ? capitalizeEveryFirstLetter(data.copyright) : 'NASA'),
-    //       hdUrl: (data.media_type == 'image') ? data.hdurl : data.url,
-    //       url: (data.media_type == 'image') ? data.url : data.url,
-    //     });
-    //   } 
-
-  }, [dailyData]);
+  }, []);
 
   return (
     <main className="home">
@@ -66,9 +40,15 @@ export default function Home() {
           <hr />    
 
           <div className="content-box">
-            <a data-toggle="modal" data-target='#modal' onClick={() => showModal({ 'media_type': media_type, 'modalUrl': hdUrl })}>
-              {(media_type === 'image') ? <img src={url} alt={title} /> : <iframe src={url} alt={title} />}
-            </a>
+            {media_type === 'image' ? 
+              <a onClick={() => sendModalData({ imgSrc: hdUrl, imgAlt: title, imgCaption: copyright })}>
+                <img src={url} alt={title} />
+              </a> 
+              : 
+              <div className="iframe-box">
+                <iframe src={url} alt={title} />
+              </div>
+            }
 
             <div className="text-box">
               <h6>{date}</h6>
@@ -83,3 +63,7 @@ export default function Home() {
     </main>
   );
 }
+
+Home.propTypes = {
+  sendModalData: PropTypes.func,
+};

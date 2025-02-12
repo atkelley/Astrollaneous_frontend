@@ -2,7 +2,7 @@
   section {
     background-color: white;
     border-radius: 7px;
-    padding: 35px;
+    padding: 40px;
     width: 80vw;
   
     h1 {
@@ -19,7 +19,16 @@
       column-gap: 25px;
       padding: 10px 0px;
 
-      img, iframe {
+      .iframe-box {
+        iframe {
+          height: 350px;
+          width: 500px;
+          border-radius: 20px;
+          cursor: pointer;
+        }
+      }
+
+      img {
         border-radius: 20px;
         cursor: pointer;
       }
@@ -30,10 +39,7 @@
         max-width: 500px;
       }
 
-      iframe {
-        height: 350px;
-        width: 500px;
-      }
+
   
       .text-box {
         display: flex;

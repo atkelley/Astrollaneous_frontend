@@ -1,4 +1,5 @@
 .mars {
+
   section {
     background-color: white;
     border-radius: 7px;
@@ -17,6 +18,22 @@
       align-items: center;
       column-gap: 80px;
       padding: 0px 100px;
+
+      a {
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .elysium {
+        font-weight: 600;
+      }
+
+      .elysium:hover {
+        text-decoration: none;
+      }
 
       img {
         height: 200px;
@@ -52,8 +69,8 @@
     }
 
     table {
-      width: 900px;
-      margin: 20px auto;
+      width: 90%;
+      margin: 20px auto 0px auto;
       border-spacing: 0;
       border-collapse: separate;
       border-radius: 5px;
