@@ -1,0 +1,46 @@
+.satellites {
+  section {
+    background-color: transparent;
+    border-radius: 7px;
+    width: 80vw;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+  
+    .text-box{
+      width: 100%;
+      background-color: white;
+      border-radius: 7px;
+    }
+
+    .content-box {
+      background-color: transparent;
+      width: 100%;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 40px;
+      margin-top: 40px;
+
+      .cesium-box {
+        width: 70%;
+        height: 700px;
+        background-color: white;
+        border-radius: 7px;
+      }
+
+      .accordion-box {
+        width: 30%;
+        height: 700px;
+        border-radius: 7px;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        row-gap: 10px;
+      }
+    }
+  }
+}

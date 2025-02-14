@@ -20,9 +20,9 @@ export default function Navbar() {
     <ul className="nav">
       <li className="nav-list-item"><NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>Home</NavLink></li>
       <li className="nav-list-item"><NavLink to="/mars" className={({ isActive }) => (isActive ? 'active' : '')}>Mars</NavLink></li>
-      <li className="nav-list-item"><NavLink to="/nasa" className={({ isActive }) => (isActive ? 'active' : '')}>NASA</NavLink></li>
       <li className="nav-list-item"><NavLink to="/rovers" className={({ isActive }) => (isActive ? 'active' : '')}>Rovers</NavLink></li>
       <li className="nav-list-item"><NavLink to="/satellites" className={({ isActive }) => (isActive ? 'active' : '')}>Satellites</NavLink></li>
+      <li className="nav-list-item"><NavLink to="/nasa" className={({ isActive }) => (isActive ? 'active' : '')}>NASA</NavLink></li>
       <li className="nav-list-item"><NavLink to="/techport" className={({ isActive }) => (isActive ? 'active' : '')}>TechPort</NavLink></li>
       <li className="nav-list-item"><NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : '')}>About</NavLink></li>
       <li className="nav-list-item"><NavLink to="/contact" className={({ isActive }) => (isActive ? 'active' : '')}>Contact</NavLink></li>

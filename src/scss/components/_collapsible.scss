@@ -1,0 +1,64 @@
+.collapsible {
+  width: 100%;
+  padding: 15px;
+  background-color: white;
+  border-radius: 7px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  .collapsible-top {
+    width: 100%;
+    display: flex;
+    padding: 0px 10px;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      display: inline;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    img {
+      height: 35px;
+      padding: 10px;
+      cursor: pointer;
+      border: 1px solid lightgrey;
+      border-radius: 50%;
+    }
+  }
+
+  .collapsible-body {
+    width: 100%;
+    padding-bottom: 5px;
+
+    hr {
+      margin: .75rem 0;
+      border-top: 2px solid darkgrey;
+    }
+
+    p {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      align-items: center;
+      line-height: 1.5rem;
+      column-gap: 7px;
+      padding: 0px 10px;
+
+      input[type="radio"] {
+        margin: 3px 0px 0px 0px;
+        cursor: pointer;
+      }
+
+      label {
+        font-size: 1rem;
+        font-weight: 400;
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { NASA_DAILY_PHOTO_BACKUP_DATA } from '../common/Constants';
-import { getDailyPhotoData } from '../../api/nasa.api';
+import { getDailyPhoto } from '../../api/nasa.api';
 import { getFormalDateString } from '../common/Utilities';
 import Loader from '../common/Loader';
 
@@ -10,8 +10,8 @@ export default function Home({ sendModalData }) {
   const { media_type, date, title, copyright, explanation, url, hdUrl, isLoaded } = dailyData;
 
   useEffect(() => {
-    async function getDailyPhoto() {
-      await getDailyPhotoData().then(response => {
+    async function fetchData() {
+      await getDailyPhoto().then(response => {
         let { media_type, title, date, copyright, explanation, hdurl, url } = response.data;
 
         setDailyData({
@@ -29,7 +29,7 @@ export default function Home({ sendModalData }) {
       });
     }
   
-    getDailyPhoto();
+    fetchData();
   }, []);
 
   return (

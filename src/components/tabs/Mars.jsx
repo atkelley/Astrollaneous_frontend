@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { getMarsWeatherData } from '../../api/nasa.api';
+import { getMarsWeather } from '../../api/nasa.api';
 import { getFormalDateString } from '../common/Utilities';
 import mars_orange from '../../assets/mars_round.png';
 import elysium_planitia from '../../assets/elysium_planitia.jpg';
@@ -20,8 +20,8 @@ export default function Mars({ sendModalData }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    async function getMarsWeather() {
-      await getMarsWeatherData().then(response => {
+    async function fetchData() {
+      await getMarsWeather().then(response => {
         let array = [];
 
         for (let key in response.data) {
@@ -45,7 +45,7 @@ export default function Mars({ sendModalData }) {
       });
     }
 
-    getMarsWeather();
+    fetchData();
   }, []);
 
   const convertValues = (valuesObj, metric) => {

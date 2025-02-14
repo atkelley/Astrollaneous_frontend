@@ -1,3 +1,4 @@
 import { api } from "../api/api";
 
-export const getSatellite = (name) => api.get(`/space/satellites/${name}`); 
+export const getSatellites = () => api.get(`/satellites/`); 
+export const getSatellite = (name) => api.get(`/satellites/${name}`); 
