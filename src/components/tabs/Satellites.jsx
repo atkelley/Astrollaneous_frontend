@@ -40,7 +40,8 @@ export default function Satellites() {
   useEffect(() => {
     async function fetchData() {
       await getSatellites().then(response => {
-        
+        console.log(response);
+        console.log(response.data);
         const ordered = Object.keys(response.data).sort((a, b) => b.localeCompare(a)).reduce(
           (obj, key) => { 
             obj[key] = response.data[key]; 
