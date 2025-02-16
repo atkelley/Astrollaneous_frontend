@@ -51,7 +51,7 @@ export default function Satellites() {
         );
 
         setSatelliteData(ordered);
-        setSelectedSatellite(response.data['Weather & Earth'].filter(satellite => satellite.acronym === 'NOAA')[0]);
+        setSelectedSatellite(response.data['Weather & Earth'].filter(satellite => satellite.name === 'noaa')[0]);
       }).catch(error => {
         console.log(error);
       });
@@ -81,7 +81,7 @@ export default function Satellites() {
   // }
 
   const handleChange = (value, type) => {
-    setSelectedSatellite(satelliteData[type].filter(satellite => satellite.acronym === value)[0]);
+    setSelectedSatellite(satelliteData[type].filter(satellite => satellite.name === value)[0]);
   }
 
   return (
@@ -105,11 +105,11 @@ export default function Satellites() {
               {Object.keys(satelliteData).map((type, index) => {
                 return (
                   <Collapsible key={index} title={type}>
-                    {satelliteData[type].map(({id, acronym}) => {
+                    {satelliteData[type].map(({id, name, acronym}) => {
                       return (
-                        <p key={id} onClick={() => handleChange(acronym, type)}>
-                          <input type="radio" id={acronym} name="satellites" value={acronym} checked={selectedSatellite.acronym === acronym} onChange={(event) => handleChange(event.target.value, type)} />
-                          <label htmlFor="huey">{acronym}</label>
+                        <p key={id} onClick={() => handleChange(name, type)}>
+                          <input type="radio" id={name} name="satellites" value={name} checked={selectedSatellite.name === name} onChange={(event) => handleChange(event.target.value, type)} />
+                          <label htmlFor="satellites">{acronym}</label>
                         </p>
                       );
                     })}
