@@ -4,6 +4,7 @@ import Collapsible from "../common/Collapsible";
 import Loader from '../common/Loader';
 
 import * as Cesium from 'cesium';
+import 'cesium/Build/Cesium/Widgets/widgets.css'
 
 // window.CESIUM_BASE_URL = '/';
 
@@ -13,10 +14,12 @@ export default function Satellites() {
   const [selectedSatellite, setSelectedSatellite] = useState('noaa');
 
   useEffect(() => {
-    // const viewer = new Cesium.Viewer("cesiumContainer", { shouldAnimate: true, });
-    
+    Cesium.Ion.defaultAccessToken = import.meta.env.VITE_CESIUM_TOKEN;
+    const viewer = new Cesium.Viewer("cesiumContainer", { shouldAnimate: true, });
 
-      // Cesium.Ion.defaultAccessToken = import.meta.env.VITE_CESIUM_TOKEN;
+
+
+
  
       // var viewer = new Cesium.Viewer("cesiumContainer", { shouldAnimate: true, });
       // viewer.entities.removeAll();
@@ -33,7 +36,7 @@ export default function Satellites() {
       //   },
       // });
 
-    // return () => viewer.destroy();
+    return () => viewer.destroy();
   }, []);
 
 
@@ -92,11 +95,11 @@ export default function Satellites() {
             </Collapsible>
           </div>
 
+          
+
           <div className="content-box">
             <div className="cesium-box">
-              {/* <div id="cesiumContainer" className="fullSize"></div>
-              <div id="loadingOverlay"><h1>Loading...</h1></div>
-              <div id="toolbar"></div> */}
+              <div id="cesiumContainer"></div>
             </div>
 
             <div className="accordion-box">

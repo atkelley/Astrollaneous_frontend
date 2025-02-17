@@ -20,15 +20,16 @@
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       column-gap: 40px;
       margin-top: 40px;
 
       .cesium-box {
         width: 70%;
-        height: 700px;
         background-color: white;
         border-radius: 7px;
+        border: 2px solid white;
+        padding: 2px;
       }
 
       .accordion-box {
