@@ -1,10 +1,10 @@
-import thumb_heic from '../../assets/thumb_heic.jpg';
-import large_heic from '../../assets/large_heic.jpg';
-import thumb_sunshield from '../../assets/thumb_sunshield.jpg';
-import large_sunshield from '../../assets/large_sunshield.jpg';
-import thumb_space from '../../assets/thumb_space.jpg';
-import large_space from '../../assets/large_space.jpg';
-import Space from '../../assets/space.jpg';
+import thumb_heic from '../../assets/img/thumb_heic.jpg';
+import large_heic from '../../assets/img/large_heic.jpg';
+import thumb_sunshield from '../../assets/img/thumb_sunshield.jpg';
+import large_sunshield from '../../assets/img/large_sunshield.jpg';
+import thumb_space from '../../assets/img/thumb_space.jpg';
+import large_space from '../../assets/img/large_space.jpg';
+import Space from '../../assets/img/space.jpg';
 
 export default function About() {
 

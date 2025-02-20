@@ -19,7 +19,7 @@ export default function Home({ sendModalData }) {
           title, 
           media_type,
           copyright: copyright ? copyright : 'NASA © 2025',
-          explanation: explanation.split(/Gallery:|Explore Your Universe:|Jigsaw Challenge:/)[0],
+          explanation: explanation.split(/Gallery:|Explore Your Universe:|Jigsaw Challenge:|Portal Universe:/)[0],
           hdUrl: (media_type == 'image') ? hdurl : url,
           url: (media_type == 'image') ? url : url,
           isLoaded: true,

@@ -1,5 +1,5 @@
-import backup_image from '../../assets/backup_image.jpg';
-import backup_image_large from '../../assets/backup_image_large.jpg';
+import backup_image from '../../assets/img/backup_image.jpg';
+import backup_image_large from '../../assets/img/backup_image_large.jpg';
 
 import { getFormalDateString } from './Utilities';
 

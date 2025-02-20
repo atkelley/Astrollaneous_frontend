@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import user from '../assets/user.png';
+import user from '../assets/img/user.png';
 
 export default function Navbar() {
   const dropdownRef = useRef(null);

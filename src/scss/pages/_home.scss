@@ -1,9 +1,15 @@
 .home {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  
   section {
     background-color: white;
     border-radius: 7px;
     padding: 40px;
     width: 80vw;
+    height: fit-content;
   
     h1 {
       font-size: 2.5rem;

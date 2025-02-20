@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import astrollaneous_logo from '../assets/astrollaneous_logo.png';
+import astrollaneous_logo from '../assets/img/astrollaneous_logo.png';
 
 export default function Header() {
 

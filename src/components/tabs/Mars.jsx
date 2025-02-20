@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getMarsWeather } from '../../api/nasa.api';
 import { getFormalDateString } from '../common/Utilities';
-import mars_orange from '../../assets/mars_round.png';
-import elysium_planitia from '../../assets/elysium_planitia.jpg';
+import mars_orange from '../../assets/img/mars_round.png';
+import elysium_planitia from '../../assets/img/elysium_planitia.jpg';
 import Loader from '../common/Loader';
 
 export default function Mars({ sendModalData }) {
@@ -15,7 +15,7 @@ export default function Mars({ sendModalData }) {
     convertedSolTemps: null, 
     convertedSolPressures: null, 
     convertedSolSpeeds: null, 
-    conversions: { 'temperature': 'celsius', 'pressure': 'pascal', 'speed': 'm/s' }, // DEFAULT: temperature => Celsius, pressure => Pascal, wind speed => m/s
+    conversions: { 'temperature': 'celsius', 'pressure': 'pascal', 'speed': 'm/s' }, 
   });
   const [isLoaded, setIsLoaded] = useState(false);
 

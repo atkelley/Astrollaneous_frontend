@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Space from '../assets/space.jpg';
+import Space from '../assets/img/space.jpg';
 
 export default function Wrapper({ children }) {
 

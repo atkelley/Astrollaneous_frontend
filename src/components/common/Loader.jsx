@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import Phobos from '../../assets/phobos_flat.jpg';
-import Deimos from '../../assets/deimos_flat.png';
-import Mars from '../../assets/mars_flat.jpg';
+import Phobos from '../../assets/img/phobos_flat.jpg';
+import Deimos from '../../assets/img/deimos_flat.png';
+import Mars from '../../assets/img/mars_flat.jpg';
 
 export default function Loader() {
   const loadingTextRef = useRef(null);
