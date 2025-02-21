@@ -1,45 +1,46 @@
 // https://sass-guidelin.es/#architecture
 
-@import 'abstracts/variables';
-@import 'abstracts/functions';
-@import 'abstracts/mixins';
-@import 'abstracts/placeholders';
+@import "abstracts/variables";
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/placeholders";
 
-@import 'vendors/bootstrap';
+@import "vendors/bootstrap";
 
-@import 'base/reset';
-@import 'base/typography';
+@import "base/reset";
+@import "base/typography";
 
-@import 'layout/layout';
-@import 'layout/header';
-@import 'layout/navbar';
-@import 'layout/footer';
-@import 'layout/wrapper';
-// @import 'layout/sidebar';
-// @import 'layout/forms';
+@import "layout/layout";
+@import "layout/header";
+@import "layout/navbar";
+@import "layout/footer";
+@import "layout/wrapper";
+// @import "layout/sidebar";
+// @import "layout/forms";
 
-// @import 'components/buttons';
-// @import 'components/carousel';
-// @import 'components/cover';
-// @import 'components/dropdown';
-@import 'components/post';
-@import 'components/loader';
-@import 'components/modal';
-@import 'components/collapsible';
-
-
-@import 'pages/home';
-@import 'pages/mars';
-@import 'pages/rovers';
-@import 'pages/nasa';
-@import 'pages/satellites';
-@import 'pages/techport';
-@import 'pages/about';
-@import 'pages/contact';
-@import 'pages/blog';
+// @import "components/buttons";
+// @import "components/carousel";
+// @import "components/cover";
+// @import "components/dropdown";
+@import "components/post";
+@import "components/loader";
+@import "components/modal";
+@import "components/collapsible";
+@import "components/spinner";
 
 
+@import "pages/home";
+@import "pages/mars";
+@import "pages/rovers";
+@import "pages/nasa";
+@import "pages/satellites";
+@import "pages/techport";
+@import "pages/about";
+@import "pages/contact";
+@import "pages/blog";
 
-// @import 'themes/theme';
-// @import 'themes/admin';
+
+
+// @import "themes/theme";
+// @import "themes/admin";
 
