@@ -1,18 +1,16 @@
 .spinner-container {
-  position: relative;
-  height: 55vh;
 
   .spinner-wrap {
     position: absolute;
-    top: 40%;
-    left: 50%;
+    top: 54%;
+    left: 45%;
     height: 250px;
     width: 250px;
     transform: translate(-50%, -50%);
 
     .spinner {
-      border: 25px solid #f3f3f3; 
-      border-top: 25px solid #20538a; 
+      border: 35px solid #f3f3f3; 
+      border-top: 35px solid #20538a; 
       border-radius: 50%;
       width: 100%;
       height: 100%;
@@ -22,7 +20,7 @@
 
   .spinning-wrap {
     position: absolute;
-    top: 100%;
+    top: 80%;
     left: 50%;
     transform: translate(-50%, -25%);
     height: 55vh;

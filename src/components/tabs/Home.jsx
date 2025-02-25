@@ -8,6 +8,7 @@ import Loader from '../common/Loader';
 export default function Home({ sendModalData }) {
   const [dailyData, setDailyData] = useState(NASA_DAILY_PHOTO_BACKUP_DATA);
   const { media_type, date, title, copyright, explanation, url, hdUrl, isLoaded } = dailyData;
+  console.log(copyright)
 
   useEffect(() => {
     async function fetchData() {
@@ -18,7 +19,7 @@ export default function Home({ sendModalData }) {
           date: getFormalDateString(date),
           title, 
           media_type,
-          copyright: copyright ? copyright : 'NASA © 2025',
+          copyright: copyright ? `${copyright} © 2025` : 'NASA © 2025',
           explanation: explanation.split(/Gallery:|Explore Your Universe:|Jigsaw Challenge:|Portal Universe:/)[0],
           hdUrl: (media_type == 'image') ? hdurl : url,
           url: (media_type == 'image') ? url : url,

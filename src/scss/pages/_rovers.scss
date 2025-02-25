@@ -7,9 +7,56 @@
   section {
     background-color: white;
     border-radius: 7px;
-    padding: 35px;
+    padding: 15px 35px;
     width: 80vw;
+    min-height: 60vh;
     height: fit-content;
+    position: relative;
 
+    .rovers-nav-list {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+      align-items: center;
+      column-gap: 15px;
+      border-bottom: 2px solid rgba($base-dark-color, 0.9);
+
+      button {
+        border: 0px;
+        padding: 10px 15px;
+        font-weight: 600;
+        background-color: transparent;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-left: 2px solid transparent;
+        border-right: 2px solid transparent;
+        border-top: 2px solid transparent;
+      }
+
+      button:hover {
+        color: white;
+        background-color: rgba($base-dark-color, 0.55);
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        border-left: 2px solid rgba($base-dark-color, 0.9);
+        border-right: 2px solid rgba($base-dark-color, 0.9);
+        border-top: 2px solid rgba($base-dark-color, 0.9);
+      }
+
+      button:active {
+        background-color: rgba($base-dark-color, 0.65);
+      }
+
+      button:focus {
+        border-left: 2px solid rgba($base-dark-color, 0.9);
+        border-right: 2px solid rgba($base-dark-color, 0.9);
+        border-top: 2px solid rgba($base-dark-color, 0.9);
+        background-color: rgba($base-dark-color, 0.15);
+      }
+
+      button:focus:hover {
+        text-shadow: none;
+        color: black;
+      }
+    }
   }
 }
