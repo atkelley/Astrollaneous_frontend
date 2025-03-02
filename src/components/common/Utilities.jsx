@@ -25,16 +25,8 @@ export const reformatDateString = (dateString) => {
   return `${dateArray[1]}/${dateArray[2]}/${dateArray[0].substring(2, 4)}`;
 }
 
-export const getNewSlideIndex = (value, slideIndex, collection) => {
-  let newSlideIndex = slideIndex + value;
-
-  if (newSlideIndex > collection.length - 1) { 
-    newSlideIndex = 0 
-  } 
-  
-  if (newSlideIndex < 0) {
-    newSlideIndex = collection.length -1 ;
-  }
-  
-  return newSlideIndex;
+export const getNextDate = (date) => {
+  const nextDate = new Date(date);
+  nextDate.setDate(nextDate.getDate() + 1);
+  return nextDate;
 }

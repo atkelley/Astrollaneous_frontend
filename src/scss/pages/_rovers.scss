@@ -46,14 +46,14 @@
         background-color: rgba($base-dark-color, 0.65);
       }
 
-      button:focus {
+      .selected {
         border-left: 2px solid rgba($base-dark-color, 0.9);
         border-right: 2px solid rgba($base-dark-color, 0.9);
         border-top: 2px solid rgba($base-dark-color, 0.9);
         background-color: rgba($base-dark-color, 0.15);
       }
 
-      button:focus:hover {
+      .selected:hover {
         text-shadow: none;
         color: black;
       }

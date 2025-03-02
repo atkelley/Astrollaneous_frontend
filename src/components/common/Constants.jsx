@@ -30,3 +30,15 @@ export const NASA_DAILY_PHOTO_BACKUP_DATA = {
   url: backup_image,
   isLoaded: false,
 };
+
+import curiosity from "../../assets/mp4/curiosity-3d.mp4";
+import opportunity from "../../assets/mp4/opportunity-3d.mp4";
+import spirit from "../../assets/mp4/spirit-3d.mp4";
+import perseverance from "../../assets/mp4/perseverance-3d.mp4";
+
+export const roverVideos = { 
+  "Curiosity": curiosity, 
+  "Perseverance": perseverance, 
+  "Opportunity": opportunity, 
+  "Spirit": spirit 
+};

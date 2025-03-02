@@ -8,7 +8,6 @@ import Loader from '../common/Loader';
 export default function Home({ sendModalData }) {
   const [dailyData, setDailyData] = useState(NASA_DAILY_PHOTO_BACKUP_DATA);
   const { media_type, date, title, copyright, explanation, url, hdUrl, isLoaded } = dailyData;
-  console.log(copyright)
 
   useEffect(() => {
     async function fetchData() {

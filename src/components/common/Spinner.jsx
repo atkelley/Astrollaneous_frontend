@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export default function Spinner() {
-  const [isLoading, setIsLoading] = useState(false);
   const spinningTextRef = useRef(null);
 
   useEffect(() => {
@@ -30,11 +29,9 @@ export default function Spinner() {
       <div className="spinner-wrap">
         <div className="spinner"></div> 
       </div>
-      {isLoading &&
-        <div className="spinning-wrap">
-          <h1 className="spinning" ref={spinningTextRef}>Loading<span>.</span><span>.</span><span>.</span><span>.</span><span>.</span></h1>
-        </div>
-      }
+      <div className="spinning-wrap">
+        <h1 className="spinning" ref={spinningTextRef}>Loading<span>.</span><span>.</span><span>.</span><span>.</span><span>.</span></h1>
+      </div>
     </div>
   );
 }

@@ -25,6 +25,16 @@
       column-gap: 25px;
       padding: 10px 0px;
 
+      img {
+        border-radius: 20px;
+        outline: 1px solid black;
+        box-shadow: 2px 2px 5px grey;
+        cursor: pointer;
+        min-width: 400px;
+        max-height: 400px;
+        max-width: 500px;
+      }
+
       .iframe-box {
         iframe {
           height: 350px;
@@ -34,19 +44,6 @@
         }
       }
 
-      img {
-        border-radius: 20px;
-        cursor: pointer;
-      }
-  
-      img {
-        min-width: 400px;
-        max-height: 400px;
-        max-width: 500px;
-      }
-
-
-  
       .text-box {
         display: flex;
         flex-flow: column nowrap;

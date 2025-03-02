@@ -2,8 +2,8 @@
 
   .spinner-wrap {
     position: absolute;
-    top: 54%;
-    left: 45%;
+    top: 45%;
+    left: 50%;
     height: 250px;
     width: 250px;
     transform: translate(-50%, -50%);
@@ -20,7 +20,7 @@
 
   .spinning-wrap {
     position: absolute;
-    top: 80%;
+    top: 100%;
     left: 50%;
     transform: translate(-50%, -25%);
     height: 55vh;
@@ -31,6 +31,14 @@
       margin: 0 auto;
       font-size: 2rem;
       font-weight: 600;
+
+      span {
+        visibility: hidden;
+      }
+      
+      span:first-of-type {
+        visibility: visible;
+      }
     }
   }
 }

@@ -34,7 +34,7 @@ export default function App() {
         <Route path="/" exact element={<Wrapper><Home sendModalData={(data) => setModalData({ ...data })} /></Wrapper>} />
         <Route path="/blog" exact element={<Wrapper><Blog /></Wrapper>} />
         <Route path="/mars" exact element={<Wrapper><Mars sendModalData={(data) => setModalData({ ...data })} /></Wrapper>} />
-        <Route path="/rovers" exact element={<Wrapper><Rovers /></Wrapper>} />
+        <Route path="/rovers" exact element={<Wrapper><Rovers sendModalData={(data) => setModalData({ ...data })} /></Wrapper>} />
         <Route path="/satellites" exact element={<Wrapper><Satellites /></Wrapper>} />
         <Route path="/nasa" exact element={<Wrapper><Nasa /></Wrapper>} />
         <Route path="/techport" exact element={<Wrapper><Techport /></Wrapper>} />
