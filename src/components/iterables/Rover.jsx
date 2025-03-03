@@ -112,7 +112,7 @@ export default function Rover({ rover, sendModalData }) {
                     onChange={(event) => setSelected({ ...selected, "dateType": event.target.value })} 
                     checked={(selected.dateType == "earth")}
                   /> 
-                  <label htmlFor="earth">By Earth</label>
+                  <label htmlFor="earth">Earth</label>
                 </div>
                 <span>(from {reformatDateString(landing_date)} to {reformatDateString(max_date)})</span>
               </div>
@@ -134,7 +134,7 @@ export default function Rover({ rover, sendModalData }) {
                     onChange={(event) => setSelected({ ...selected, "dateType": event.target.value })} 
                     checked={(selected.dateType == 'sol')}
                   /> 
-                  <label htmlFor="sol">By Sol</label>
+                  <label htmlFor="sol">Sol</label>
                 </div>
                 <span>(from Sol 1 to Sol { max_sol })</span>
               </div>

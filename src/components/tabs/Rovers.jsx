@@ -9,7 +9,7 @@ export default function Rovers({ sendModalData }) {
   const [selectedRover, setSelectedRover] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const fetchRoverData = async (name) => {
+  const fetchData = async (name) => {
     setIsLoaded(false);
     setTabSelect(name);
     const env = await import.meta.env;
@@ -24,17 +24,17 @@ export default function Rovers({ sendModalData }) {
   };
 
   useEffect(() => {
-    fetchRoverData("perseverance");
+    fetchData("perseverance");
   }, []);
 
   return (
     <main className="rovers">
       <section>
         <div className="rovers-nav-list">
-          <button type="button" id="perseverance" className={tabSelect === "perseverance" ? 'selected' : null} onClick={(event) => fetchRoverData(event.target.id)}>Perseverance</button>
-          <button type="button" id="curiosity" className={tabSelect === "curiosity" ? 'selected' : null} onClick={(event) => fetchRoverData(event.target.id)}>Curiosity</button>
-          <button type="button" id="spirit" className={tabSelect === "spirit" ? 'selected' : null} onClick={(event) => fetchRoverData(event.target.id)}>Spirit</button>
-          <button type="button" id="opportunity" className={tabSelect === "opportunity" ? 'selected' : null} onClick={(event) => fetchRoverData(event.target.id)}>Opportunity</button>
+          <button type="button" id="perseverance" className={tabSelect === "perseverance" ? 'selected' : null} onClick={(event) => fetchData(event.target.id)}>Perseverance</button>
+          <button type="button" id="curiosity" className={tabSelect === "curiosity" ? 'selected' : null} onClick={(event) => fetchData(event.target.id)}>Curiosity</button>
+          <button type="button" id="spirit" className={tabSelect === "spirit" ? 'selected' : null} onClick={(event) => fetchData(event.target.id)}>Spirit</button>
+          <button type="button" id="opportunity" className={tabSelect === "opportunity" ? 'selected' : null} onClick={(event) => fetchData(event.target.id)}>Opportunity</button>
         </div>
         {isLoaded ? <Rover rover={selectedRover} sendModalData={sendModalData} /> : <Spinner />}
       </section>

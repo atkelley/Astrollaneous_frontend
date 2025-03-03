@@ -1,3 +1,229 @@
 .nasa {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+
+  section {
+    background-color: white;
+    border-radius: 7px;
+    padding: 40px 20px 20px 20px;
+    width: 80vw;
+    height: fit-content;
+    position: relative;
+
+    form {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-items: center;
+      row-gap: 15px;
+      width: 100%;
+
+      .input-container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
   
+        .input-field {
+          width: 80%;
+          height: 50px;
+          padding: 10px;
+          border-radius: 5px;
+          border: 2px solid black;
+          margin-right: 10px;
+        }
+  
+        .input-button {
+          height: 50px;
+          border: 2px solid black;
+          border-radius: 5px;
+          padding: 0px 10px;
+    
+          img {
+            width: 25px;
+            height: 25px;
+          }
+        }
+  
+        .input-button:hover {
+          background: #CCCCCC;
+        }
+    
+        .input-button:focus {
+          background: #CCCCCC;
+        }
+      }
+
+      .checkbox-container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+        column-gap: 10px;
+        width: 50%;
+
+        label {
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-between;
+          align-items: center;
+          column-gap: 5px;
+
+          input {
+            margin-top: 2px;
+            cursor: pointer;
+          }
+      
+          input[type="checkbox"]:checked {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+
+    .results-box {
+      border: 1px solid grey;
+      border-radius: 15px;
+      margin: 20px 0px 0px;
+      padding: 20px;
+
+      .results-header {
+        width: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 20px;
+
+        h3 {
+          display: inline;
+          text-decoration: underline;
+          font-size: 1.65rem;
+          font-weight: 700;
+        }
+
+        .results-header-tabs {
+          border: 1px solid #CCCCCC;
+          border-radius: 10px;
+          float: right;
+
+          .results-header-tab {
+            background-color: #FFFFFF;
+            cursor: pointer;
+            padding: 8px 10px;
+          }
+          
+          .results-header-tab:hover, .results-header-tab:focus, .results-header-tab.active {
+            background-color: #CCCCCC;
+            outline: 0;
+          }
+          
+          .results-header-tab.front, .results-header-tab.front.active {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+          }
+          
+          .results-header-tab.back, .results-header-tab.back.active {
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+          }
+        }
+      }
+      
+
+      .results-content-box{
+        width: 100%;
+
+        .slideshow-container {
+          width: 100%
+        }
+      }
+
+
+    }
+
+
+
+    // /* VIDEO */
+    // .video-container {
+    //   padding: 20px 0px 40px 0;
+    //   border-bottom: 1px solid #CCCCCC;
+    // }
+
+    // .video-container:first-of-type {
+    //   padding: 10px 0px 20px 0;
+    // }
+
+    // .video-container:last-of-type {
+    //   border-bottom: none;
+    // }
+
+    // .video-image-wrapper {
+    //   position: relative;
+    // }
+
+    // .video-image-wrapper .fa-play {
+    //   position: absolute;
+    //   top: 50%;
+    //   left: 50%;
+    //   transform: translate(-50%, -50%);
+    //   color: white;
+    // }
+
+    // .video-image {
+    // padding: 10px;
+    // max-width: 100%;
+    // height: auto;
+    // border: 2px solid #CCCCCC;
+    // border-radius: 5px;
+    // }
+
+    // .video-image:hover, .video-image-wrapper .fa-play:hover {
+    // cursor: pointer;
+    // }
+
+    // .video-image:hover {
+    // box-shadow: 1px 1px 2px black, 0 0 5px #007bff, 0 0 5px #0056b3;
+    // }
+
+
+
+
+    // /* AUDIO */
+    // .audio-container {
+    //   padding: 20px 0px 20px 0;
+    //   border-bottom: 1px solid #CCCCCC;
+    // }
+
+    // .audio-container:first-of-type {
+    //   padding: 10px 0px 20px 0;
+    // }
+
+    // .audio-container:last-of-type {
+    //   border-bottom: none;
+    // }
+
+
+    // /* VIDEO & AUDIO */
+    // .toggle-click {
+    //   cursor: pointer;
+    //   color: #007bff;
+    // }
+
+    // .toggle-click:hover {
+    //   color: #0056b3;
+    // }
+
+
+
+    .no-results-box {
+      padding: 60px 0px 0px;
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+  }
 }

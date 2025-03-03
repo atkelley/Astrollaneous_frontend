@@ -1,0 +1,51 @@
+.audio-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 20px;
+  border-bottom: 1px solid #CCCCCC;
+  padding: 20px 0px;
+
+  audio {
+    display: block;
+    width: 40%;
+  }
+
+  .audio-text-box {
+    width: 60%;
+    flex: 0 1 auto;
+
+    .title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .date {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 10px 0px;
+      line-height: 1.2;
+    }
+
+    .description {
+      margin-bottom: 10px;
+    }
+
+    .toggle-click {
+      cursor: pointer;
+      color: #007bff;
+      font-weight: 500;
+    }
+    
+    .toggle-click:hover {
+      color: #0056b3;
+    }
+  }
+}
+
+.audio-container:last-of-type {
+  border-bottom: none;
+}
+

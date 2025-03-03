@@ -4,7 +4,7 @@ const getOrdinalNumber = (number) => {
 };
 
 export const getFormalDateString = (dateString) => {
-  let date = (dateString) ? new Date(dateString + "T12:00:00.000Z") : new Date();
+  let date = (dateString) ? new Date(dateString.split("T")[0] + "T12:00:00.000Z") : new Date();
   let day = getOrdinalNumber(date.getDate());
   let month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][date.getMonth()];
   let year = date.getFullYear();
