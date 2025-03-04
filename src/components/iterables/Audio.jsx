@@ -55,7 +55,7 @@ export default function Audio({ audio: { json_url, title, nasa_id, create_date, 
         }
       </div>
     </div>
-  )
+  );
 }
 
 Audio.propTypes = {

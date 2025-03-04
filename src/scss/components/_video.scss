@@ -1,4 +1,4 @@
-.audio-container {
+.video-container {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -7,17 +7,36 @@
   border-bottom: 1px solid #CCCCCC;
   padding: 20px 0px;
 
-  audio {
-    display: block;
+  .video-image-wrapper {
     width: 40%;
+    height: 200px;
+    padding: 7px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+
+    .video-image-box {
+      width: 100%;
+      height: 100%;
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 50%; 
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: 45px;
+      height: 45px;
+      z-index: 100;
+    }
   }
 
-  audio:hover {
-    border-radius: 25px;
-    box-shadow: 0px 0px 12px grey;
+  .video-image-wrapper:hover {
+    box-shadow: 0px 0px 12px #20538a;
   }
 
-  .audio-text-box {
+  .video-text-box {
     width: 60%;
     flex: 0 1 auto;
 
@@ -50,7 +69,6 @@
   }
 }
 
-.audio-container:last-of-type {
+.video-container:last-of-type {
   border-bottom: none;
 }
-

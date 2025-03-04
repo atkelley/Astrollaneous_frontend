@@ -48,7 +48,7 @@ export default function Nasa({ sendModalData }) {
           }
   
           if (item.data[0].media_type == 'video') {
-            searchObject.preview_image = item['links'][0]['href'];
+            searchObject.preview_image = item['links'][0]['href'].replaceAll(' ', '%20');
           }
   
           if (state.checkboxes[item.data[0].media_type].checked){
@@ -151,29 +151,29 @@ export default function Nasa({ sendModalData }) {
                 <hr />
                   
                 <div className="results-content-box">
-                {state.selectedCollectionType == 'image' &&
-                  <div className="slideshow-container">
-                    <Image 
-                      image={state.convertedResults[state.selectedCollectionType][state.slideIndex]} 
-                      index={state.slideIndex} 
-                      total={state.convertedResults[state.selectedCollectionType].length} 
-                      showModal={(data) => sendModalData(data)} 
-                      handleNextSlide={(value) => handleNextSlide(value)}
-                    />
-                  </div>
-                }
+                  {state.selectedCollectionType == 'image' &&
+                    <div className="slideshow-container">
+                      <Image 
+                        image={state.convertedResults[state.selectedCollectionType][state.slideIndex]} 
+                        index={state.slideIndex} 
+                        total={state.convertedResults[state.selectedCollectionType].length} 
+                        sendModalData={(data) => sendModalData(data)} 
+                        handleNextSlide={(value) => handleNextSlide(value)}
+                      />
+                    </div>
+                  }
 
-                {state.selectedCollectionType == 'video' &&
-                  state.convertedResults[state.selectedCollectionType].map((item, index) => {
-                    return <Video key={index} video={item} showModal={(data) => sendModalData(data)} />
-                  })
-                }
+                  {state.selectedCollectionType == 'video' &&
+                    state.convertedResults[state.selectedCollectionType].map((item, index) => {
+                      return <Video key={index} video={item} sendModalData={(data) => sendModalData(data)} />
+                    })
+                  }
 
-                {state.selectedCollectionType == 'audio' &&
-                  state.convertedResults[state.selectedCollectionType].map((item, index) => {
-                    return <Audio key={index} audio={item} />
-                  })
-                }
+                  {state.selectedCollectionType == 'audio' &&
+                    state.convertedResults[state.selectedCollectionType].map((item, index) => {
+                      return <Audio key={index} audio={item} />
+                    })
+                  }
                 </div>
               </div>
             }
