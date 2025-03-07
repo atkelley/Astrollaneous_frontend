@@ -19,7 +19,7 @@ export default function Home({ sendModalData }) {
           title, 
           media_type,
           copyright: copyright ? `${copyright} © 2025` : 'NASA © 2025',
-          explanation: explanation.split(/Gallery:|Explore Your Universe:|Jigsaw Challenge:|Portal Universe:/)[0],
+          explanation: explanation.split(/Gallery:|Explore Your Universe:|Jigsaw Challenge:|Portal Universe:|Your Sky Surprise:|Jump Around the Universe:|Today's Coverage:/)[0],
           hdUrl: (media_type == 'image') ? hdurl : url,
           url: (media_type == 'image') ? url : url,
           isLoaded: true,
@@ -40,16 +40,15 @@ export default function Home({ sendModalData }) {
           <hr />    
 
           <div className="content-box">
-            {media_type === 'image' ? 
-              <a onClick={() => sendModalData({ imgSrc: hdUrl, imgAlt: title, imgCaption: copyright })}>
+            <a onClick={() => sendModalData({ media_type, src: hdUrl, alt: title, caption: copyright })}>
+              {media_type === 'image' ? 
                 <img src={url} alt={title} />
-              </a> 
-              : 
-              <div className="iframe-box">
-                <iframe src={url} alt={title} />
-              </div>
-            }
-
+                :
+                <div className="iframe-box">
+                  <iframe src={url} alt={title} />
+                </div>
+              }
+            </a> 
             <div className="text-box">
               <h6>{date}</h6>
               <h3>{title}</h3>

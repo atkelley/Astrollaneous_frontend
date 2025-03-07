@@ -168,7 +168,7 @@ export default function Rover({ rover, sendModalData }) {
                   <button onClick={() => handleNextSlide(1)}>&#10095;&#10095;&#10095;</button> 
                 </div>
                 <div className="slideshow-content">
-                  <a onClick={() => sendModalData({ imgSrc: selected.cameraData[cameraType][slideIndex], imgAlt: `${name} - ${cameraType}`, imgCaption: `${name} - ${cameraType} ${cameraType} - (${slideIndex + 1}/${selected.cameraData[cameraType].length})` })}>
+                  <a onClick={() => sendModalData({ media_type: "image", src: selected.cameraData[cameraType][slideIndex], alt: `${name} - ${cameraType}`, caption: `${name} - ${cameraType} ${cameraType} - (${slideIndex + 1}/${selected.cameraData[cameraType].length})` })}>
                     <img src={selected.cameraData[cameraType][slideIndex]} alt={`${name} - ${cameraType} - ${slideIndex + 1}`} />
                   </a>
                 </div>
@@ -184,6 +184,19 @@ export default function Rover({ rover, sendModalData }) {
 }
 
 Rover.propTypes = {
-  rover: PropTypes.object,
+  rover: PropTypes.shape({
+    name: PropTypes.string, 
+    status: PropTypes.string, 
+    launch_date: PropTypes.string, 
+    landing_date: PropTypes.string, 
+    max_date: PropTypes.string, 
+    max_sol: PropTypes.number, 
+    cameras:  PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        full_name: PropTypes.string
+      })
+    )
+  }),
   sendModalData: PropTypes.func
 };

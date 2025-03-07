@@ -10,14 +10,13 @@ import search from "../../assets/img/search.png";
 
 export default function Nasa({ sendModalData }) {
   const [state, setState] = useState({
-    slideIndex: 0,
+    searchTerm: "",
     selectedCollectionType: "",
     selectedCollection: [],
     convertedResults: {},
-    searchTerm: "",
+    slideIndex: 0,
     isLoaded: false,
     isLoading: false,
-    value: "",
     checkboxes: {
       "image": {checked: true },
       "video": {checked: true },
@@ -27,7 +26,7 @@ export default function Nasa({ sendModalData }) {
 
   const fetchData = async () => {
     let convertedResults = {};
-    let searchTerm = state.value;
+    let searchTerm = state.searchTerm;
 
     if (searchTerm && (state.checkboxes['image'].checked || state.checkboxes['video'].checked || state.checkboxes['audio'].checked)) {
       setState({ ...state, isLoading: true, isLoaded: false });
@@ -57,7 +56,6 @@ export default function Nasa({ sendModalData }) {
         });
 
         setState({ 
-          value: '', 
           slideIndex: 0,
           selectedCollectionType: Object.keys(convertedResults)[0],
           convertedResults, 
@@ -87,11 +85,23 @@ export default function Nasa({ sendModalData }) {
     setState({ ...state, checkboxes });
   }
 
-  const handleNextSlide = (num) => {}
+  const handleNextSlide = (delta) => {
+    let newIndex = state.slideIndex + delta;
+
+    if (newIndex < 0) {
+      setState({ ...state, slideIndex: state.convertedResults[state.selectedCollectionType].length - 1 });
+    } else if (newIndex > state.convertedResults[state.selectedCollectionType].length - 1) {
+      setState({ ...state, slideIndex: 0 });
+    } else {
+      setState({ ...state, slideIndex: newIndex });
+    }
+  }
 
   const getHeaderTitle = () => {
     return `${state.convertedResults[state.selectedCollectionType].length} ${state.selectedCollectionType} result${(state.convertedResults[state.selectedCollectionType].length == 1) ? '' : 's'} for "${state.searchTerm}":`;
-  }
+  }  
+
+  // console.log(state.slideIndex, state.selectedCollectionType, state.convertedResults[state.selectedCollectionType][state.slideIndex])
 
   return (
     <main className="nasa">
@@ -107,8 +117,8 @@ export default function Nasa({ sendModalData }) {
                   name="input-field" 
                   className="input-field" 
                   placeholder={`Search for...(e.g. "Orion")`} 
-                  value={state.value} 
-                  onChange={(event) => setState({ ...state, value: event.target.value})}   
+                  value={state.searchTerm} 
+                  onChange={(event) => setState({ ...state, searchTerm: event.target.value})}   
                 />
                 <button type="submit" className="input-button"><img src={search} alt="magnifying glass icon"></img></button><br />
               </div>
@@ -154,18 +164,18 @@ export default function Nasa({ sendModalData }) {
                   {state.selectedCollectionType == 'image' &&
                     <div className="slideshow-container">
                       <Image 
-                        image={state.convertedResults[state.selectedCollectionType][state.slideIndex]} 
                         index={state.slideIndex} 
+                        image={state.convertedResults[state.selectedCollectionType][state.slideIndex]} 
                         total={state.convertedResults[state.selectedCollectionType].length} 
                         sendModalData={(data) => sendModalData(data)} 
-                        handleNextSlide={(value) => handleNextSlide(value)}
+                        handleNextSlide={handleNextSlide}
                       />
                     </div>
                   }
 
                   {state.selectedCollectionType == 'video' &&
                     state.convertedResults[state.selectedCollectionType].map((item, index) => {
-                      return <Video key={index} video={item} sendModalData={(data) => sendModalData(data)} />
+                      return <Video key={index} video={item} sendModalData={sendModalData} />
                     })
                   }
 

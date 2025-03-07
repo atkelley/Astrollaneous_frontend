@@ -6,7 +6,7 @@ import axios from "axios";
 export default function Video({ video: { json_url, title, nasa_id, create_date, description, preview_image }, sendModalData }) {
   const [state, setState] = useState({
     showTruncatedText: true,
-    videoUrl: ''
+    videoUrl: ""
   });
 
   useEffect(() => {
@@ -30,10 +30,9 @@ export default function Video({ video: { json_url, title, nasa_id, create_date, 
 
   return (
     <div className="video-container">
-      <div className="video-image-wrapper">
+      <div className="video-image-wrapper" onClick={() => sendModalData({ media_type: "video", src: state.videoUrl, alt: title, caption: null })}>
         <div 
           className="video-image-box" 
-          onClick={() => sendModalData({ imgSrc: state.videoUrl, imgAlt: title, imgCaption: null })}
           style={{ backgroundImage: `url(${preview_image})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}  
         >
         </div>
