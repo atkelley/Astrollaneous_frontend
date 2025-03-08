@@ -17,16 +17,16 @@ export default function Navbar() {
   }, []);
 
   return (
-    <ul className="nav">
-      <li className="nav-list-item"><NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>Home</NavLink></li>
-      <li className="nav-list-item"><NavLink to="/mars" className={({ isActive }) => (isActive ? 'active' : '')}>Mars</NavLink></li>
-      <li className="nav-list-item"><NavLink to="/rovers" className={({ isActive }) => (isActive ? 'active' : '')}>Rovers</NavLink></li>
-      <li className="nav-list-item"><NavLink to="/satellites" className={({ isActive }) => (isActive ? 'active' : '')}>Satellites</NavLink></li>
-      <li className="nav-list-item"><NavLink to="/nasa" className={({ isActive }) => (isActive ? 'active' : '')}>NASA</NavLink></li>
-      <li className="nav-list-item"><NavLink to="/techport" className={({ isActive }) => (isActive ? 'active' : '')}>TechPort</NavLink></li>
-      <li className="nav-list-item"><NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : '')}>About</NavLink></li>
-      <li className="nav-list-item"><NavLink to="/contact" className={({ isActive }) => (isActive ? 'active' : '')}>Contact</NavLink></li>
-      <li className="nav-list-item"><NavLink to="/blog" className={({ isActive }) => (isActive ? 'active' : '')}>Blog</NavLink></li>
+    <div className="nav">
+      <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>Home</NavLink>
+      <NavLink to="/mars" className={({ isActive }) => (isActive ? 'active' : '')}>Mars</NavLink>
+      <NavLink to="/rovers" className={({ isActive }) => (isActive ? 'active' : '')}>Rovers</NavLink>
+      <NavLink to="/satellites" className={({ isActive }) => (isActive ? 'active' : '')}>Satellites</NavLink>
+      <NavLink to="/nasa" className={({ isActive }) => (isActive ? 'active' : '')}>NASA</NavLink>
+      <NavLink to="/techport" className={({ isActive }) => (isActive ? 'active' : '')}>TechPort</NavLink>
+      <NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : '')}>About</NavLink>
+      <NavLink to="/contact" className={({ isActive }) => (isActive ? 'active' : '')}>Contact</NavLink>
+      <NavLink to="/blog" className={({ isActive }) => (isActive ? 'active' : '')}>Blog</NavLink>
 
       <div className="dropdown" ref={dropdownRef}>
         <img src={user} alt="user" onMouseOver={() => setIsOpen(true)} />
@@ -52,6 +52,6 @@ export default function Navbar() {
         <input type="search" placeholder="Search" aria-label="Search" />
         <button className="btn btn-sm px-3 btn-outline-secondary" type="submit">Search</button>
       </form>
-    </ul>
+    </div>
   );
 }

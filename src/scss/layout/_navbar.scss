@@ -10,7 +10,10 @@
   border-top: 3px solid darkgrey;
   border-bottom: 3px solid darkgrey;
 
-  .nav-list-item {
+  a {
+    text-decoration: none;
+    font-weight: 800;
+    color: #20538a;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,41 +23,18 @@
     border-right: 1px solid transparent;
     border-left: 1px solid transparent;
     transition: all .1s ease-in-out;
-
-    a {
-      color: #20538a;
-      text-decoration: none;
-      font-weight: 800;
-    }
-
-    a.active {
-      color: white;
-      // background-color: black;
-    }
   }
 
-  .nav-list-item:has(a.active) {
-    // border-right: 1px solid darkgrey;
-    // border-left: 1px solid darkgrey;
-    background-color: rgba($base-dark-color, 0.9);
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-  }
-
-  .nav-list-item:hover {
+  a:hover {
     background-color: rgba($base-dark-color, 0.65);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-
-    a {
-      color: white;
-    }
-
-    a.active {
-      // color: black;
-    }
+    color: white;
   }
 
-  .nav-list-item:hover:has(a.active) {
-    // text-shadow: none;
+  a.active {
+    background-color: rgba($base-dark-color, 0.9);
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    color: white;
   }
 
   form {
