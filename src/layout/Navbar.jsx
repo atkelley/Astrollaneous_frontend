@@ -18,15 +18,15 @@ export default function Navbar() {
 
   return (
     <div className="nav">
-      <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>Home</NavLink>
-      <NavLink to="/mars" className={({ isActive }) => (isActive ? 'active' : '')}>Mars</NavLink>
-      <NavLink to="/rovers" className={({ isActive }) => (isActive ? 'active' : '')}>Rovers</NavLink>
-      <NavLink to="/satellites" className={({ isActive }) => (isActive ? 'active' : '')}>Satellites</NavLink>
-      <NavLink to="/nasa" className={({ isActive }) => (isActive ? 'active' : '')}>NASA</NavLink>
-      <NavLink to="/techport" className={({ isActive }) => (isActive ? 'active' : '')}>TechPort</NavLink>
-      <NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : '')}>About</NavLink>
-      <NavLink to="/contact" className={({ isActive }) => (isActive ? 'active' : '')}>Contact</NavLink>
-      <NavLink to="/blog" className={({ isActive }) => (isActive ? 'active' : '')}>Blog</NavLink>
+      <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')} >Home</NavLink>
+      <NavLink to="/mars" className={({ isActive }) => (isActive ? 'active' : '')} >Mars</NavLink>
+      <NavLink to="/rovers" className={({ isActive }) => (isActive ? 'active' : '')} >Rovers</NavLink>
+      <NavLink to="/satellites" className={({ isActive }) => (isActive ? 'active' : '')} >Satellites</NavLink>
+      <NavLink to="/nasa" className={({ isActive }) => (isActive ? 'active' : '')} >NASA</NavLink>
+      <NavLink to="/techport" className={({ isActive }) => (isActive ? 'active' : '')} >TechPort</NavLink>
+      <NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : '')} >About</NavLink>
+      <NavLink to="/contact" className={({ isActive }) => (isActive ? 'active' : '')} >Contact</NavLink>
+      <NavLink to="/blog" className={({ isActive }) => (isActive ? 'active' : '')} >Blog</NavLink>
 
       <div className="dropdown" ref={dropdownRef}>
         <img src={user} alt="user" onMouseOver={() => setIsOpen(true)} />

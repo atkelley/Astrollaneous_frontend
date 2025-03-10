@@ -44,10 +44,10 @@ export default function App() {
 
         <Route path="/" exact element={<Wrapper><Home sendModalData={openModal} /></Wrapper>} />
         <Route path="/blog" exact element={<Wrapper><Blog /></Wrapper>} />
-        <Route path="/mars" exact element={<Wrapper><Mars sendModalData={openModal}/></Wrapper>} />
-        <Route path="/rovers" exact element={<Wrapper><Rovers sendModalData={openModal}/></Wrapper>} />
+        <Route path="/mars" exact element={<Wrapper><Mars sendModalData={openModal} /></Wrapper>} />
+        <Route path="/rovers" exact element={<Wrapper><Rovers sendModalData={openModal} /></Wrapper>} />
         <Route path="/satellites" exact element={<Wrapper><Satellites /></Wrapper>} />
-        <Route path="/nasa" exact element={<Wrapper><Nasa sendModalData={openModal}/></Wrapper>} />
+        <Route path="/nasa" exact element={<Wrapper><Nasa sendModalData={openModal} /></Wrapper>} />
         <Route path="/techport" exact element={<Wrapper><Techport /></Wrapper>} />
         <Route path="/about" exact element={<Wrapper><About /></Wrapper>} />
         <Route path="/contact" exact element={<Wrapper><Contact /></Wrapper>} />
