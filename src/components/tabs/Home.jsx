@@ -40,7 +40,7 @@ export default function Home({ sendModalData }) {
           <hr />    
 
           <div className="content-box">
-            <a onClick={() => sendModalData({ media_type, src: hdUrl, alt: title, caption: copyright })}>
+            <a onClick={() => sendModalData({ type: media_type, src: hdUrl, alt: title, caption: copyright })}>
               {media_type === 'image' ? 
                 <img src={url} alt={title} />
                 :

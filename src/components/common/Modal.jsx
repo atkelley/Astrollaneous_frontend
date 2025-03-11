@@ -1,7 +1,8 @@
 import { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Combo from '../iterables/Combo';
 
-export default function Modal ({ media_type, src, alt, caption, closeModal, showModal }) {
+export default function Modal ({ type, src, alt, caption, closeModal, showModal }) {
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -40,15 +41,16 @@ export default function Modal ({ media_type, src, alt, caption, closeModal, show
   return (
     <div className='backdrop'>
       <div ref={modalRef} className="modal"> 
-        {media_type === "image" && getImageComponent()}
-        {media_type === "video" && getVideoComponent()}
+        {type === "image" && getImageComponent()}
+        {type === "video" && getVideoComponent()}
+        {type === "login" && <Combo tab={type} />}
       </div>
     </div>
   );
 };
 
 Modal.propTypes = {
-  media_type: PropTypes.string,
+  type: PropTypes.string,
   src: PropTypes.string,
   alt: PropTypes.string,
   caption: PropTypes.string,

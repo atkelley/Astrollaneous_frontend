@@ -35,7 +35,7 @@ export default function Image({ index, total, image: { json_url, author, title, 
     <div className="images" value={index}>
       <div className="images-content">
         <div className="images-counter">{index + 1} / {total}</div>
-        <img src={preview_image} alt={title} onClick={() => sendModalData({ media_type: "image", src: state.imageUrl, alt: title, caption: `${author ? author : 'NASA'} © 2025` })} />
+        <img src={preview_image} alt={title} onClick={() => sendModalData({ type: "image", src: state.imageUrl, alt: title, caption: `${author ? author : 'NASA'} © 2025` })} />
         <span className="prev" onClick={() => fetchNextSlide(-1)}>&#10094;</span>
         <span className="next" onClick={() => fetchNextSlide(1)}>&#10095;</span> 
       </div>

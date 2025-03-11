@@ -101,8 +101,6 @@ export default function Nasa({ sendModalData }) {
     return `${state.convertedResults[state.selectedCollectionType].length} ${state.selectedCollectionType} result${(state.convertedResults[state.selectedCollectionType].length == 1) ? '' : 's'} for "${state.searchTerm}":`;
   }  
 
-  // console.log(state.slideIndex, state.selectedCollectionType, state.convertedResults[state.selectedCollectionType][state.slideIndex])
-
   return (
     <main className="nasa">
       {state.isLoading 

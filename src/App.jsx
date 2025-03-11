@@ -1,22 +1,27 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import Header from './layout/Header';
-import Navbar from './layout/Navbar';
-import Modal from './components/common/Modal';
-import Wrapper from './layout/Wrapper';
-import Footer from './layout/Footer';
-import Home from './components/tabs/Home';
-import Blog from './components/tabs/Blog';
-import Mars from './components/tabs/Mars';
-import Rovers from './components/tabs/Rovers';
-import Satellites from './components/tabs/Satellites';
-import Nasa from './components/tabs/Nasa';
-import Techport from './components/tabs/Techport';
-import About from './components/tabs/About';
-import Contact from './components/tabs/Contact';
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { useState } from "react";
+import Header from "./layout/Header";
+import Navbar from "./layout/Navbar";
+import Modal from "./components/common/Modal";
+import Wrapper from "./layout/Wrapper";
+import Footer from "./layout/Footer";
+import Home from "./components/tabs/Home";
+import Blog from "./components/tabs/Blog";
+import Mars from "./components/tabs/Mars";
+import Rovers from "./components/tabs/Rovers";
+import Satellites from "./components/tabs/Satellites";
+import Nasa from "./components/tabs/Nasa";
+import Techport from "./components/tabs/Techport";
+import About from "./components/tabs/About";
+import Contact from "./components/tabs/Contact";
+import Login from "./components/iterables/Login";
+import Register from "./components/iterables/Register";
+import Create from "./components/iterables/Create";
+import Update from "./components/iterables/Update";
+import User from "./components/iterables/User";
 
 export default function App() {
-  const [modalData, setModalData] = useState({ media_type: null, src: null, alt: null, caption: null });
+  const [modalData, setModalData] = useState({ type: null, src: null, alt: null, caption: null });
   const [showModal, setShowModal] = useState(false);
 
   const closeModal = () => {
@@ -32,15 +37,15 @@ export default function App() {
   return (
     <BrowserRouter>
       <Header /> 
-      <Navbar />
+      <Navbar sendModalData={openModal} />
       {showModal && <Modal { ...modalData } closeModal={closeModal} showModal={showModal} />}
       
       <Routes>        
-        {/* <Route path="/login" exact component={Login} />
-        <Route path="/register" exact component={Register} /> */}
-        {/* <Route path="/blog/create" exact component={CreatePost} />
-        <Route path="/blog/update/:id" exact component={UpdatePost} />
-        <Route path="/user/:id" exact component={User} /> */}        
+        <Route path="/login" exact element={<Wrapper><Login /></Wrapper>} />
+        <Route path="/register" exact element={<Wrapper><Register /></Wrapper>} />
+        <Route path="/blog/create" exact element={<Wrapper><Create /></Wrapper>} />
+        <Route path="/blog/update/:id" exact element={<Wrapper><Update /></Wrapper>} />
+        <Route path="/user/:id" exact element={<Wrapper><User /></Wrapper>} />     
 
         <Route path="/" exact element={<Wrapper><Home sendModalData={openModal} /></Wrapper>} />
         <Route path="/blog" exact element={<Wrapper><Blog /></Wrapper>} />

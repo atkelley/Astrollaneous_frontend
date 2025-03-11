@@ -12,7 +12,7 @@ export default function Contact() {
     }
   }
 
-  return (
+  return (  // Maybe reconsider and make this component a modal
     <main className="contact">
       <div className="contact-content">
         {isSent 

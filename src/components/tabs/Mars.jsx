@@ -121,7 +121,7 @@ export default function Mars({ sendModalData }) {
 
             <div className="text-box">
               <h1>Mars Daily Weather</h1>
-              <p>The <a href="https://en.wikipedia.org/wiki/InSight" target="_blank" rel="noopener noreferrer">InSight</a> lander took daily weather measurements on Mars from <Link className="elysium" onClick={() => sendModalData({ media_type: "image", src: elysium_planitia, alt: "Elysium Planitia", caption: "NASA/JPL-Caltech © 2021" })}><b>Elysium Planitia</b></Link> (a flat, smooth plain near Mars&apos; equator).</p>
+              <p>The <a href="https://en.wikipedia.org/wiki/InSight" target="_blank" rel="noopener noreferrer">InSight</a> lander took daily weather measurements on Mars from <Link className="elysium" onClick={() => sendModalData({ type: "image", src: elysium_planitia, alt: "Elysium Planitia", caption: "NASA/JPL-Caltech © 2021" })}><b>Elysium Planitia</b></Link> (a flat, smooth plain near Mars&apos; equator).</p>
               <p>Sadly, InSight stopped transmitting on <a href="https://www.nasa.gov/missions/insight/nasa-retires-insight-mars-lander-mission-after-years-of-science/" target="_blank" rel="noopener noreferrer">Dec. 15th, 2022</a>, but 
               we preserved this page to illustrate some of the data that it was transmitting.</p>
               <p><a href="https://mars.nasa.gov/insight/" target="_blank" rel="noopener noreferrer">Click for more information about NASA&apos;s InSight program.</a></p>

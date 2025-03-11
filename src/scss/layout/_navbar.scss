@@ -10,7 +10,7 @@
   border-top: 3px solid darkgrey;
   border-bottom: 3px solid darkgrey;
 
-  a {
+  .navlink {
     text-decoration: none;
     font-weight: 800;
     color: #20538a;
@@ -25,13 +25,13 @@
     transition: all .1s ease-in-out;
   }
 
-  a:hover {
+  .navlink:hover {
     background-color: rgba($base-dark-color, 0.65);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     color: white;
   }
 
-  a.active {
+  .navlink.active {
     background-color: rgba($base-dark-color, 0.9);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     color: white;
@@ -86,28 +86,31 @@
       box-shadow: 0px 0px 12px #20538a;
     }
 
-    .dropdown-list, .dropdown-list-item {
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
     .dropdown-list {
+      border-radius: 5px;
       background-color: white;
       border: 1px solid darkgrey;
       position: absolute;
-      top: 25px;
+      top: 29px;
       left: 0;      
-      width: 125px;
-      z-index: 10;
-      padding: 5px 0px;
-    }
+      width: 110px;
+      z-index: 10;   
 
-    .dropdown-list-item {
-      padding: 8px 10px;
-    }
-  
-    .dropdown-list-item:hover {
-      background-color: rgba(211, 211, 211, 0.35);
+      .dropdown-navlink {
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 400;
+        cursor: pointer;
+        color: #20538a;
+
+        .dropdown-list-item {
+          padding: 10px;
+        }
+
+        .dropdown-list-item:hover {
+          background-color: rgba(211, 211, 211, 0.55);
+        }
+      }
     }
 
     select:focus-visible {

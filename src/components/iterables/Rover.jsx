@@ -168,7 +168,7 @@ export default function Rover({ rover, sendModalData }) {
                   <button onClick={() => handleNextSlide(1)}>&#10095;&#10095;&#10095;</button> 
                 </div>
                 <div className="slideshow-content">
-                  <a onClick={() => sendModalData({ media_type: "image", src: selected.cameraData[cameraType][slideIndex], alt: `${name} - ${cameraType}`, caption: `${name} - ${cameraType} ${cameraType} - (${slideIndex + 1}/${selected.cameraData[cameraType].length})` })}>
+                  <a onClick={() => sendModalData({ type: "image", src: selected.cameraData[cameraType][slideIndex], alt: `${name} - ${cameraType}`, caption: `${name} - ${cameraType} ${cameraType} - (${slideIndex + 1}/${selected.cameraData[cameraType].length})` })}>
                     <img src={selected.cameraData[cameraType][slideIndex]} alt={`${name} - ${cameraType} - ${slideIndex + 1}`} />
                   </a>
                 </div>

@@ -30,7 +30,7 @@ export default function Video({ video: { json_url, title, nasa_id, create_date, 
 
   return (
     <div className="video-container">
-      <div className="video-image-wrapper" onClick={() => sendModalData({ media_type: "video", src: state.videoUrl, alt: title, caption: null })}>
+      <div className="video-image-wrapper" onClick={() => sendModalData({ type: "video", src: state.videoUrl, alt: title, caption: null })}>
         <div 
           className="video-image-box" 
           style={{ backgroundImage: `url(${preview_image})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}  
