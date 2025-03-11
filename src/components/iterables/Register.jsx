@@ -1,5 +1,11 @@
 import PropTypes from "prop-types";
 
+import username from "../../assets/img/username.png";
+import login from "../../assets/img/login.png"
+import mail from "../../assets/img/mail.png";
+import lock from "../../assets/img/lock.png";
+import key from "../../assets/img/key.png";
+
 export default function Register({ handleTabChange }) {
   const non_field_errors = null;
 

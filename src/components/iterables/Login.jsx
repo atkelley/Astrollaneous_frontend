@@ -1,5 +1,9 @@
 import PropTypes from "prop-types";
 
+import user from "../../assets/img/username.png";
+import login from "../../assets/img/login.png"
+import key from "../../assets/img/key.png";
+
 export default function Login({ handleTabChange }) {
   const non_field_errors = [];
   const handleSubmit = () => {}
@@ -28,8 +32,8 @@ export default function Login({ handleTabChange }) {
         </div>
       }
       
-      <div className="md-form mb-3">
-        <i className="fas fa-user icon prefix grey-text" aria-hidden="true"></i>
+      <div className="form-group">
+        <img src={user} alt="username icon" />
         <input 
           type="text" 
           name="form_username" 
@@ -39,6 +43,8 @@ export default function Login({ handleTabChange }) {
           value={form_username}
         />
       </div>
+
+
       { username && 
         <div className="mb-3 ml-5">
           <ul className="non_field_error_list">
@@ -49,8 +55,8 @@ export default function Login({ handleTabChange }) {
         </div>
       }
   
-      <div className="md-form mb-3">
-        <i className="fas fa-key icon prefix grey-text" aria-hidden="true"></i>
+      <div className="form-group">
+        <img src={key} alt="password icon" />
         <input 
           type="password" 
           name="form_password" 
@@ -70,8 +76,8 @@ export default function Login({ handleTabChange }) {
         </div>
       }
 
-      <div className="checkbox">
-        <label><input type="checkbox" name="remember" /> Remember me</label>
+      <div className="checkbox-group">
+        <input type="checkbox" name="remember" /><label>Remember me</label>
       </div>
       <div className="options text-center text-md-right mt-1">
         <p>Not a member? <a href="#" className="blue-text" id="register" onClick={handleTabChange}>Register Now!</a></p>
@@ -80,7 +86,7 @@ export default function Login({ handleTabChange }) {
   
     </div>
     <div className="form-actions modal-footer d-flex justify-content-center">
-      <button type="submit" className="btn btn-primary">Login <i className="fas fa-sign-in-alt ml-1" aria-hidden="true"></i></button>
+      <button type="submit" className="btn btn-primary">Login <img src={login} alt="login icon" /></button>
     </div>
   </form>
   );

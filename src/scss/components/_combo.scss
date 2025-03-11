@@ -1,38 +1,51 @@
-.combo-contant {
+.combo-box {
+  width: 650px;
+  height: 500px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  pointer-events: auto;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, .2);
-  border-radius: .3rem;
-  outline: 0;
+  background-color: white;
+
+  .combo-tabs-box {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    display: flex;
+    flex-flow: row nowrap;
+    border-bottom: 1px solid lightgrey;
+
+    .combo-tab {
+      width: 50%;
+      padding: 20px 0px;
+      cursor: pointer;
+    }
+
+    .combo-tab:first-of-type {
+      border-right: 1px solid lightgrey;
+    }
+
+    .combo-tab:not(.active) {
+      color: rgba(#007bff, 0.75);
+      background-color:rgba(52, 58, 64, 0.1);
+    }
+
+    .combo-tab:not(.active):hover {
+      color: rgba(#0056b3, 0.75);
+    }
+  }
 }
 
 
-.nav-tabs .nav-link:first-of-type {
-  border-left: none;
-  border-top: none
-}
+// .nav-tabs .nav-link:first-of-type {
+//   border-left: none;
+//   border-top: none
+// }
 
-.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
-  border-color: none;
-}
+// .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+//   border-color: none;
+// }
 
-.nav-tabs .nav-link:first-of-type.active {
-  border-top-left-radius: .5rem;
-}
+// .nav-tabs .nav-link:first-of-type.active {
+//   border-top-left-radius: .5rem;
+// }
 
-.combo-tab-link {
-  width: 50%;
-  padding: 15px;
-}
-
-.combo-tabs-box {
-  font-size: 1.25rem;
-  font-weight: 600;
-  text-align: center;
-  background-color:rgba(52, 58, 64, 0.1);
-}

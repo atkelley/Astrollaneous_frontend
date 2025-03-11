@@ -15,12 +15,10 @@ export default function Combo({ tab }) {
   }
 
   return (
-    <div className="combo-content">
-      <nav>
-        <div className="nav nav-tabs combo-tabs-box" id="nav-tabs" role="tablist">
-          <div className={`${active === "login" ? "nav-link active combo-tab-link" : "nav-link combo-tab-link"}`} id="login" href="" role="tab" onClick={handleTabChange}>Account Login</div>
-          <div className={`${active === "register" ? "nav-link active combo-tab-link" : "nav-link combo-tab-link"}`}  id="register" href="" role="tab" onClick={handleTabChange}>Create an Account</div>
-        </div>
+    <div className="combo-box">
+      <nav className="combo-tabs-box">
+        <div className={`${active === "login" ? "combo-tab active" : "combo-tab"}`} id="login" href="" onClick={handleTabChange}>Account Login</div>
+        <div className={`${active === "register" ? "combo-tab active" : "combo-tab"}`}  id="register" href="" onClick={handleTabChange}>Create an Account</div>
       </nav>
       <div className="tab-content" id="tab-content">
         {active === "login" && <Login handleTabChange={handleTabChange} formProps={null} handleSetState={handleSetState} handleSubmit={handleLoginSubmit} />}
