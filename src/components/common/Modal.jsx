@@ -1,6 +1,9 @@
-import { useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import Combo from '../iterables/Combo';
+import { useRef, useEffect } from "react";
+import PropTypes from "prop-types";
+import Contact from "../iterables/Contact";
+import Combo from "../iterables/Combo";
+import Logout from "../iterables/Logout";
+import Create from "../iterables/Create";
 
 export default function Modal ({ type, src, alt, caption, closeModal, showModal }) {
   const modalRef = useRef(null);
@@ -43,7 +46,10 @@ export default function Modal ({ type, src, alt, caption, closeModal, showModal 
       <div ref={modalRef} className="modal"> 
         {type === "image" && getImageComponent()}
         {type === "video" && getVideoComponent()}
-        {type === "login" && <Combo tab={type} />}
+        {type === "contact" && <Contact />}
+        {type === "create" && <Create closeModal={closeModal} />}
+        {type === "logout" && <Logout />}
+        {(type === "login" || type === "register") && <Combo tab={type} />}
       </div>
     </div>
   );

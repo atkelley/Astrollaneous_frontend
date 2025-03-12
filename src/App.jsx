@@ -13,9 +13,7 @@ import Satellites from "./components/tabs/Satellites";
 import Nasa from "./components/tabs/Nasa";
 import Techport from "./components/tabs/Techport";
 import About from "./components/tabs/About";
-import Contact from "./components/tabs/Contact";
-import Login from "./components/iterables/Login";
-import Register from "./components/iterables/Register";
+import Contact from "./components/iterables/Contact";
 import Create from "./components/iterables/Create";
 import Update from "./components/iterables/Update";
 import User from "./components/iterables/User";
@@ -25,7 +23,7 @@ export default function App() {
   const [showModal, setShowModal] = useState(false);
 
   const closeModal = () => {
-    setModalData({ media_type: null, src: null, alt: null, caption: null });
+    setModalData({ type: null, src: null, alt: null, caption: null });
     setShowModal(false);
   }
 
@@ -41,8 +39,6 @@ export default function App() {
       {showModal && <Modal { ...modalData } closeModal={closeModal} showModal={showModal} />}
       
       <Routes>        
-        <Route path="/login" exact element={<Wrapper><Login /></Wrapper>} />
-        <Route path="/register" exact element={<Wrapper><Register /></Wrapper>} />
         <Route path="/blog/create" exact element={<Wrapper><Create /></Wrapper>} />
         <Route path="/blog/update/:id" exact element={<Wrapper><Update /></Wrapper>} />
         <Route path="/user/:id" exact element={<Wrapper><User /></Wrapper>} />     

@@ -1,6 +1,5 @@
 .combo-box {
   width: 650px;
-  height: 500px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -25,12 +24,12 @@
     }
 
     .combo-tab:not(.active) {
-      color: rgba(#007bff, 0.75);
+      color: rgba(#007bff, 0.95);
       background-color:rgba(52, 58, 64, 0.1);
     }
 
     .combo-tab:not(.active):hover {
-      color: rgba(#0056b3, 0.75);
+      color: rgba(#0056b3, 0.95);
     }
   }
 }

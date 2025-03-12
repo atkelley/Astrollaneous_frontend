@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from "prop-types";
-import user from '../assets/img/user.png';
+import profile from '../assets/img/profile.png';
 
 export default function Navbar({ sendModalData }) {
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   useEffect(() => {
     const handlePageClick = (event) => {
@@ -26,26 +26,25 @@ export default function Navbar({ sendModalData }) {
       <NavLink to="/nasa" className={({ isActive }) => (isActive ? 'navlink active' : 'navlink')} >NASA</NavLink>
       <NavLink to="/techport" className={({ isActive }) => (isActive ? 'navlink active' : 'navlink')} >TechPort</NavLink>
       <NavLink to="/about" className={({ isActive }) => (isActive ? 'navlink active' : 'navlink')} >About</NavLink>
-      {/* <NavLink to="/contact" className={({ isActive }) => (isActive ? 'navlink active' : 'navlink')} >Contact</NavLink> */}
       <NavLink to="/blog" className={({ isActive }) => (isActive ? 'navlink active' : 'navlink')} >Blog</NavLink>
 
       <div className="dropdown" ref={dropdownRef}>
-        <img src={user} alt="user" onMouseOver={() => setIsOpen(true)} />
+        <img src={profile} alt="profile icon" onMouseOver={() => setIsOpen(true)} />
          
         {isOpen &&
           <ul className="dropdown-list" onMouseLeave={() => setIsOpen(false)}>
             { !isAuthenticated ?
               <>
                 <li className="dropdown-list-item" onClick={() => sendModalData({ type: "login" })}>Login</li>
-                <NavLink to="/register" className="dropdown-navlink"onClick={() => setIsOpen(false)}><li className="dropdown-list-item">Register</li></NavLink>
+                <li className="dropdown-list-item" onClick={() => sendModalData({ type: "register" })}>Register</li>
               </>
               :
               <>
-                <NavLink to="/blog/create" className="dropdown-navlink" onClick={() => setIsOpen(false)}><li className="dropdown-list-item">Create Post</li></NavLink>
-                <NavLink to="/logout" className="dropdown-navlink"onClick={() => setIsOpen(false)}><li className="dropdown-list-item">Logout</li></NavLink>
+                <li className="dropdown-list-item" onClick={() => sendModalData({ type: "create" })}>Create Post</li>
+                <li className="dropdown-list-item" onClick={() => sendModalData({ type: "logout" })}>Logout</li>
               </>
             }
-            <NavLink to="/contact" className="dropdown-navlink" onClick={() => setIsOpen(false)}><li className="dropdown-list-item">Contact</li></NavLink>
+            <li className="dropdown-list-item" onClick={() => sendModalData({ type: "contact" })}>Contact</li>
           </ul>
         }
       </div>

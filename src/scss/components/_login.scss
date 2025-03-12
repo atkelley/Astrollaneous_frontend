@@ -9,13 +9,13 @@
   margin-bottom: 15px;
 
   img {
-    height: 40px;
-    width: 40px;
-    padding: 5px;
-    border: 2px solid black;
+    height: 35px;
+    width: 35px;
+    padding: 7px;
+    border: 2px solid lightgrey;
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
-    background-color: rgba(black, 0.15);
+    background-color: lightgrey;
   }
 
   .form-control {
@@ -26,7 +26,11 @@
     border-radius: 7px;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
-    height: 40px;
+    height: 35px;
+  }
+
+  .form-control::placeholder {
+    color: darkgrey;
   }
 
   .form-control:focus {
@@ -40,18 +44,85 @@
   box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
 }
 
-
 .checkbox-group {
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: center;
-  column-gap: 5px;
+  column-gap: 7px;
   height: 15px;
   padding: 0px 0px 0px 5px;
+  margin-top: 15px;
 
   .checkbox {
     margin-top: 3px;
+  }
+}
+
+.links-group {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-end;
+  row-gap: 10px;
+  padding-top: 10px;
+
+  p {
+    font-size: 0.95rem;
+
+    span {
+      color: rgba(#007bff, 0.95);
+      cursor: pointer;
+    }
+
+    span:hover {
+      color: rgba(#0056b3, 0.95);
+    }
+  }
+}
+
+.login-footer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0px;
+  border-top: 1px solid lightgrey;
+
+  button {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    padding: 7px 25px;
+    border-radius: 5px;
+    background-color: rgba(#007bff, 0.95);
+    box-shadow: 2px 2px 5px rgba(black, 0.6);
+    transition: translateY .2s;
+    border: none;
+
+    p {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: white;
+    }
+
+    img {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  button:hover {
+    background-color: rgba(#0056b3, 0.95);
+  }
+
+  button:active {
+    box-shadow: 1px 1px 2px rgba(black, 0.6);
+    transform: translateY(2px);
   }
 }
