@@ -6,7 +6,11 @@ export default function Contact() {
   const sendMessage = () => {
     const { name, email, message } = state;
 
+  }
 
+
+  const handleOnChange = (event) => {
+    setState({ ...state, [event.target.id]: event.target.value});
   }
 
   return ( 
@@ -17,15 +21,15 @@ export default function Contact() {
       <div className="body">
         <div className="group">
           <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="name" value={state.name} onChange={(e) => setState({ ...state, name: e.target.value})} />
+          <input type="text" id="name" name="name" value={state.name} onChange={handleOnChange} />
         </div>
         <div className="group">
           <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" value={state.email} onChange={(e) => setState({ ...state, email: e.target.value})} />
+          <input type="email" id="email" name="email" value={state.email} onChange={handleOnChange} />
         </div>
         <div className="group">
           <label htmlFor="message">Message:</label>
-          <textarea id="message" name="message" value={state.message} onChange={(e) => setState({ ...state, message: e.target.value})}></textarea>
+          <textarea id="message" name="message" value={state.message} onChange={handleOnChange}></textarea>
         </div>
         <div className="button">
           <button type="submit" onClick={sendMessage}>Submit</button>

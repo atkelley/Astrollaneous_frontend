@@ -4,6 +4,7 @@ import Contact from "../iterables/Contact";
 import Combo from "../iterables/Combo";
 import Logout from "../iterables/Logout";
 import Create from "../iterables/Create";
+import Delete from "../iterables/Delete";
 
 export default function Modal ({ type, src, alt, caption, closeModal, showModal }) {
   const modalRef = useRef(null);
@@ -48,8 +49,9 @@ export default function Modal ({ type, src, alt, caption, closeModal, showModal 
         {type === "video" && getVideoComponent()}
         {type === "contact" && <Contact />}
         {type === "create" && <Create closeModal={closeModal} />}
-        {type === "logout" && <Logout />}
+        {type === "logout" && <Logout closeModal={closeModal} />}
         {(type === "login" || type === "register") && <Combo tab={type} />}
+        {type === "delete" && <Delete closeModal={closeModal} /> }
       </div>
     </div>
   );

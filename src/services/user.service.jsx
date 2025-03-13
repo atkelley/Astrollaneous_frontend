@@ -1,4 +1,4 @@
-import { api } from "./api";
+import { api } from "../api/api";
 
 export const getUser = (userId) => api.get(`/auth/users/${userId}`); 
 export const getUserPosts = (userId) => api.get(`/auth/users/${userId}/posts`); 

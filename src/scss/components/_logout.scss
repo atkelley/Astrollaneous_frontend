@@ -1,0 +1,51 @@
+.logout-content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  width: 30vw;
+
+  .header {
+    border-bottom: 1px solid lightgrey;
+    height: 50px;
+  }
+
+  .logout-body {
+    width: 100%;
+    text-align: center;
+    padding: 30px 0px;
+  }
+
+  .logout-footer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 15px;
+    width: 100%;
+    padding: 15px 20px;
+    border-top: 1px solid lightgrey;
+
+    .logout, .cancel {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+    }
+
+    .logout {
+      background-color: rgba(#dc3545, 0.95);
+    }
+
+    .delete:hover {
+      background-color: rgba(#bb2d3b, 0.95);
+    }
+
+    .cancel {
+      background-color: rgba(grey, 0.95);
+    }
+
+    .cancel:hover {
+      background-color: rgba(#5c636a, 0.95);
+    }
+  }
+}

@@ -15,6 +15,12 @@ export default function Create({ closeModal }) {
     closeModal();
   }
 
+  const handleOnChange = (event) => {
+    setState({ ...state, [event.target.id]: event.target.value});
+  }
+
+  console.log(state)
+
   return (
     <div className="content">
       <div className="header">
@@ -23,15 +29,15 @@ export default function Create({ closeModal }) {
       <div className="body">
         <div className="group">
           <label htmlFor="title">Title:</label>
-          <input type="text" id="title" name="title" value={state.title} onChange={(e) => setState({ ...state, name: e.target.value})} />
+          <input type="text" id="title" name="title" value={state.title} onChange={handleOnChange} />
         </div>
         <div className="group">
           <label htmlFor="image_url">Image URL:</label>
-          <input type="image_url" id="image_url" name="image_url" value={state.image_url} onChange={(e) => setState({ ...state, email: e.target.value})} />
+          <input type="image_url" id="image_url" name="image_url" value={state.image_url} onChange={handleOnChange} />
         </div>
         <div className="group">
           <label htmlFor="text">Text:</label>
-          <textarea id="text" name="text" value={state.text} onChange={(e) => setState({ ...state, message: e.target.value})}></textarea>
+          <textarea id="text" name="text" value={state.text} onChange={handleOnChange}></textarea>
         </div>
         <div className="button">
           <button type="submit" onClick={sendMessage}>Create Post</button>

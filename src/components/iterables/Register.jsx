@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 
 import user from "../../assets/img/user.png";
@@ -7,6 +8,7 @@ import lock from "../../assets/img/lock.png";
 import key from "../../assets/img/key.png";
 
 export default function Register({ handleTabChange }) {
+  const [state, setState] = useState({ username: "", email: "", password: "", password_confirmation: "" });
   const non_field_errors = null;
 
   const handleSubmit = () => { }
@@ -25,16 +27,18 @@ export default function Register({ handleTabChange }) {
   const form_password_confirmation = "";
   const password_confirmation = "";
 
-
+  const handleOnChange = (event) => {
+    setState({ ...state, [event.target.id]: event.target.value});
+  }
 
   return (
     <div>
       <div className={"modal-body mx-3 " + (non_field_errors ? 'mt-3 mb-5' : 'my-5')}> 
-        { non_field_errors && 
+        {non_field_errors && 
           <div className="ml-5 mb-4">
             <ul className="non_field_error_list">
-              { non_field_errors.map((error, index) =>
-                <li key={index} className="help-block"><em>{ error }</em></li>
+              {non_field_errors.map((error, index) =>
+                <li key={index} className="help-block"><em>{error}</em></li>
               )}
             </ul>
           </div>
@@ -44,18 +48,18 @@ export default function Register({ handleTabChange }) {
           <img src={user} alt="username icon" />
           <input 
             type="text" 
-            name="form_username" 
+            name="username" 
             placeholder="Username" 
             className="form-control validate input" 
-            onChange={(event) => handleSetState({ [event.target.name]: event.target.value })}
-            value={form_username}
+            onChange={handleOnChange}
+            value={state.username}
           />
         </div>
         { username && 
           <div className="mb-3 ml-5">
             <ul className="non_field_error_list">
-              { username.map((error, index) =>
-                <li key={index} className="help-block"><em>{ error }</em></li>
+              {username.map((error, index) =>
+                <li key={index} className="help-block"><em>{error}</em></li>
               )}
             </ul>
           </div>
@@ -65,18 +69,18 @@ export default function Register({ handleTabChange }) {
           <img src={mail} alt="mail icon" />
           <input 
             type="email" 
-            name="form_email" 
+            name="email" 
             placeholder="Email" 
             className="form-control validate input" 
-            onChange={(event) => handleSetState({ [event.target.name]: event.target.value })}
-            value={form_email}
+            onChange={handleOnChange}
+            value={state.email}
           />
         </div>
-        { email && 
+        {email && 
           <div className="mb-3 ml-5">
             <ul className="non_field_error_list">
-              { email.map((error, index) =>
-                <li key={index} className="help-block"><em>{ error }</em></li>
+              {email.map((error, index) =>
+                <li key={index} className="help-block"><em>{error}</em></li>
               )}
             </ul>
           </div>
@@ -86,18 +90,18 @@ export default function Register({ handleTabChange }) {
           <img src={key} alt="password icon" />
           <input 
             type="password" 
-            name="form_password" 
+            name="password" 
             placeholder="Password" 
             className="form-control validate input" 
-            onChange={(event) => handleSetState({ [event.target.name]: event.target.value })}
-            value={form_password}
+            onChange={handleOnChange}
+            value={state.password}
           />
         </div>
-        { password && 
+        {password && 
           <div className="mb-3 ml-5">
             <ul className="non_field_error_list">
-              { password.map((error, index) =>
-                <li key={index} className="help-block"><em>{ error }</em></li>
+              {password.map((error, index) =>
+                <li key={index} className="help-block"><em>{error}</em></li>
               )}
             </ul>
           </div>
@@ -107,18 +111,18 @@ export default function Register({ handleTabChange }) {
           <img src={lock} alt="password conformation icon" />
           <input 
             type="password" 
-            name="form_password_confirmation" 
+            name="password_confirmation" 
             placeholder="Password Confirmation" 
             className="form-control validate input" 
-            onChange={(event) => handleSetState({ [event.target.name]: event.target.value })}
-            value={form_password_confirmation}
+            onChange={handleOnChange}
+            value={state.password_confirmation}
           />
         </div>
-        { password_confirmation && 
+        {password_confirmation && 
           <div className="mb-3 ml-5">
             <ul className="non_field_error_list">
-              { password_confirmation.map((error, index) =>
-                <li key={index} className="help-block"><em>{ error }</em></li>
+              {password_confirmation.map((error, index) =>
+                <li key={index} className="help-block"><em>{error}</em></li>
               )}``
             </ul>
           </div>
