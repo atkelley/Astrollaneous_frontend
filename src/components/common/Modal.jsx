@@ -50,7 +50,7 @@ export default function Modal ({ type, src, alt, caption, closeModal, showModal 
         {type === "contact" && <Contact />}
         {type === "create" && <Create closeModal={closeModal} />}
         {type === "logout" && <Logout closeModal={closeModal} />}
-        {(type === "login" || type === "register") && <Combo tab={type} />}
+        {(type === "login" || type === "register") && <Combo tab={type} closeModal={closeModal} />}
         {type === "delete" && <Delete closeModal={closeModal} /> }
       </div>
     </div>

@@ -6,7 +6,7 @@ import profile from '../assets/img/profile.png';
 export default function Navbar({ sendModalData }) {
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const handlePageClick = (event) => {

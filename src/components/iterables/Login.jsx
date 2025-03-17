@@ -1,27 +1,60 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-
+import { login, register } from '../../actions/auth';
 import user from "../../assets/img/user.png";
-import login from "../../assets/img/login.png"
+import login_icon from "../../assets/img/login.png"
 import key from "../../assets/img/key.png";
+import show from "../../assets/img/show.png";
+import hide from "../../assets/img/hide.png";
 
-export default function Login({ handleTabChange }) {
+import { useDispatch } from 'react-redux';
+import { useLoginMutation } from '../../app/slices/authApiSlice';
+
+export default function Login({ handleTabChange, closeModal }) {
   const [state, setState] = useState({ username: "", password: "" });
+  const [remember, setRemember] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [login, { isLoading, error }] = useLoginMutation();
+  const dispatch = useDispatch();
+
   const non_field_errors = [];
-  const handleSubmit = () => {}
-
-  const form_username = "";
-
-  const username = "";
-
-  const form_password = "";
-  const password = "";
-
 
   const forgotPassword = () => {}
 
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      let temp = JSON.parse(localStorage.getItem("user"));
+      setState({ ...temp });
+    }
+  }, []);
+
+  const handleSubmit = async () => {
+    const { username, password } = state;
+
+    if(username && password) {
+      await login({ username, password }).unwrap().then(result => {
+        localStorage.setItem('accessToken', result.access);
+        localStorage.setItem('refreshToken', result.refresh);
+
+        if (state.remember) {
+          localStorage.setItem("user", JSON.stringify({ "username": username, "password": password }));
+        }
+        // Dispatch action to update user state
+        dispatch({ type: 'SET_USER', payload: result.access });
+
+        closeModal();
+      }).catch(({ status, data: { error }}) => console.error(`Login failed (${status}): ${error}`));
+
+
+      setState({ username: "", password: "" });
+      setRemember(false);
+      setShowPassword(false);
+    }
+  }
+  
   const handleOnChange = (event) => {
-    setState({ ...state, [event.target.id]: event.target.value});
+    setState({ ...state, [event.target.name]: event.target.value });
   }
 
   return (
@@ -50,40 +83,67 @@ export default function Login({ handleTabChange }) {
         </div>
 
 
-        {username && 
+        {/* {state.username && 
           <div className="mb-3 ml-5">
             <ul className="non_field_error_list">
-              {username.map((error, index) =>
+              {state.username.map((error, index) =>
                 <li key={index} className="help-block"><em>{error}</em></li>
               )}
             </ul>
           </div>
-        }
+        } */}
     
         <div className="form-group">
           <img src={key} alt="password icon" />
           <input 
-            type="password" 
             name="password" 
+            type={state.password ? "text" : "password"}
             placeholder="Password"  
             className="form-control validate input"
             onChange={handleOnChange}
             value={state.password}
           />
+          <img 
+            name="showPassword" 
+            src={showPassword ? show : hide} 
+            alt={`${showPassword ? "show" : "hide"} password icon`} 
+            className="password-icon" 
+            onClick={() => { state.password && setShowPassword(!showPassword)}} 
+            style={{ backgroundColor: showPassword ? "rgba(255, 0, 0, 0.75)" : "white" }}
+          />
         </div>
-        {password && 
+
+        {/* {state.password && 
           <div className="mb-3 ml-5">
             <ul className="non_field_error_list">
-              {password.map((error, index) =>
+              {state.password.map((error, index) =>
                 <li key={index} className="help-block"><em>{error}</em></li>
               )}
             </ul>
           </div>
-        }
+        } */}
 
         <div className="checkbox-group">
-          <input className="checkbox" type="checkbox" name="remember" /><label>Remember me</label>
+          <input 
+            name="remember"
+            type="checkbox" 
+            value={remember}
+            onChange={() => setRemember(!remember)} 
+            checked={remember}
+          />
+          <label>Remember me</label>
         </div>
+
+        {/* <div className="checkbox-group">
+          <input 
+            type="checkbox" 
+            name="showPassword" 
+            value={showPassword} 
+            onChange={() => setShowPassword(!showPassword)} 
+            checked={showPassword}
+          />
+          <label>Show Password?</label>
+        </div> */}
 
         <div className="links-group">
           <p>Not a member? <span id="register" onClick={handleTabChange}>Register Now!</span></p>
@@ -92,12 +152,13 @@ export default function Login({ handleTabChange }) {
       </div>
       
       <div className="login-footer">
-        <button type="submit" onClick={handleSubmit}><p>Login</p><img src={login} alt="login icon" /></button>
+        <button type="submit" onClick={handleSubmit}><p>Login</p><img src={login_icon} alt="login icon" /></button>
       </div>
     </div>
   );
 }
 
 Login.propTypes = {
-  handleTabChange: PropTypes.func
+  handleTabChange: PropTypes.func,
+  closeModal: PropTypes.func
 };

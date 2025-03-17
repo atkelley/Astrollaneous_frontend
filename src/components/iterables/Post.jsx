@@ -7,13 +7,13 @@ import Comment from './Comment';
 export default function Post({ post, showDeleteModal, showCommentModal }) {
   const [showTruncatedText, setShowTruncatedText] = useState(true);
   const { id, title, created_date, image_url, text, text_html, comments } = post;
-  const post_user = { id: post.user, username: "Admin" };
+  console.log(comments)
 
   return (
       <article>
 
             <h1 className="mt-3">{ title }</h1>
-            <p className="lead"><em>Posted by <Link to={`/user/${post_user.id}`}>{ post_user.username }</Link> on { getFormalDateString(created_date) } at { getConvertedDateTime(created_date) }</em></p>
+            <p className="lead"><em>Posted by <Link to={`/users/${post.user.id}`}>{ post.user.username }</Link> on { getFormalDateString(created_date) } at { getConvertedDateTime(created_date) }</em></p>
             <hr />
             {image_url &&
               <>
@@ -23,7 +23,7 @@ export default function Post({ post, showDeleteModal, showCommentModal }) {
             }
 
             {showTruncatedText ?
-              <p>{text.substring(0, 200) + " ..."}</p>
+              <p>{text.substring(0, 200) + "..."}</p>
             :
               <>
                 <span dangerouslySetInnerHTML={{__html: text_html}}></span>

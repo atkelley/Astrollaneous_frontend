@@ -5,13 +5,11 @@ import { getPosts } from "../../services/post.service";
 
 export default function Blog() {
   const [posts, setPosts] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       await getPosts().then(response => {
         setPosts([...response.data]);
-        setIsLoaded(true);
       }).catch(error => {
         console.log(error);
       });

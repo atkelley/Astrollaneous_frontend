@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { login, register } from '../../actions/auth';
 import Login from "./Login";
 import Register from "./Register";
 
-export default function Combo({ tab }) {
+export default function Combo({ tab, closeModal }) {
   const [active, setActive] = useState(tab);
 
   const handleSetState = () => {}
@@ -21,13 +22,14 @@ export default function Combo({ tab }) {
         <div className={`${active === "register" ? "combo-tab active" : "combo-tab"}`}  id="register" href="" onClick={handleTabChange}>Create an Account</div>
       </nav>
       <div className="tab-content" id="tab-content">
-        {active === "login" && <Login handleTabChange={handleTabChange} formProps={null} handleSetState={handleSetState} handleSubmit={handleLoginSubmit} />}
-        {active === "register" && <Register handleTabChange={handleTabChange} formProps={null} handleSetState={handleSetState} handleSubmit={handleRegisterSubmit} />}
+        {active === "login" && <Login handleTabChange={handleTabChange} handleSetState={handleSetState} handleSubmit={handleLoginSubmit} closeModal={closeModal} />}
+        {active === "register" && <Register handleTabChange={handleTabChange} handleSetState={handleSetState} handleSubmit={handleRegisterSubmit} closeModal={closeModal} />}
       </div>
     </div>
   )
 }
 
 Combo.propTypes = {
-  tab: PropTypes.string
+  tab: PropTypes.string,
+  closeModal: PropTypes.func
 };

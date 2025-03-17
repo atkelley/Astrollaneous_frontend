@@ -1,8 +1,9 @@
 import { useState, useEffect, Fragment } from 'react';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Gravatar from 'react-gravatar';
 import { getFormalDateString, getConvertedDateTime } from '../common/Utilities';
-import { getUser } from "../../services/user.service";
+import { getUser, getUserPosts, getUserComments } from "../../services/user.service";
 // import { PostDataService } from "../../services/post.service";
 import Loader from '../common/Loader';
 // import '../css/layout/Blog.css';
@@ -11,27 +12,46 @@ import Loader from '../common/Loader';
 export default function User () {
   const [state, setState] = useState({ user: {}, posts: null, comments: null, showTruncatedText: {} })
   const { user, posts, comments } = state;
+  const { id } = useParams();
 
   useEffect(() => {
     fetchData();
   }, []);
 
+  const fetchData = async () => {
+    await Promise.all([
+      getUser(id),
+      getUserPosts(id),
+      getUserComments(id),
+    ]).then(([user, { data: posts }, {data: comments }]) => {
 
-  // componentDidMount = () => {
-  //   this.getUser(this.props.match.params.id);
-  //   this.getUserPosts(this.props.match.params.id);
-  //   this.getUserComments(this.props.match.params.id);
-  // }
+      // console.log('Data from API 1:', user);
+      // console.log('Data from API 2:', posts);
+      // console.log('Data from API 3:', comments);
 
-  const fetchData = async (id) => {
-    await getUser(id)
-    .then(response => {
-      this.setState({ user: response.data[0].fields });
-    })
-    .catch(error => {
-      console.log(error);
+      let showTruncatedText = {};
+      posts.forEach((_, index) => {
+        showTruncatedText[index] = true;
+      })
+
+      setState({ user: user.data[0].fields, posts, comments, showTruncatedText });
+    }).catch(error => {
+      console.error('Error fetching data:', error);
     });
   }
+
+  console.log(state)
+
+  // const fetchData = async () => {
+  //   await getUser(id)
+  //   .then(response => {
+  //     console.log(response)
+  //     setState({ ...state, user: response.data[0].fields });
+  //   })
+  //   .catch(error => {
+  //     console.log(error);
+  //   });
+  // }
 
   // getUserPosts = async (id) => {
   //   await UserDataService.getUserPosts(id)
@@ -42,7 +62,7 @@ export default function User () {
   //         showTruncatedText[index] = true;
   //       });
         
-  //       this.setState({ posts: response.data, showTruncatedText });
+  //       setState({ ...state, posts: response.data, showTruncatedText });
   //     })
   //     .catch(error => {
   //       console.log(error);
@@ -56,7 +76,7 @@ export default function User () {
   //         comment.title = await this.getPostTitle(comment.post);
   //       });
 
-  //       this.setState({ comments: response.data });
+  //       setState({ ...state, comments: response.data });
   //     })
   //     .catch(error => {
   //       console.log(error);
@@ -69,11 +89,11 @@ export default function User () {
   //   }
   // }
 
-  // setTruncatedTextState = (index) => {
-  //   let showTruncatedText = this.state.showTruncatedText;
-  //   showTruncatedText[index] = !this.state.showTruncatedText[index];
-  //   this.setState({ showTruncatedText });
-  // }
+  const setTruncatedTextState = (index) => {
+    let showTruncatedText = state.showTruncatedText;
+    showTruncatedText[index] = !state.showTruncatedText[index];
+    setState({ ...state, showTruncatedText });
+  }
 
   // getPostTitle = async (id) => {
   //   return await PostDataService.getPost(id)
@@ -86,8 +106,8 @@ export default function User () {
   // }   
 
   return (
-    <div className="container main-container">
-      {(user && Object.keys(user).length !== 0 && posts && comments) ?
+    <section>
+      {(user && Object.keys(user).length > 0 && posts && comments) ?
         <div className="row user-title-row">
           <div className="col-md-4">
             <h4><Gravatar email={user.email} className="user-gravatar" /><strong>{user.username}</strong></h4>
@@ -116,30 +136,30 @@ export default function User () {
       {posts ?
         <Fragment>
           {posts.length > 0 ?
-            posts.map(({ user, title, created_date, image_url, text, text_html }, index) => {
+            posts.map((post, index) => {
               return (
                 <Fragment key={index}>
                   <div className="row daily-row">
                     <div className="col-md-12">
-                      <h1>{ title }</h1>
-                      <p className="lead"><em>Posted by <Link to={`/user/${user.id}`}>{ user.username }</Link> on { getFormalDateString(created_date) } at { getConvertedDateTime(created_date) }</em></p>
-                      {(image_url) &&
+                      <h1>{ post.title }</h1>
+                      <p className="lead"><em>Posted by <Link to={`/user/${post.user}`}>{ user.username }</Link> on { getFormalDateString(post.created_date) } at { getConvertedDateTime(post.created_date) }</em></p>
+                      {(post.image_url) &&
                         <Fragment>
-                          <img className="img-fluid" src={ image_url } alt="" />
+                          <img className="img-fluid" src={ post.image_url } alt="" />
                           <hr />
                         </Fragment>
                       }
         
-                      {this.state.showTruncatedText[index] ? <p>{text.substring(0, 200) + " ..."}</p> : <span dangerouslySetInnerHTML={{__html: text_html}}></span>}
+                      {state.showTruncatedText[index] ? <p>{post.text.substring(0, 200) + "..."}</p> : <span dangerouslySetInnerHTML={{__html: post.text_html}}></span>}
                       
                       <div className="post-button-box">
-                        {this.state.showTruncatedText[index] ?
-                          <button type="button" className="btn btn-success" value="hidden" onClick={() => this.setTruncatedTextState(index)}>
+                        {state.showTruncatedText[index] ?
+                          <button type="button" className="btn btn-success" value="hidden" onClick={() => setTruncatedTextState(index)}>
                             <span className="fa fa-plus" aria-hidden="true"></span>
                             <span className="icon-label">Show More</span>
                           </button>
                         :
-                          <button type="button" className="btn btn-success" value="hidden" onClick={() => this.setTruncatedTextState(index)}>
+                          <button type="button" className="btn btn-success" value="hidden" onClick={() => setTruncatedTextState(index)}>
                             <span className="fa fa-minus" aria-hidden="true"></span>
                             <span className="icon-label">Show Less</span>
                           </button>
@@ -167,7 +187,7 @@ export default function User () {
                 <div key={index} className="comment-wrapper">
                   <div className="comment-title">
                     <em>
-                      <a href="#">{ comment.user.username }</a> on { getFormalDateString(comment.created_date) } at { getConvertedDateTime(comment.created_date) } from the post &quot;<strong>{comment.title}</strong>&quot;
+                      <a href="#">{ comment.user.username }</a> on { getFormalDateString(comment.created_date) } at { getConvertedDateTime(comment.created_date) } from the post &quot;<strong>{comment.post_title}</strong>&quot;
                     </em>
                   </div>
                   
@@ -182,6 +202,6 @@ export default function User () {
       :
         <Loader />
       }
-    </div>
+    </section>
   );
 }

@@ -6,29 +6,24 @@ import login from "../../assets/img/login.png"
 import mail from "../../assets/img/mail.png";
 import lock from "../../assets/img/lock.png";
 import key from "../../assets/img/key.png";
+import show from "../../assets/img/show.png";
+import hide from "../../assets/img/hide.png";
 
 export default function Register({ handleTabChange }) {
-  const [state, setState] = useState({ username: "", email: "", password: "", password_confirmation: "" });
+  const [state, setState] = useState({ username: "", email: "", password: "", confirmation: "" });
+  const [passwords, setPasswords] = useState({ password: false, confirmation: false });
   const non_field_errors = null;
 
   const handleSubmit = () => { }
 
-  const handleSetState = () => {}
-
-  const form_username = "";
-  const username = "";
-
-  const form_email = "";
-  const email = "";
-
-  const form_password = "";
-  const password = "";
-
-  const form_password_confirmation = "";
-  const password_confirmation = "";
-
   const handleOnChange = (event) => {
-    setState({ ...state, [event.target.id]: event.target.value});
+    setState({ ...state, [event.target.name]: event.target.value});
+  }
+
+  const handlePasswords = (event) => {
+    if (state[event.target.name]) {
+      setPasswords({ ...passwords, [event.target.name]: !passwords[event.target.name] });
+    }
   }
 
   return (
@@ -55,15 +50,16 @@ export default function Register({ handleTabChange }) {
             value={state.username}
           />
         </div>
-        { username && 
+
+        {/* {state.username && 
           <div className="mb-3 ml-5">
             <ul className="non_field_error_list">
-              {username.map((error, index) =>
+              {state.username.map((error, index) =>
                 <li key={index} className="help-block"><em>{error}</em></li>
               )}
             </ul>
           </div>
-        }
+        } */}
 
         <div className="form-group">
           <img src={mail} alt="mail icon" />
@@ -76,49 +72,68 @@ export default function Register({ handleTabChange }) {
             value={state.email}
           />
         </div>
-        {email && 
+
+        {/* {state.email && 
           <div className="mb-3 ml-5">
             <ul className="non_field_error_list">
-              {email.map((error, index) =>
+              {state.email.map((error, index) =>
                 <li key={index} className="help-block"><em>{error}</em></li>
               )}
             </ul>
           </div>
-        }
+        } */}
     
         <div className="form-group">
           <img src={key} alt="password icon" />
           <input 
-            type="password" 
             name="password" 
+            type={passwords['password'] ? "text" : "password"}
             placeholder="Password" 
             className="form-control validate input" 
             onChange={handleOnChange}
             value={state.password}
           />
+          <img 
+            name="password"
+            src={passwords['password'] ? show : hide} 
+            alt={`${passwords['password'] ? "show" : "hide"} password icon`} 
+            className="password-icon" 
+            onClick={handlePasswords} 
+            style={{ backgroundColor: passwords['password'] ? "rgba(255, 0, 0, 0.75)" : "white" }}
+          />
         </div>
-        {password && 
+
+        {/* {state.password && 
           <div className="mb-3 ml-5">
             <ul className="non_field_error_list">
-              {password.map((error, index) =>
+              {state.password.map((error, index) =>
                 <li key={index} className="help-block"><em>{error}</em></li>
               )}
             </ul>
           </div>
-        }
+        } */}
 
         <div className="form-group">
           <img src={lock} alt="password conformation icon" />
           <input 
-            type="password" 
-            name="password_confirmation" 
+            name="confirmation" 
+            type={passwords['confirmation'] ? "text" : "password"}
             placeholder="Password Confirmation" 
             className="form-control validate input" 
             onChange={handleOnChange}
-            value={state.password_confirmation}
+            value={state.confirmation}
+          />
+          <img 
+            name="confirmation"
+            src={passwords['confirmation'] ? show : hide} 
+            alt={`${passwords['confirmation'] ? "show" : "hide"} password confirmation icon`} 
+            className="confirmation-icon" 
+            onClick={handlePasswords} 
+            style={{ backgroundColor: passwords['confirmation'] ? "rgba(255, 0, 0, 0.75)" : "white" }}
           />
         </div>
-        {password_confirmation && 
+
+        {/* {state.confirmation && 
           <div className="mb-3 ml-5">
             <ul className="non_field_error_list">
               {password_confirmation.map((error, index) =>
@@ -126,7 +141,7 @@ export default function Register({ handleTabChange }) {
               )}``
             </ul>
           </div>
-        }
+        } */}
 
         <div className="link-group">
           <p>Already have an account? <span id="login" onClick={handleTabChange}>Log In!</span></p>

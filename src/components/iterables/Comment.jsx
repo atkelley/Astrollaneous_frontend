@@ -1,45 +1,41 @@
-import { useState } from "react";
+import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { getFormalDateString, getConvertedDateTime } from '../common/Utilities';
 
-export default function Comment () {
-  const [state, setState] = useState({ commentId: 0, commentText: "" });
 
-  const handleCommentSubmit = () => {}
-  
+
+
+export default function Comment ({ comment: { id, user, created_date, text, post }, isAuthenticated, user: authUser, showDeleteModal, showCommentModal }) {
   return (
-    <div className="modal fade bd-example-modal-lg" id='commentModal' tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-      <div className="modal-dialog modal-lg">
-        <div className="modal-content">
-          <form onSubmit={handleCommentSubmit}>
-            <div className="modal-header">
-              {(state.commentId < 0) ? <h2 className="modal-title">Add Comment</h2> : <h2 className="modal-title">Edit Comment</h2>}
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <i className="fas fa-times" aria-hidden="true"></i>
-              </button>
-            </div>
-
-            <div className="modal-body">
-              <textarea 
-                type="text" 
-                name="text" 
-                placeholder="Enter Text..." 
-                rows={10}
-                className="form-control validate input" 
-                onChange={(event) => setState(event.target.value)}
-                value={state.commentText}
-                required
-              />
-            </div>
-
-            <div className="modal-footer">
-              {(state.commentId < 0) ? 
-                <button type="submit" className="btn btn-primary">Add Comment</button>
-              : 
-                <button type="submit" className="btn btn-primary">Edit Comment</button>
-              }
-            </div>
-          </form>
-        </div>
+    <div className="comment-wrapper">
+      <div className="comment-title">
+        <em><Link to={`/user/${user.id}`}>{ user.username }</Link> on { getFormalDateString(created_date) } at { getConvertedDateTime(created_date) }</em>
       </div>
+
+      {(isAuthenticated && authUser.id == user.id) 
+        ?
+        <Fragment>
+          <div className="comment-body">{ text }</div>
+          <div className="comment-delete">
+            <button type="button" className="btn-comment comment_delete" data-toggle="modal" data-target='#deleteModal' onClick={() => showDeleteModal(false, id, '')}>Delete</button>
+          </div>
+          <div className="comment-edit">
+            <button type="button" className="btn-comment comment_edit" data-toggle="modal" data-target='#commentModal' onClick={() => showCommentModal(post, id, text)}>Edit</button>
+          </div>
+        </Fragment>
+        :
+        <div className="comment-body comment-body-unauth ">{ text }</div>
+      }
+      <br />
     </div>
-  );
+  )
 }
+
+Comment.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  user: PropTypes.object,
+  comment: PropTypes.object,
+  showDeleteModal: PropTypes.func,
+  showCommentModal: PropTypes.func
+};

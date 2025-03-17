@@ -41,7 +41,7 @@ export default function App() {
       <Routes>        
         <Route path="/blog/create" exact element={<Wrapper><Create /></Wrapper>} />
         <Route path="/blog/update/:id" exact element={<Wrapper><Update /></Wrapper>} />
-        <Route path="/user/:id" exact element={<Wrapper><User /></Wrapper>} />     
+        <Route path="/users/:id" exact element={<Wrapper><User /></Wrapper>} />     
 
         <Route path="/" exact element={<Wrapper><Home sendModalData={openModal} /></Wrapper>} />
         <Route path="/blog" exact element={<Wrapper><Blog /></Wrapper>} />
