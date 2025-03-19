@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import PropTypes from "prop-types";
 import profile from '../assets/img/profile.png';
@@ -6,7 +7,8 @@ import profile from '../assets/img/profile.png';
 export default function Navbar({ sendModalData }) {
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
 
   useEffect(() => {
     const handlePageClick = (event) => {

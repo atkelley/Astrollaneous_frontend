@@ -1,13 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { user, key, mail, lock, show, hide, submit } from "../../assets/img/index";
 
-import user from "../../assets/img/user.png";
-import login from "../../assets/img/login.png"
-import mail from "../../assets/img/mail.png";
-import lock from "../../assets/img/lock.png";
-import key from "../../assets/img/key.png";
-import show from "../../assets/img/show.png";
-import hide from "../../assets/img/hide.png";
 
 export default function Register({ handleTabChange }) {
   const [state, setState] = useState({ username: "", email: "", password: "", confirmation: "" });
@@ -149,7 +143,7 @@ export default function Register({ handleTabChange }) {
     
       </div>
       <div className="register-footer">
-        <button type="submit" onClick={handleSubmit}><p>Register</p><img src={login} alt="login icon" /></button>
+        <button type="submit" onClick={handleSubmit}><p>Register</p><img src={submit} alt="register icon" /></button>
       </div>
     </div>
   )

@@ -17,6 +17,7 @@ import Contact from "./components/iterables/Contact";
 import Create from "./components/iterables/Create";
 import Update from "./components/iterables/Update";
 import User from "./components/iterables/User";
+import Alerts from "./layout/Alerts";
 
 export default function App() {
   const [modalData, setModalData] = useState({ type: null, src: null, alt: null, caption: null });
@@ -54,6 +55,7 @@ export default function App() {
         <Route path="/contact" exact element={<Wrapper><Contact /></Wrapper>} />
       </Routes>
 
+      <Alerts />
       <Footer />
     </BrowserRouter>
   );

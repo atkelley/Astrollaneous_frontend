@@ -1,31 +1,23 @@
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import { login, register } from '../../actions/auth';
-import user from "../../assets/img/user.png";
-import login_icon from "../../assets/img/login.png"
-import key from "../../assets/img/key.png";
-import show from "../../assets/img/show.png";
-import hide from "../../assets/img/hide.png";
-
 import { useDispatch } from 'react-redux';
-import { useLoginMutation } from '../../app/slices/authApiSlice';
+import PropTypes from "prop-types";
+import { login } from '../../app/actions/authActions';
+import { user, key, show, hide, submit } from "../../assets/img/index";
+
 
 export default function Login({ handleTabChange, closeModal }) {
+  const dispatch = useDispatch();
   const [state, setState] = useState({ username: "", password: "" });
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const [login, { isLoading, error }] = useLoginMutation();
-  const dispatch = useDispatch();
-
   const non_field_errors = [];
 
-  const forgotPassword = () => {}
 
   useEffect(() => {
     if (localStorage.getItem("user")) {
-      let temp = JSON.parse(localStorage.getItem("user"));
-      setState({ ...temp });
+      let user = JSON.parse(localStorage.getItem("user"));
+      setState({ ...user });
     }
   }, []);
 
@@ -33,28 +25,12 @@ export default function Login({ handleTabChange, closeModal }) {
     const { username, password } = state;
 
     if(username && password) {
-      await login({ username, password }).unwrap().then(result => {
-        localStorage.setItem('accessToken', result.access);
-        localStorage.setItem('refreshToken', result.refresh);
-
-        if (state.remember) {
-          localStorage.setItem("user", JSON.stringify({ "username": username, "password": password }));
-        }
-        // Dispatch action to update user state
-        dispatch({ type: 'SET_USER', payload: result.access });
-
-        closeModal();
-      }).catch(({ status, data: { error }}) => console.error(`Login failed (${status}): ${error}`));
-
-
-      setState({ username: "", password: "" });
-      setRemember(false);
-      setShowPassword(false);
+      dispatch(login(username, password, remember, closeModal));
     }
-  }
+  };
   
   const handleOnChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.value });
+    setState({ ...state, [event.target.name]: event.target.value.trim() });
   }
 
   return (
@@ -97,7 +73,7 @@ export default function Login({ handleTabChange, closeModal }) {
           <img src={key} alt="password icon" />
           <input 
             name="password" 
-            type={state.password ? "text" : "password"}
+            type={showPassword ? "text" : "password"}
             placeholder="Password"  
             className="form-control validate input"
             onChange={handleOnChange}
@@ -147,12 +123,12 @@ export default function Login({ handleTabChange, closeModal }) {
 
         <div className="links-group">
           <p>Not a member? <span id="register" onClick={handleTabChange}>Register Now!</span></p>
-          <p>Forgot <span onClick={forgotPassword}>Password?</span></p>
+          <p>Forgot <span onClick={() => {}}>Password?</span></p>
         </div>
       </div>
       
       <div className="login-footer">
-        <button type="submit" onClick={handleSubmit}><p>Login</p><img src={login_icon} alt="login icon" /></button>
+        <button type="submit" onClick={handleSubmit}><p>Login</p><img src={submit} alt="login icon" /></button>
       </div>
     </div>
   );

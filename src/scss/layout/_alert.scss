@@ -1,0 +1,62 @@
+.alert {
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+  border-radius: 10px;
+  margin-bottom: 0px;
+  padding: 10px 10px 10px 20px;
+
+  animation-name: fade-out;
+  animation-duration: 3s;
+  animation-timing-function: ease;
+  animation-delay: 5s;
+  -webkit-animation-name: fade-out;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-delay: 5s;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+
+  p {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 14px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+
+    img {
+      height: 15px;
+      padding-top: 1px;
+    }
+  }
+
+  .close {
+    border: 0px;
+    background-color: transparent;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 14px;
+    padding-bottom: 2px;
+  }
+}
+
+@keyframes fade-out {
+  from { opacity: 1.0 }
+  to   { opacity: 0.0 }
+}
+
+@-webkit-keyframes fade-out {
+  from { opacity: 1.0 }
+  to   { opacity: 0.0 }
+}
+
+
+

@@ -1,11 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from './slices/counterSlice';
-import { authApiSlice } from './slices/authApiSlice';
+import { configureStore } from "@reduxjs/toolkit"
+import alertReducer from "./slices/alertSlice";
+import authReducer from "./reducers/authReducer";
 
 export default configureStore ({
   reducer: {
-    counter: counterReducer,
-    [authApiSlice.reducerPath]: authApiSlice.reducer,
+    alert: alertReducer,
+    auth: authReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApiSlice.middleware),
 });

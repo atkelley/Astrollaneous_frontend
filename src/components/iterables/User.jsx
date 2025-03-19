@@ -39,9 +39,7 @@ export default function User () {
       console.error('Error fetching data:', error);
     });
   }
-
-  console.log(state)
-
+  
   // const fetchData = async () => {
   //   await getUser(id)
   //   .then(response => {

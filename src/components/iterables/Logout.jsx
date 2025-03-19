@@ -1,6 +1,11 @@
+import { useDispatch } from 'react-redux';
 import PropTypes from "prop-types";
+import { logout } from '../../app/actions/authActions';
 
 export default function Logout({ closeModal }) {
+  const dispatch = useDispatch();
+
+
   const isPost = false;
 
   const handleSubmit = () => {}
@@ -14,7 +19,7 @@ export default function Logout({ closeModal }) {
       </div>
 
       <div className="logout-footer">
-        <button type="submit" className="logout" onClick={handleSubmit}>Log Out</button>
+        <button type="submit" className="logout" onClick={() => dispatch(logout(closeModal))}>Log Out</button>
         <button type="button" className="cancel" onClick={closeModal}>Cancel</button>
       </div>
     </div>

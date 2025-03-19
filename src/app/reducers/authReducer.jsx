@@ -7,7 +7,7 @@ const initialState = {
   user: null,
 };
 
-const auth = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case USER_LOADING:
       return { ...state, isLoading: true };
@@ -28,4 +28,4 @@ const auth = (state = initialState, action) => {
   }
 };
 
-export default auth;
+export default authReducer;
