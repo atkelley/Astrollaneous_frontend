@@ -1,8 +1,14 @@
 .blog {
+  width: 100%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
   row-gap: 40px;
-  min-height: 75vh;
+  
+  section {
+    width: 80vw;
+    border-radius: 7px;
+    height: fit-content;
+  }
 }

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import Gravatar from 'react-gravatar';
 import { getFormalDateString, getConvertedDateTime } from '../common/Utilities';
 import { getUser, getUserPosts, getUserComments } from "../../services/user.service";
-// import { PostDataService } from "../../services/post.service";
 import Loader from '../common/Loader';
-// import '../css/layout/Blog.css';
-// import '../css/layout/User.css';
+import Post from './Post';
+import Comment from './Comment';
+
 
 export default function User () {
   const [state, setState] = useState({ user: {}, posts: null, comments: null, showTruncatedText: {} })
@@ -39,53 +39,6 @@ export default function User () {
       console.error('Error fetching data:', error);
     });
   }
-  
-  // const fetchData = async () => {
-  //   await getUser(id)
-  //   .then(response => {
-  //     console.log(response)
-  //     setState({ ...state, user: response.data[0].fields });
-  //   })
-  //   .catch(error => {
-  //     console.log(error);
-  //   });
-  // }
-
-  // getUserPosts = async (id) => {
-  //   await UserDataService.getUserPosts(id)
-  //     .then(response => {
-  //       let showTruncatedText = {};
-
-  //       response.data.forEach((post, index) => {
-  //         showTruncatedText[index] = true;
-  //       });
-        
-  //       setState({ ...state, posts: response.data, showTruncatedText });
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }
-
-  // getUserComments = async (id) => {
-  //   await UserDataService.getUserComments(id)
-  //     .then(response => {
-  //       this.asyncForEach(response.data, async (comment) => {
-  //         comment.title = await this.getPostTitle(comment.post);
-  //       });
-
-  //       setState({ ...state, comments: response.data });
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }
-
-  // asyncForEach = async (array, callback) => {
-  //   for (let index = 0; index < array.length; index++) {
-  //     await callback(array[index], index, array);
-  //   }
-  // }
 
   const setTruncatedTextState = (index) => {
     let showTruncatedText = state.showTruncatedText;
@@ -93,113 +46,41 @@ export default function User () {
     setState({ ...state, showTruncatedText });
   }
 
-  // getPostTitle = async (id) => {
-  //   return await PostDataService.getPost(id)
-  //   .then(response => {
-  //     return response.data.post.title;
-  //   })
-  //   .catch(error => {
-  //     console.log(error);
-  //   });
-  // }   
 
   return (
-    <section>
-      {(user && Object.keys(user).length > 0 && posts && comments) ?
-        <div className="row user-title-row">
-          <div className="col-md-4">
-            <h4><Gravatar email={user.email} className="user-gravatar" /><strong>{user.username}</strong></h4>
-          </div>
-          <div className="col-md-4">
-            <div className="row">
-              <h6 className="user-title"><em>Posts: {posts.length}</em></h6>
-            </div>
-            <div className="row">
-              <h6 className="user-title"><em>Comments: {comments.length}</em></h6>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="row">
-              <h6><em>Joined: {getFormalDateString(user.date_joined)}</em></h6>
-            </div>
-            <div className="row">
-              <h6><em>Last Login: {getFormalDateString(user.last_login)} at {getConvertedDateTime(user.last_login)}</em></h6>
-            </div>
-          </div>
-        </div>      
-      :
-        <Loader />
-      }
-      <hr className="user-title-hr" />
-      {posts ?
-        <Fragment>
-          {posts.length > 0 ?
-            posts.map((post, index) => {
-              return (
-                <Fragment key={index}>
-                  <div className="row daily-row">
-                    <div className="col-md-12">
-                      <h1>{ post.title }</h1>
-                      <p className="lead"><em>Posted by <Link to={`/user/${post.user}`}>{ user.username }</Link> on { getFormalDateString(post.created_date) } at { getConvertedDateTime(post.created_date) }</em></p>
-                      {(post.image_url) &&
-                        <Fragment>
-                          <img className="img-fluid" src={ post.image_url } alt="" />
-                          <hr />
-                        </Fragment>
-                      }
-        
-                      {state.showTruncatedText[index] ? <p>{post.text.substring(0, 200) + "..."}</p> : <span dangerouslySetInnerHTML={{__html: post.text_html}}></span>}
-                      
-                      <div className="post-button-box">
-                        {state.showTruncatedText[index] ?
-                          <button type="button" className="btn btn-success" value="hidden" onClick={() => setTruncatedTextState(index)}>
-                            <span className="fa fa-plus" aria-hidden="true"></span>
-                            <span className="icon-label">Show More</span>
-                          </button>
-                        :
-                          <button type="button" className="btn btn-success" value="hidden" onClick={() => setTruncatedTextState(index)}>
-                            <span className="fa fa-minus" aria-hidden="true"></span>
-                            <span className="icon-label">Show Less</span>
-                          </button>
-                        }
-                      </div>
-                    </div>
-                  </div> 
-                  <hr />
-                </Fragment>
-            )})
-          :
-            <p><em>{user.username} has not posted...yet.</em></p>
-          }
-        </Fragment>
-      :
-        <Loader />
-      }
+    (user && Object.keys(user).length > 0 && posts && comments) ?
+      <main className="user">
+        <section className="user-header">
+          <h4><Gravatar email={user.email} className="user-gravatar" />{user.username}</h4>
+          <h6 className="user-title">Posts: {posts.length}</h6>
+          <h6 className="user-title">Comments: {comments.length}</h6>
+          <h6>Joined: {getFormalDateString(user.date_joined)}</h6>
+          <h6>Last Login: {getFormalDateString(user.last_login)} at {getConvertedDateTime(user.last_login)}</h6>
+        </section>      
 
-      <h4>Comments:</h4>
-      {comments ?
-        <Fragment>
-          {comments.length > 0 ?
-            comments.map((comment, index) => {
-              return (
-                <div key={index} className="comment-wrapper">
-                  <div className="comment-title">
-                    <em>
-                      <a href="#">{ comment.user.username }</a> on { getFormalDateString(comment.created_date) } at { getConvertedDateTime(comment.created_date) } from the post &quot;<strong>{comment.post_title}</strong>&quot;
-                    </em>
-                  </div>
-                  
-                  <div className="comment-body comment-body-unauth">{ comment.text }</div>
-                  <br />
-                </div> 
-            )})
+        <section className="user-posts">
+          <h4 className="user-posts-title">User Posts:</h4>
+          {posts.length > 0 ?
+            posts.map((post, index) => <Post key={index} post={post} showDeleteModal={() => {}} showCommentModal={() => {}} />)
           :
-            <p><em>{user.username} has not commented on any posts...yet.</em></p>
+            <p>{user.username} has not posted...yet.</p>
           }
-        </Fragment>
-      :
-        <Loader />
-      }
-    </section>
+        </section>
+
+        <section className="user-comments">
+          <h4 className="user-comments-title">User Comments:</h4>
+          <div className="user-comments-wrapper"> 
+            {comments.length > 0 ?
+              comments.map((comment, index) => <Comment key={index} comment={comment} showDeleteModal={() => {}} showCommentModal={() => {}} />)
+            :
+              <p>{user.username} has not commented on any posts...yet.</p>
+            }
+
+          </div>
+        </section>
+
+      </main>
+    :
+      <Loader />
   );
 }

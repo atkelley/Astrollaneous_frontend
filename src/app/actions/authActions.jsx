@@ -40,6 +40,7 @@ export const login = (username, password, remember, closeModal) => (dispatch) =>
       if (remember) {
         localStorage.setItem("user", JSON.stringify({ "username": username, "password": password }));
       }
+      console.log(res.data)
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
       dispatch(showAlert({ message: "You have successfully logged in.", type: 'success' }));
       closeModal();
@@ -61,8 +62,7 @@ export const register = (username, email, password) => (dispatch) => {
     })
     .catch((err) => {
       dispatch({ type: REGISTER_FAIL, });
-      // dispatch(returnErrors(err.response.data, err.response.status));
-      dispatch(returnErrors(err.message, err.code));
+      dispatch(returnErrors(err.response.data, err.response.status));
     });
 };
 
@@ -74,7 +74,7 @@ export const logout = (closeModal) => (dispatch, getState) => {
       dispatch(showAlert({ message: "You have successfully logged out.", type: 'success' }));
       closeModal();
     })
-    .catch((err) => {
-      dispatch(returnErrors(err.message, err.code));
+    .catch((err) => {;
+      dispatch(returnErrors(err.response.data, err.response.status));
     });
 };
