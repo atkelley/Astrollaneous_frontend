@@ -22,16 +22,14 @@ export default function Blog() {
   const showCommentModal = () => {}
 
   return (
-    
-      (posts ?
-        <main className="blog">
-          <section>
-          {posts.map((post) => <Post key={post.id} post={post} showDeleteModal={showDeleteModal} showCommentModal={showCommentModal} />)}
-          </section>
-        </main>
-      :
-        <Loader />
-      )
-    
+    (posts ?
+      <main className="blog">
+        <section>
+        {posts.map((post) => <Post key={post.id} post={post} showDeleteModal={showDeleteModal} showCommentModal={showCommentModal} />)}
+        </section>
+      </main>
+    :
+      <Loader />
+    )
   );
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getFormalDateString, getConvertedDateTime } from '../common/Utilities';
+import { space_banner } from '../../assets/img';
 
 
 export default function Comment ({ comment, showDeleteModal, showCommentModal }) {
@@ -11,7 +12,7 @@ export default function Comment ({ comment, showDeleteModal, showCommentModal })
   const user = useSelector((state) => state.auth.user);
 
   return (
-    <div className="comment-box">
+    <div className="comment-box" style={{ backgroundImage: `url(${space_banner})`}}>
       <div className="comment-title">
         <Link to={`/users/${comment_user.id}`}>{ comment_user.username }</Link> on { getFormalDateString(created_date) } at { getConvertedDateTime(created_date) }
       </div>

@@ -12,27 +12,65 @@
   }
 
   .user-header {
-    background-color: white;
-    padding: 40px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    
+    .user-header-info {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+      column-gap: 40px;
+      background-color: lightblue;
+      border: 2px solid pink;
+      border-radius: 7px;
+      padding: 30px 40px;
+      width: 99%;
+      box-shadow: 
+        rgba(240, 46, 170, 0.4) 5px 5px, 
+        rgba(240, 46, 170, 0.3) 10px 10px, 
+        rgba(240, 46, 170, 0.2) 15px 15px, 
+        rgba(240, 46, 170, 0.1) 20px 20px, 
+        rgba(240, 46, 170, 0.05) 25px 25px;
 
-    .user-title-hr {
-      margin-top: .5rem;
-    }
-    
-    .user-title-row {
-      padding-left: 40px;
-    }
-    
-    .user-gravatar {
-      border: 2px double #343a40;
-      box-shadow: 2px 2px 4px #cccccc;
-      border-radius: 50%;
-      height: 45px;
-      width: auto;
-      margin-right: 15px;
+      .user-gravatar {
+        border: 2px double yellow;
+        border-radius: 25%;
+        width: 210px;
+        height: auto;
+      }
+
+      .user-header-text {
+        width: 100%;
+
+        p {
+          width: 100%;
+          padding: 3px;
+          border: 1px solid lightgrey;
+          border-radius: 7px;
+          margin-bottom: 5px;
+          background-color: white;
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-between;
+          align-items: center;
+  
+          .user-header-attribute {
+            font-size: 14px;
+            font-weight: 700;
+          }
+  
+          .user-header-value {
+            font-size: 13px;
+            font-weight: 500;
+          }
+        }
+      }
     }
   }
-
 
   .user-posts, .user-comments {
     display: flex;
@@ -54,7 +92,7 @@
   }
 
   .user-posts {
-    padding: 35px 0px 10px 0px;
+    padding: 55px 0px 30px 0px;
   }
 
   .user-comments {
@@ -65,6 +103,13 @@
       width: 100%;
       box-shadow: 2px 2px 5px grey;
       background-color: white;
+
+      .user-comment-post-title {
+        font-size: 14px;
+        font-weight: 600;
+        border-bottom: 1px solid grey;
+        padding-bottom: 5px;
+      }
     }
   }
 }

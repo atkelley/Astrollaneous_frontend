@@ -6,6 +6,7 @@ import show from './show.png';
 import hide from './hide.png';
 import mail from "./mail.png";
 import lock from "./lock.png";
+import space_banner from "./space-banner.jpg";
 
 export {
   check,
@@ -15,5 +16,6 @@ export {
   hide, 
   submit,
   mail,
-  lock
+  lock,
+  space_banner
 };

@@ -1,6 +1,5 @@
 import { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import Gravatar from 'react-gravatar';
 import { getFormalDateString, getConvertedDateTime } from '../common/Utilities';
 import { getUser, getUserPosts, getUserComments } from "../../services/user.service";
@@ -24,12 +23,8 @@ export default function User () {
       getUserPosts(id),
       getUserComments(id),
     ]).then(([user, { data: posts }, {data: comments }]) => {
-
-      // console.log('Data from API 1:', user);
-      // console.log('Data from API 2:', posts);
-      // console.log('Data from API 3:', comments);
-
       let showTruncatedText = {};
+
       posts.forEach((_, index) => {
         showTruncatedText[index] = true;
       })
@@ -40,22 +35,39 @@ export default function User () {
     });
   }
 
-  const setTruncatedTextState = (index) => {
-    let showTruncatedText = state.showTruncatedText;
-    showTruncatedText[index] = !state.showTruncatedText[index];
-    setState({ ...state, showTruncatedText });
-  }
-
-
   return (
     (user && Object.keys(user).length > 0 && posts && comments) ?
       <main className="user">
         <section className="user-header">
-          <h4><Gravatar email={user.email} className="user-gravatar" />{user.username}</h4>
-          <h6 className="user-title">Posts: {posts.length}</h6>
-          <h6 className="user-title">Comments: {comments.length}</h6>
-          <h6>Joined: {getFormalDateString(user.date_joined)}</h6>
-          <h6>Last Login: {getFormalDateString(user.last_login)} at {getConvertedDateTime(user.last_login)}</h6>
+          <div className="user-header-info">
+            <Gravatar email={user.email} className="user-gravatar" />
+            <div className="user-header-text">
+              <p>
+                <span className="user-header-attribute">Username: </span>
+                <span className="user-header-value">{user.username}</span>
+              </p>
+              <p>
+                <span className="user-header-attribute">Email: </span>
+                <span className="user-header-value">{user.email}</span>
+              </p>
+              <p>
+                <span className="user-header-attribute">Total posts: </span>
+                <span className="user-header-value">{posts.length}</span>
+              </p>
+              <p>
+                <span className="user-header-attribute">Total comments: </span>
+                <span className="user-header-value">{comments.length}</span>
+              </p>
+              <p>
+                <span className="user-header-attribute">Joined: </span>
+                <span className="user-header-value">{getFormalDateString(user.date_joined)}</span>
+              </p>
+              <p>
+                <span className="user-header-attribute">Last login: </span>
+                <span className="user-header-value">{getFormalDateString(user.last_login)} at {getConvertedDateTime(user.last_login)}</span>
+              </p>
+            </div>
+          </div>
         </section>      
 
         <section className="user-posts">
@@ -71,7 +83,12 @@ export default function User () {
           <h4 className="user-comments-title">User Comments:</h4>
           <div className="user-comments-wrapper"> 
             {comments.length > 0 ?
-              comments.map((comment, index) => <Comment key={index} comment={comment} showDeleteModal={() => {}} showCommentModal={() => {}} />)
+              comments.map((comment, index) => {return (
+                <Fragment key={index} >
+                  <p className="user-comment-post-title">From "{comment.post_title}":</p>
+                  <Comment comment={comment} showDeleteModal={() => {}} showCommentModal={() => {}} />
+                </Fragment>
+              )})
             :
               <p>{user.username} has not commented on any posts...yet.</p>
             }
