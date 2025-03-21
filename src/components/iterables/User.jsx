@@ -75,7 +75,7 @@ export default function User () {
           {posts.length > 0 ?
             posts.map((post, index) => <Post key={index} post={post} showDeleteModal={() => {}} showCommentModal={() => {}} />)
           :
-            <p>{user.username} has not posted...yet.</p>
+            <p className="user-posts-no-comment">"{user.username}" has not posted anything...yet.</p>
           }
         </section>
 
@@ -90,7 +90,7 @@ export default function User () {
                 </Fragment>
               )})
             :
-              <p>{user.username} has not commented on any posts...yet.</p>
+              <p className="user-comments-no-comment">"{user.username}" has not commented on any posts...yet.</p>
             }
 
           </div>
