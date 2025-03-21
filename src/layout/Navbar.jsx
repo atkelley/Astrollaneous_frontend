@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import PropTypes from "prop-types";
 import profile from '../assets/img/profile.png';
 
@@ -8,7 +8,7 @@ export default function Navbar({ sendModalData }) {
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     const handlePageClick = (event) => {
@@ -35,15 +35,16 @@ export default function Navbar({ sendModalData }) {
          
         {isOpen &&
           <ul className="dropdown-list" onMouseLeave={() => setIsOpen(false)}>
-            { !isAuthenticated ?
+            { isAuthenticated && user ?
               <>
-                <li className="dropdown-list-item" onClick={() => sendModalData({ type: "login" })}>Login</li>
-                <li className="dropdown-list-item" onClick={() => sendModalData({ type: "register" })}>Register</li>
+                <Link className="dropdown-list-item" to={`/users/${user.id}`}>Profile</Link>
+                <li className="dropdown-list-item" onClick={() => sendModalData({ type: "create" })}>Create Post</li>
+                <li className="dropdown-list-item" onClick={() => sendModalData({ type: "logout" })}>Logout</li>
               </>
               :
               <>
-                <li className="dropdown-list-item" onClick={() => sendModalData({ type: "create" })}>Create Post</li>
-                <li className="dropdown-list-item" onClick={() => sendModalData({ type: "logout" })}>Logout</li>
+                <li className="dropdown-list-item" onClick={() => sendModalData({ type: "login" })}>Login</li>
+                <li className="dropdown-list-item" onClick={() => sendModalData({ type: "register" })}>Register</li>
               </>
             }
             <li className="dropdown-list-item" onClick={() => sendModalData({ type: "contact" })}>Contact</li>
