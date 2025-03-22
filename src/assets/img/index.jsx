@@ -6,6 +6,7 @@ import show from './show.png';
 import hide from './hide.png';
 import mail from "./mail.png";
 import lock from "./lock.png";
+import shuttle from "./shuttle.png";
 import space_banner from "./space-banner.jpg";
 
 export {
@@ -17,5 +18,6 @@ export {
   submit,
   mail,
   lock,
+  shuttle,
   space_banner
 };

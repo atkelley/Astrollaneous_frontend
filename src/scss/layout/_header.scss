@@ -1,29 +1,45 @@
-.header-container {
+a {
   width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-image: url("../assets/img/astrollaneous_banner.jpg");
-  background-size: cover;
-  height: 15vh;
+  text-decoration: none;
 
-  img {
-    padding-top: 7px;
-  }
-
-  a {
-    font-size: 1.15rem;
-    font-weight: 400;
-    line-height: 1.5;
-  }
-
-  a, a:active {
-    color: #E1E1BB;
-    text-decoration: none;
-  }
+  .header-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: 30px;
+    background-image: url("../assets/img/astrollaneous_banner.jpg");
+    background-size: cover;
+    height: 15vh;
   
-  a:hover {
-    color:  #FAFAB9;
-    text-decoration: none;
+    img {
+      width: 120px;
+    }
+
+    .header-text-box-title {
+      color: rgba(0, 93, 255, 0.95);
+      font-size: 44px;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      letter-spacing: 0.5rem;
+      text-shadow: 1px 1px hsl(75, 50%, 45%),
+      2px 2px hsl(75, 50%, 40%),
+      3px 3px hsl(75, 50%, 35%),
+      4px 4px hsl(75, 50%, 34%),
+      5px 5px hsl(75, 50%, 33%),
+      10px 10px 30px rgba(0,0,0,.7);
+    }
+
+    .header-text-box-subtitle {
+      color: orange;
+      font-size: 26px;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      letter-spacing: 0.155rem;
+      text-shadow: 1px 1px hsl(40, 50%, 45%),
+      2px 2px hsl(40, 50%, 40%),
+      3px 3px hsl(40, 50%, 35%),
+      4px 4px hsl(40, 50%, 34%),
+      5px 5px hsl(40, 50%, 33%),
+      // 10px 10px 30px rgba(0,0,0,.7),
+    }
   }
 }
