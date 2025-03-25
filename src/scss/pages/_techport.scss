@@ -1,0 +1,115 @@
+.techport {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  
+  section {
+    background-color: white;
+    border-radius: 7px;
+    padding: 40px;
+    width: 80vw;
+    height: fit-content;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .techport-header-box {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 20px;
+
+      .techport-datepicker-wrapper {
+        background-color: rgba(90, 166, 185, 0.9);
+        box-shadow: 2px 2px 5px black;
+        border: 1px solid grey;
+        align-self: stretch;
+        border-radius: 7px;
+        padding: 20px;
+
+        .techport-datepicker-box {
+          background-color: white;
+          border: 1px solid black;
+          border-radius: 7px;
+          padding: 20px;
+
+          .react-datepicker__input-container input {
+            padding: 2px;
+          }
+
+          h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+          }
+        }
+      }
+
+      .techport-info-box {
+        box-shadow: 2px 2px 5px black;
+        border: 1px solid black;
+        border-radius: 7px;
+        padding: 30px;
+
+        .techport-info-bold {
+          font-weight: 600;
+        }
+
+        p {
+          font-size: 16px;
+          margin-bottom: 10px;
+          line-height: 18px;
+        }
+
+        p:last-of-type {
+          margin-bottom: 0px;
+        }
+      }
+    }
+
+    hr {
+      width: 100%;
+      margin: 30px 0px;
+    }
+
+    .techport-results-box {
+
+      .techport-results-title {
+        font-size: 24px;
+        font-weight: 800;
+        color: rgba(black, 0.65);
+      }
+
+      .techport-results-table {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 25px 0px;
+        column-gap: 20px;
+        row-gap: 20px;
+
+        .techport-result {
+          font-size: 15px;
+          font-weight: 600;
+          flex: 1 0 auto;
+          border: 2px solid rgba(90, 166, 185, 0.9);
+          box-shadow: 2px 2px 5px darkgrey;
+          transition: translateY .2s;
+        }
+
+        .techport-result:hover {
+          background-color: rgba(90, 166, 185, 0.9);
+        }
+
+        .techport-result:active {
+          transform: translateY(2px);
+        }
+      }
+    }
+  }
+}

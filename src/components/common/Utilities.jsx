@@ -3,6 +3,8 @@ const getOrdinalNumber = (number) => {
   return number + ['th', 'st', 'nd', 'rd'][selector];
 };
 
+export const createSelectedDateString = (date) => `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+
 export const getFormalDateString = (dateString) => {
   let date = (dateString) ? new Date(dateString.split("T")[0] + "T12:00:00.000Z") : new Date();
   let day = getOrdinalNumber(date.getDate());
