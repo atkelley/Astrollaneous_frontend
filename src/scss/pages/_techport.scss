@@ -16,35 +16,44 @@
     justify-content: flex-start;
     align-items: flex-start;
 
-    .techport-header-box {
+    .techport-content-box {
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       column-gap: 20px;
 
       .techport-datepicker-wrapper {
-        background-color: rgba(90, 166, 185, 0.9);
+        background-color: rgba(90, 166, 185, 0.7);
         box-shadow: 2px 2px 5px black;
         border: 1px solid grey;
         align-self: stretch;
         border-radius: 7px;
         padding: 20px;
+        width: 25%;
+        height: fit-content;
 
         .techport-datepicker-box {
           background-color: white;
           border: 1px solid black;
           border-radius: 7px;
           padding: 20px;
+          height: 90px;
 
           .react-datepicker__input-container input {
+            float: none;
             padding: 2px;
+            font-weight: 500;
+            font-size: 15px;
+            width: 100%;
           }
 
           h2 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             margin-bottom: 5px;
+            color: rgba(252, 252, 210, 0.95);
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
           }
         }
       }
@@ -54,15 +63,16 @@
         border: 1px solid black;
         border-radius: 7px;
         padding: 30px;
+        width: 75%;
 
         .techport-info-bold {
           font-weight: 600;
         }
 
         p {
-          font-size: 16px;
+          font-size: 15px;
           margin-bottom: 10px;
-          line-height: 18px;
+          line-height: 16px;
         }
 
         p:last-of-type {
@@ -73,7 +83,7 @@
 
     hr {
       width: 100%;
-      margin: 30px 0px;
+      margin: 15px 0px;
     }
 
     .techport-results-box {
@@ -84,30 +94,51 @@
         color: rgba(black, 0.65);
       }
 
-      .techport-results-table {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 25px 0px;
-        column-gap: 20px;
-        row-gap: 20px;
+      .techport-results-list {
+        margin-top: 20px;
+        max-height: 500px;
+        overflow-y: auto;
+        padding-right: 6px;
 
-        .techport-result {
-          font-size: 15px;
-          font-weight: 600;
-          flex: 1 0 auto;
-          border: 2px solid rgba(90, 166, 185, 0.9);
-          box-shadow: 2px 2px 5px darkgrey;
-          transition: translateY .2s;
+        li:first-of-type {
+          border-top-left-radius: 7px;
+          border-top-right-radius: 7px;
+          padding-top: 10px;
+          border-top: 1px solid black;
         }
 
-        .techport-result:hover {
-          background-color: rgba(90, 166, 185, 0.9);
+        li:last-of-type {
+          border-bottom-left-radius: 7px;
+          border-bottom-right-radius: 7px;
+          padding-bottom: 12px;
+          border-bottom: 1px solid black;
         }
 
-        .techport-result:active {
-          transform: translateY(2px);
+        li {
+          background-color: white;
+          padding: 5px 10px;
+          border-right: 1px solid black;
+          border-left: 1px solid black;
+
+          .techport-result {
+            background-color: white;
+            font-size: 15px;
+            font-weight: 600;
+            flex: 1 0 auto;
+            border: 1px solid black;
+            box-shadow: 2px 2px 5px black;
+            transition: translateY .2s;
+            width: 100%;
+          }
+  
+          .techport-result:hover {
+            background-color: rgba(140, 200, 215, 0.45);
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+          }
+  
+          .techport-result:active {
+            transform: translateY(2px);
+          }
         }
       }
     }

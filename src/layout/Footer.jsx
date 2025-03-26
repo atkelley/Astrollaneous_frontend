@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-copyright">
-        <a href="https://atkelley.github.io/" target="_blank" rel="noopener noreferrer">AK-47</a><span> &copy; 2025</span>
+        <p><a href="https://atkelley.github.io/" target="_blank" rel="noopener noreferrer">AK-47</a><span> &copy; 2025</span></p>
       </div>
       <div className="footer-links">
         <a href="https://code.nasa.gov" target="_blank" rel="noopener noreferrer">code.nasa.gov</a>

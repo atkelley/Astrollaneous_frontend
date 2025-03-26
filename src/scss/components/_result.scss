@@ -1,0 +1,155 @@
+.results-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  width: 100%;
+  
+  .results-section-box {
+    margin: 0px 0px 10px 0px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 15px;
+    width: 100%;
+
+    .results-section-whole, .results-section-half, .results-section-third, .results-section-fifth {
+      border: 1px solid grey;
+      border-radius: 10px;
+      padding: 15px;
+      align-self: stretch;
+    }
+
+    .results-section-whole {
+      width: 100%;
+    }
+
+    .results-section-half {
+      width: 50%;
+    }
+
+    .results-section-third {
+      width: 33%;
+    }
+
+    .results-section-fifth {
+      width: 20%;
+
+      .results-section-title {
+        font-size: 14px;
+        font-weight: 600;
+      }
+  
+      span {
+        font-size: 13px;
+      }
+    }
+
+    .results-section-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    span, p {
+      font-size: 14px!important;
+      font-family: inherit!important;
+    }
+  }
+}
+
+
+
+
+// .techport-results {
+//   border: 1px solid black;
+//   border-radius: 10px;
+//   background-color: #FFFFFF;
+//   padding: 30px;
+// }
+
+// .techport-results .row .col-md-12 {
+//   padding-right: 0px;
+// }
+
+// .techport-result {
+//   display: inline-block;
+// }
+
+// .techport-result-cell {
+//   font-size: 1rem;
+// }
+
+// .techport-search-property-container {
+//   border: 1px solid grey;
+//   border-radius: 10px;
+//   padding: 15px;
+//   margin: 5px 0px;
+// }
+
+// .techport-search-property-container span li {
+//   margin-left: 5px;
+// }
+
+// .techport-search-property-container span li span {
+//   position: relative;
+//   left: -5px;
+// }
+
+// .techport-search-left, .techport-search-right {
+//   cursor: pointer;
+//   margin: 20px 10px;
+//   color: #007bff;
+// }
+
+// .techport-search-right {
+//   float: left;
+// }
+
+// .techport-search-left {
+//   float: right;
+// }
+
+// .techport-search-left:hover, .techport-search-right:hover {
+//   color: #0056b3;
+// }
+
+// .techport-search-submit {
+//   margin-top: 10px;
+// }
+
+// .techport-search-input, .techport-search-results-backdrop {
+//   background-color: rgba(90, 166, 185, 0.9);
+// }
+
+// .col-md-4, .col-md-6, .col-md-12 {
+//   background-color: #FFFFFF;
+// }
+
+// .techport-result th:first-child, .techport-result td:first-child {
+//   border: none;
+// }
+
+// .techport-result th, .techport-result td {
+//   border: none;
+// }
+
+// .btn-outline-secondary {
+//   width: 85px;
+// }
+
+// .techport-custom-input {
+//   background: url("../../../../static/images/calendar.svg") no-repeat right;
+//   background-origin: content-box;
+//   background-size: 20px;
+//   cursor: pointer;
+//   border: 1px solid black;
+//   padding: 5px;
+// }
+
+// .react-datepicker {
+//   border-radius: 5px;
+//   border: 1px solid grey;
+// }
+

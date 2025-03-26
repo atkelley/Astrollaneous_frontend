@@ -6,6 +6,7 @@ import Logout from "../iterables/Logout";
 import Create from "../iterables/Create";
 import Delete from "../iterables/Delete";
 
+
 export default function Modal ({ type, src, alt, caption, closeModal, showModal }) {
   const modalRef = useRef(null);
 

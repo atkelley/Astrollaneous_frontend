@@ -1,10 +1,9 @@
 import { useState, useEffect, Fragment, forwardRef } from "react";
 import DatePicker, { CalendarContainer } from "react-datepicker";
 import { getTechportData } from "../../api/nasa.api";
-import { createSelectedDateString, getFormalDateString } from "../common/Utilities";
-// import TechportModal from "./TechportModal";
+import { createSelectedDateString } from "../common/Utilities";
+import Result from "../iterables/Result";
 import Loader from "../common/Loader";
-
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function Techport() {
@@ -67,6 +66,8 @@ export default function Techport() {
   }  
 
   const handleProjectSelect = (index) => {
+    console.log(index)
+
     // setState({ 
     //   selectedProjectId: selectedProjectsArray[index],
     //   previous: ((index == 0) ? selectedProjectsArray.length - 1 : index - 1),
@@ -92,11 +93,13 @@ export default function Techport() {
   //   ></input>
   // ));
 
+  console.log(selectedProjectId)
+
   return (
     (isLoaded ?
       <main className="techport">
         <section>
-          <div className="techport-header-box">
+          <div className="techport-content-box">
             <div className="techport-datepicker-wrapper">
               <div className="techport-datepicker-box">
                 <h2>Search by Date:</h2>
@@ -110,6 +113,15 @@ export default function Techport() {
                   filterDate={(date) => createSelectedDateString(date) in projectDatesObject}
                 />
               </div>
+
+              <div className="techport-results-box">
+                {/* <h1 className="techport-results-title">{selectedProjectsArray.length} projects listed on {getFormalDateString(selectedDate.toISOString())}:</h1> */}
+                  <ul className="techport-results-list">
+                    {selectedProjectsArray.length > 0 &&
+                      selectedProjectsArray.map((projectId, index) => <li key={index}><button className="btn btn-outline-secondary techport-result" onClick={() => setSelectedProjectId(projectId)}>{projectId}</button></li>)
+                    }
+                </ul>
+              </div>
             </div>
 
             <div className="techport-info-box">
@@ -117,17 +129,13 @@ export default function Techport() {
               <p>Use the <span className="techport-info-bold">"Search By Date"</span> calendar to the left to explore various early-stage concepts, prototypes or fully-developed technologies.</p>
               <p>The TechPort portal aggregates technology investment information from developers, designers, architects and engineers from across NASA. Its primary goal is to promote collaboration and partnerships that could lead to actualization of these proposed technologies.</p>  
               <p>For more information, visit the Techport website <a href="https://techport.nasa.gov/home" target="_blank" rel="noopener noreferrer">here</a>.</p>  
-            </div>
-          </div>
-
-          <hr />
-
-          <div className="techport-results-box">
-            <h1 className="techport-results-title">{selectedProjectsArray.length} projects listed on {getFormalDateString(selectedDate.toISOString())}:</h1>
-              <div className="techport-results-table">
-                {selectedProjectsArray.length > 0 &&
-                  selectedProjectsArray.map((projectId, index) => <button key={index} className="btn btn-outline-secondary techport-result" onClick={() => handleProjectSelect(index)}>{projectId}</button>)
-                }
+              
+              {selectedProjectId &&
+                <>
+                  <hr />
+                  <Result projectId={selectedProjectId} />
+                </>    
+              }          
             </div>
           </div>
         </section>
