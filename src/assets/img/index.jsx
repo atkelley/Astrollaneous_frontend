@@ -8,6 +8,7 @@ import mail from "./mail.png";
 import lock from "./lock.png";
 import shuttle from "./shuttle.png";
 import space_banner from "./space-banner.jpg";
+import calendar from "./calendar.png";
 
 export {
   check,
@@ -19,5 +20,6 @@ export {
   mail,
   lock,
   shuttle,
-  space_banner
+  space_banner,
+  calendar
 };

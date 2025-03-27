@@ -40,12 +40,24 @@
           padding: 20px;
           height: 90px;
 
-          .react-datepicker__input-container input {
-            float: none;
-            padding: 2px;
-            font-weight: 500;
-            font-size: 15px;
-            width: 100%;
+          .react-datepicker__input-container {
+            position: relative;
+            
+            img {
+              height: 20px;
+              width: 20px;
+              position: absolute;
+              top: 3px;
+              right: 5px;
+            }
+            
+            input {
+              float: none;
+              padding: 2px 5px;
+              font-weight: 500;
+              font-size: 15px;
+              width: 100%;
+            }
           }
 
           h2 {
@@ -78,12 +90,58 @@
         p:last-of-type {
           margin-bottom: 0px;
         }
-      }
-    }
 
-    hr {
-      width: 100%;
-      margin: 15px 0px;
+        .buttons {
+          margin: 10px 0px;
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 20px;
+          border-top: 7px solid rgba(90, 166, 185, 1.0);
+          border-bottom: 7px solid rgba(90, 166, 185, 1.0);
+          width: 100%;
+
+          button {
+            background-color: rgba(90, 166, 185, 1.0);
+            border: 10px solid rgba(90, 166, 185, 1.0);
+            cursor: pointer;
+            position: relative;
+          }
+
+          .previous {
+            border-left: none;
+          }
+          
+          .next {
+            border-right: none;
+          }
+          
+          .previous::before,
+          .next::before {
+            border: 20px solid transparent;
+            content: "";
+            position: absolute;
+            top: calc(50% - 20px);
+          }
+          
+          .previous::before {
+            border-right-color: rgba(90, 166, 185, 1.0);
+            left: -38px;
+          }
+          
+          .next::before {
+            border-left-color: rgba(90, 166, 185, 1.0);
+            right: -38px;
+          }
+
+          p {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 3px;
+          }
+        }
+      }
     }
 
     .techport-results-box {
@@ -96,7 +154,7 @@
 
       .techport-results-list {
         margin-top: 20px;
-        max-height: 500px;
+        max-height: 50vh;
         overflow-y: auto;
         padding-right: 6px;
 
@@ -129,15 +187,21 @@
             box-shadow: 2px 2px 5px black;
             transition: translateY .2s;
             width: 100%;
+            scroll-margin-bottom: 45px;
           }
   
           .techport-result:hover {
-            background-color: rgba(140, 200, 215, 0.45);
+            background-color: rgba(214, 236, 117, 0.35);
             text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
           }
   
           .techport-result:active {
             transform: translateY(2px);
+          }
+
+          .techport-result.active {
+            background-color: rgba(140, 200, 215, 0.8);
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
           }
         }
       }

@@ -53,8 +53,10 @@
     }
 
     span, p {
+      display: inline-block;
       font-size: 14px!important;
       font-family: inherit!important;
+      margin-bottom: 5px;
     }
   }
 }

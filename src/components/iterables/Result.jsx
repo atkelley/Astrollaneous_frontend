@@ -49,25 +49,13 @@ export default function Result({ projectId }) {
 
   return (
     (Object.keys(project).length > 0 &&
-      <div className="results-container">
-
-          {/* <div className="col-md-6">
-            <span className="techport-search-left">
-              <a onClick={() => this.props.handleProjectSelect(this.props.previous)}><span className="fas fa-arrow-left fa-3x" aria-hidden="true"></span></a>
-            </span>
-          </div>
-          <div className="col-md-6">
-            <span className="techport-search-right">
-              <a onClick={() => this.props.handleProjectSelect(this.props.next)}><span className="fas fa-arrow-right fa-3x" aria-hidden="true"></span></a>
-            </span>
-          </div> */}
-        
+      <div className="results-container">        
         <div className="results-section-box">
           <div className="results-section-whole">
             <h4 className="results-section-title">Project Name:</h4>
             <span>
               <a href={`https://techport.nasa.gov/view/${projectId}`} target="_blank" rel="noopener noreferrer">{title}</a>
-              {acronym && <span> ({acronym})</span>}
+              {acronym && <span>&nbsp;({acronym})</span>}
             </span>
           </div>
         </div>
@@ -161,15 +149,6 @@ export default function Result({ projectId }) {
             </div>
           </div>
         }
-
-
-        {/* <span className="techport-search-left">
-          <a onClick={() => this.props.handleProjectSelect(this.props.previous)}><span className="fas fa-arrow-left fa-3x" aria-hidden="true"></span></a>
-        </span>
-
-        <span className="techport-search-right">
-          <a onClick={() => this.props.handleProjectSelect(this.props.next)}><span className="fas fa-arrow-right fa-3x" aria-hidden="true"></span></a>
-        </span> */}
       </div>
     )
   );

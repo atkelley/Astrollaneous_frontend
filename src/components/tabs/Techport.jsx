@@ -1,33 +1,29 @@
-import { useState, useEffect, Fragment, forwardRef } from "react";
-import DatePicker, { CalendarContainer } from "react-datepicker";
+import { useState, useEffect, useRef, forwardRef, createRef } from "react";
+import DatePicker from "react-datepicker";
 import { getTechportData } from "../../api/nasa.api";
 import { createSelectedDateString } from "../common/Utilities";
 import Result from "../iterables/Result";
 import Loader from "../common/Loader";
+import { calendar } from "../../assets/img/index";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function Techport() {
+  const projectRefs = useRef([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [selectedProjectsArray, setSelectedProjectsArray] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedProjectsArray, setSelectedProjectsArray] = useState([]);
   const [selectedProjectId, setSelectedProjectId] = useState(null);
   const [projectDatesObject,setProjectDatesObject] = useState({});
-
-  // const {state, setState} = useState({
-  //   next: 0,
-  //   previous: 0,
-  //   selectedDate: null,
-  //   selectedProjectId: null,
-  //   selectedProjects: [],
-  // });
 
   useEffect(() => {
     fetchData();
   }, []);
 
+  const setRefs = (array) => projectRefs.current = array.map((_, index) => projectRefs.current[index] ?? createRef());
+
   const fetchData = async () => {
     await getTechportData().then(res => {
-      let projectDatesObject = {}; // ORGANIZES PROJECT IDS BY DATE
+      let projectDatesObject = {};
 
       if (res.data.projects && res.data.projects.length > 0) {
         res.data.projects.forEach((project) => {
@@ -44,8 +40,10 @@ export default function Techport() {
       mostRecentDate.setTime(mostRecentDate.getTime() + (12 * 60 * 60 * 1000));
 
       setSelectedDate(mostRecentDate);
+      setSelectedProjectId(projectDatesObject[projectDatesArray[0]][0])
       setSelectedProjectsArray(projectDatesObject[projectDatesArray[0]]);
-      setProjectDatesObject(projectDatesObject)
+      setRefs(projectDatesObject[projectDatesArray[0]]);
+      setProjectDatesObject(projectDatesObject);
     }).then(_ => {
       setIsLoaded(true);
     }).catch(error => {
@@ -61,39 +59,41 @@ export default function Techport() {
       newSelectedDate.setTime(newSelectedDate.getTime() + (12 * 60 * 60 * 1000));
 
       setSelectedDate(newSelectedDate);
+      setSelectedProjectId(projectDatesObject[newSelectedDateString][0])
       setSelectedProjectsArray(projectDatesObject[newSelectedDateString]);
+      setRefs(projectDatesObject[newSelectedDateString]);
     }
   }  
 
   const handleProjectSelect = (index) => {
-    console.log(index)
+    if (index < 0) {
+      index = selectedProjectsArray.length - 1;
+    }
 
-    // setState({ 
-    //   selectedProjectId: selectedProjectsArray[index],
-    //   previous: ((index == 0) ? selectedProjectsArray.length - 1 : index - 1),
-    //   next: ((index == selectedProjectsArray.length - 1) ? 0 : index + 1)
-    // });
+    if (index > selectedProjectsArray.length - 1) {
+      index = 0;
+    }
+
+    projectRefs.current[index].current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
+
+    setSelectedProjectId(selectedProjectsArray[index]);
   }
-
-  // const MyContainer = ({ className, children }) => {
-  //   return (
-  //     <CalendarContainer className={className}>
-  //       <div>{children}</div>
-  //     </CalendarContainer>
-  //   );
-  // };
   
-  // const TechportCustomInput = forwardRef(({ value, onClick, onChange }, ref) => (
-  //   <input
-  //     value={value}
-  //     className="techport-custom-input"
-  //     onClick={onClick}
-  //     onChange={onChange}
-  //     ref={ref}
-  //   ></input>
-  // ));
-
-  console.log(selectedProjectId)
+  const TechportCustomInput = forwardRef(({ value, onClick, onChange }, ref) => (
+    <>
+      <input
+        value={value}
+        className="techport-custom-input"
+        onClick={onClick}
+        onChange={onChange}
+        ref={ref}
+      />
+      <img src={calendar} alt="calendar" />
+    </>
+  ));
 
   return (
     (isLoaded ?
@@ -106,33 +106,42 @@ export default function Techport() {
                 <DatePicker
                   selected={selectedDate}
                   onChange={(date) => handleDateSelect(date)}
-                  // customInput={<TechportCustomInput />}
+                  customInput={<TechportCustomInput />}
                   popperPlacement="right"
-                  // calendarContainer={MyContainer}
                   closeOnScroll={true}
                   filterDate={(date) => createSelectedDateString(date) in projectDatesObject}
                 />
               </div>
 
               <div className="techport-results-box">
-                {/* <h1 className="techport-results-title">{selectedProjectsArray.length} projects listed on {getFormalDateString(selectedDate.toISOString())}:</h1> */}
                   <ul className="techport-results-list">
                     {selectedProjectsArray.length > 0 &&
-                      selectedProjectsArray.map((projectId, index) => <li key={index}><button className="btn btn-outline-secondary techport-result" onClick={() => setSelectedProjectId(projectId)}>{projectId}</button></li>)
+                      selectedProjectsArray.map((projectId, index) => {
+                        return (
+                          <li key={index}>
+                            <button ref={projectRefs.current[index]} className={`btn btn-outline-secondary techport-result${selectedProjectId === projectId ? ' active' : ''}`} onClick={() => handleProjectSelect(index)}>
+                              {projectId}
+                            </button>
+                          </li>
+                        );
+                      })
                     }
                 </ul>
               </div>
             </div>
 
             <div className="techport-info-box">
-              <span className="techport-chevron"><i className="fa fa-chevron-circle-left fa-3x" aria-hidden="true"></i></span>
               <p>Use the <span className="techport-info-bold">"Search By Date"</span> calendar to the left to explore various early-stage concepts, prototypes or fully-developed technologies.</p>
               <p>The TechPort portal aggregates technology investment information from developers, designers, architects and engineers from across NASA. Its primary goal is to promote collaboration and partnerships that could lead to actualization of these proposed technologies.</p>  
               <p>For more information, visit the Techport website <a href="https://techport.nasa.gov/home" target="_blank" rel="noopener noreferrer">here</a>.</p>  
               
               {selectedProjectId &&
                 <>
-                  <hr />
+                  <div className="buttons">
+                    <button type="button" className="previous" onClick={() => handleProjectSelect(selectedProjectsArray.indexOf(selectedProjectId) - 1)}></button>
+                    <p>{selectedProjectId}</p>
+                    <button type="button" className="next" onClick={() => handleProjectSelect(selectedProjectsArray.indexOf(selectedProjectId) + 1)}></button>
+                  </div>
                   <Result projectId={selectedProjectId} />
                 </>    
               }          
