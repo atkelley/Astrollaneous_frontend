@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef, forwardRef, createRef } from "react";
 import DatePicker from "react-datepicker";
-import { getTechportData } from "../../api/nasa.api";
 import { createSelectedDateString } from "../common/Utilities";
 import Result from "../iterables/Result";
 import Loader from "../common/Loader";
 import { calendar } from "../../assets/img/index";
+import { api } from "../../api/api";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function Techport() {
@@ -21,8 +21,8 @@ export default function Techport() {
 
   const setRefs = (array) => projectRefs.current = array.map((_, index) => projectRefs.current[index] ?? createRef());
 
-  const fetchData = async () => {
-    await getTechportData().then(res => {
+  const fetchData = () => {
+    api.get("/nasa").then(res => {
       let projectDatesObject = {};
 
       if (res.data.projects && res.data.projects.length > 0) {

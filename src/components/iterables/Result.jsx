@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getTechportData } from "../../api/nasa.api";
+import { api } from "../../api/api";
 
 export default function Result({ projectId }) {
   const [project, setProject] = useState({});
@@ -26,8 +27,8 @@ export default function Result({ projectId }) {
     fetchData(projectId);
   }, [projectId]);
 
-  const fetchData = async () => {
-    await getTechportData.get(`/${projectId}`).then(res => {
+  const fetchData = () => {
+    api.get(`/nasa/${projectId}`).then(res => {
       let temp = res.data.project;
 
       for (let title of ["project", "program"]) {
