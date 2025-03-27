@@ -1,20 +1,55 @@
 import { useState } from "react";
+import { useDispatch } from 'react-redux';
+import PropTypes from "prop-types";
+import { contact } from '../../app/actions/authActions';
 
-export default function Contact() {
+export default function Contact({ closeModal }) {
+  const dispatch = useDispatch();
   const [state, setState] = useState({ name: "", email: "", message: "" });
-
-  const sendMessage = () => {
-    const { name, email, message } = state;
-
-  }
-
+  const [errors, setErrors] = useState({});
 
   const handleOnChange = (event) => {
     setState({ ...state, [event.target.id]: event.target.value});
   }
 
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = {};
+
+    if (!state.name) {
+      newErrors.name = '*** Name is required.';
+      isValid = false;
+    }
+
+    if (!state.email) {
+      newErrors.email = '*** Email is required.';
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email)) {
+      newErrors.email = '*** Invalid email format.';
+      isValid = false;
+    }
+
+    if (!state.message) {
+      newErrors.message = '*** Message is required.';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      dispatch(contact(name, email, message, closeModal));
+      setState({ name: "", email: "", message: "" });
+      setErrors({});
+    }
+  };
+
   return ( 
-    <div className="content">
+    <form className="content" method="POST" onSubmit={handleSubmit}>
       <div className="header">
         <h2>Contact Us</h2>
       </div>
@@ -22,19 +57,26 @@ export default function Contact() {
         <div className="group">
           <label htmlFor="name">Name:</label>
           <input type="text" id="name" name="name" value={state.name} onChange={handleOnChange} />
+          <p className="error">{errors.name}&nbsp;</p>
         </div>
         <div className="group">
           <label htmlFor="email">Email:</label>
           <input type="email" id="email" name="email" value={state.email} onChange={handleOnChange} />
+          <p className="error">{errors.email}&nbsp;</p>
         </div>
         <div className="group">
           <label htmlFor="message">Message:</label>
           <textarea id="message" name="message" value={state.message} onChange={handleOnChange}></textarea>
+          <p className="error">{errors.message}&nbsp;</p>
         </div>
         <div className="button">
-          <button type="submit" onClick={sendMessage}>Submit</button>
+          <button type="submit">Submit</button>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
+
+Contact.propTypes = {
+  closeModal: PropTypes.func
+};

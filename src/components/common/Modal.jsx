@@ -48,7 +48,7 @@ export default function Modal ({ type, src, alt, caption, closeModal, showModal 
       <div ref={modalRef} className="modal"> 
         {type === "image" && getImageComponent()}
         {type === "video" && getVideoComponent()}
-        {type === "contact" && <Contact />}
+        {type === "contact" && <Contact closeModal={closeModal} />}
         {type === "create" && <Create closeModal={closeModal} />}
         {type === "logout" && <Logout closeModal={closeModal} />}
         {(type === "login" || type === "register") && <Combo tab={type} closeModal={closeModal} />}

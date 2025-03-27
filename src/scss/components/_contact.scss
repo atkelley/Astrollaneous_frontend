@@ -49,6 +49,18 @@
         resize: vertical;
         height: 275px;
       }
+
+      .error {
+        display: inline-block;
+        text-decoration: none;
+        font-size: 12px;
+        font-style: italic;
+        font-weight: 600;
+        color: red;
+        line-height: 12px;
+        padding-left: 5px;
+        letter-spacing: 0.1rem;
+      }
     }
 
     .button {

@@ -40,7 +40,7 @@ export const login = (username, password, remember, closeModal) => (dispatch) =>
       if (remember) {
         localStorage.setItem("user", JSON.stringify({ "username": username, "password": password }));
       }
-      console.log(res.data)
+
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
       dispatch(showAlert({ message: "You have successfully logged in.", type: 'success' }));
       closeModal();
@@ -77,4 +77,11 @@ export const logout = (closeModal) => (dispatch, getState) => {
     .catch((err) => {;
       dispatch(returnErrors(err.response.data, err.response.status));
     });
+};
+
+
+export const contact = (name, email, message, closeModal) => (dispatch) => {
+  // TO-DO: create backend route and process for forwarding name, email & message to business/website email address
+  dispatch(showAlert({ message: "Thank you for your message! We'll be in touch shortly.", type: 'success' }));
+  closeModal();
 };

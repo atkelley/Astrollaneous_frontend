@@ -8,7 +8,6 @@ import Comment from './Comment';
 export default function Post({ post, showDeleteModal, showCommentModal }) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
-  console.log(user)
   const [showTruncatedText, setShowTruncatedText] = useState(true);
   const { id, title, created_date, image_url, text, text_html, comments } = post;
 
