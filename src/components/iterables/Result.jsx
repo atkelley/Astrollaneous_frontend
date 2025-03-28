@@ -4,6 +4,7 @@ import { api } from "../../api/api";
 
 export default function Result({ projectId }) {
   const [project, setProject] = useState({});
+  console.log(project)
   const {
     acronym, 
     description, 
@@ -64,12 +65,12 @@ export default function Result({ projectId }) {
         <div className="results-section-box">
           <div className="results-section-half">
             <h4 className="results-section-title">Responsible Program:</h4>
-            <span>{program.title}({program.acronym})</span>
+            <span>{program.title} ({program.acronym})</span>
           </div>
 
           <div className="results-section-half">
             <h4 className="results-section-title">Lead Organization:</h4>
-            {leadOrganization && <span>{leadOrganization.organizationName} - {leadOrganization.city}, {leadOrganization.stateTerritory.name}</span>} 
+            {leadOrganization && <span>{leadOrganization.organizationName}{`${leadOrganization.city ? " - " + leadOrganization.city : ""}`}{`${leadOrganization.stateTerritory ? ", "  + leadOrganization.stateTerritory.name: ""}`}</span>} 
           </div>
         </div>
 
