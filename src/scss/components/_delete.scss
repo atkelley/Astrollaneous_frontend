@@ -1,0 +1,56 @@
+.delete-content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+
+  .delete-header {
+    border-bottom: 2px solid lightgrey;
+
+    .delete-title {
+      font-size: 26px;
+      font-weight: 800;
+      text-shadow: 0px 4px 3px rgba(black, 0.3), 0px 8px 13px rgba(black, 0.1), 0px 18px 23px rgba(black, 0.1);
+      padding: 20px;
+    }
+  }
+
+  .delete-body {
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+  }
+
+  .delete-footer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 20px;
+    padding: 20px;
+    border-top: 2px solid lightgrey;
+
+    .delete-submit, .delete-cancel {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      box-shadow: 2px 2px 5px black;
+    }
+
+    .delete-submit {
+      background-color: rgba(#dc3545, 0.95);
+    }
+
+    .delete-submit:hover {
+      background-color: rgba(#bb2d3b, 0.95);
+    }
+
+    .delete-cancel {
+      background-color: rgba(grey, 0.95);
+    }
+
+    .delete-cancel:hover {
+      background-color: rgba(#5c636a, 0.95);
+    }
+  }
+}

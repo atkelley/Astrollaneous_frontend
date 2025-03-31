@@ -1,13 +1,14 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { user, key, mail, lock, show, hide, submit } from "../../assets/img/index";
-
+import { useModal } from "../../contexts/ModalContext";
 
 export default function Register({ handleTabChange }) {
   const [state, setState] = useState({ username: "", email: "", password: "", confirmation: "" });
   const [passwords, setPasswords] = useState({ password: false, confirmation: false });
   const non_field_errors = null;
-
+  const { closeModal } = useModal();
+  
   const handleSubmit = () => { }
 
   const handleOnChange = (event) => {

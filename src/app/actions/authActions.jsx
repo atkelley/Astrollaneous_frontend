@@ -1,17 +1,17 @@
-import axios from 'axios';
-import { createMessage, returnErrors } from './messagesActions';
-import { USER_LOADING, USER_LOADED, AUTH_ERROR, REGISTER_FAIL, REGISTER_SUCCESS, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT_SUCCESS } from './types';
-import { showAlert } from '../slices/alertSlice';
+import axios from "axios";
+import { createMessage, returnErrors } from "./messagesActions";
+import { USER_LOADING, USER_LOADED, AUTH_ERROR, REGISTER_FAIL, REGISTER_SUCCESS, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT_SUCCESS } from "./types";
+import { showAlert } from "../slices/alertSlice";
 import { api } from "../../api/api";
 
 
 // HELPER FUNCTION - TOKEN SETUP
 export const tokenConfig = (getState) => {
   const token = getState().auth.token;
-  const config = { headers: { 'Content-Type': 'application/json' }, };
+  const config = { headers: { "Content-Type": "application/json" }, };
 
   if (token) {
-    config.headers['Authorization'] = `Token ${token}`;
+    config.headers["Authorization"] = `Token ${token}`;
   }
 
   return config;
@@ -67,12 +67,11 @@ export const register = (username, email, password) => (dispatch) => {
 };
 
 
-export const logout = (closeModal) => (dispatch, getState) => {
+export const logout = () => (dispatch, getState) => {
   api.post('/users/auth/logout', null, tokenConfig(getState))
     .then((_) => {
       dispatch({ type: LOGOUT_SUCCESS });
       dispatch(showAlert({ message: "You have successfully logged out.", type: 'success' }));
-      closeModal();
     })
     .catch((err) => {;
       dispatch(returnErrors(err.response.data, err.response.status));

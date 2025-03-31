@@ -3,14 +3,15 @@ import { useDispatch } from 'react-redux';
 import PropTypes from "prop-types";
 import { login } from '../../app/actions/authActions';
 import { user, key, show, hide, submit } from "../../assets/img/index";
+import { useModal } from "../../contexts/ModalContext";
 
-
-export default function Login({ handleTabChange, closeModal }) {
+export default function Login({ handleTabChange }) {
   const dispatch = useDispatch();
   const [state, setState] = useState({ username: "", password: "" });
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
+  const { closeModal } = useModal();
+  
   const non_field_errors = [];
 
 
@@ -136,5 +137,4 @@ export default function Login({ handleTabChange, closeModal }) {
 
 Login.propTypes = {
   handleTabChange: PropTypes.func,
-  closeModal: PropTypes.func
 };

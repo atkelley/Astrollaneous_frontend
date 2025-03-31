@@ -9,6 +9,7 @@ import lock from "./lock.png";
 import shuttle from "./shuttle.png";
 import space_banner from "./space-banner.jpg";
 import calendar from "./calendar.png";
+import profile from "./profile.png";
 
 export {
   check,
@@ -21,5 +22,6 @@ export {
   lock,
   shuttle,
   space_banner,
-  calendar
+  calendar,
+  profile,
 };

@@ -1,14 +1,22 @@
-import { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
-import PropTypes from "prop-types";
-import profile from '../assets/img/profile.png';
+import { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import { NavLink, Link } from "react-router-dom";
+import { useModalConfig } from "../contexts/ModalConfigContext";
+import { useModal } from "../contexts/ModalContext";
+import Contact from "../components/iterables/Contact";
+import ComboPost from "../components/iterables/ComboPost";
+import ComboUser from "../components/iterables/ComboUser";
+import Delete from "../components/iterables/Delete";
+import { profile } from "../assets/img";
 
-export default function Navbar({ sendModalData }) {
+
+export default function Navbar() {
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
+  const { updateConfig } = useModalConfig();
+  const { openModal } = useModal();
 
   useEffect(() => {
     const handlePageClick = (event) => {
@@ -18,6 +26,29 @@ export default function Navbar({ sendModalData }) {
     document.addEventListener('mousedown', handlePageClick);
     return () => document.removeEventListener('mousedown', handlePageClick);
   }, []);
+
+  const handleClick = (e) => {
+    const type = e.target.getAttribute('data-type')
+    updateConfig({ type });
+
+    switch(type){
+      case "contact":
+        openModal(<Contact />);
+        break;
+      case "create":
+        openModal(<ComboPost data={{ user: user }} />);
+        break;
+      case "logout":
+        openModal(<Delete data={{}} />);
+        break;
+      case "login":
+      case "register":
+        openModal(<ComboUser />);
+        break;
+      default:
+        return;
+    }
+  }
 
   return (
     <div className="nav">
@@ -38,16 +69,16 @@ export default function Navbar({ sendModalData }) {
             { isAuthenticated && user ?
               <>
                 <Link className="dropdown-list-item" to={`/users/${user.id}`}>Profile</Link>
-                <li className="dropdown-list-item" onClick={() => sendModalData({ type: "create" })}>Create Post</li>
-                <li className="dropdown-list-item" onClick={() => sendModalData({ type: "logout" })}>Logout</li>
+                <li className="dropdown-list-item" data-type="create" onClick={handleClick}>Create Post</li>
+                <li className="dropdown-list-item" data-type="logout" onClick={handleClick}>Logout</li>
               </>
               :
               <>
-                <li className="dropdown-list-item" onClick={() => sendModalData({ type: "login" })}>Login</li>
-                <li className="dropdown-list-item" onClick={() => sendModalData({ type: "register" })}>Register</li>
+                <li className="dropdown-list-item" data-type="login" onClick={handleClick}>Login</li>
+                <li className="dropdown-list-item" data-type="register" onClick={handleClick}>Register</li>
               </>
             }
-            <li className="dropdown-list-item" onClick={() => sendModalData({ type: "contact" })}>Contact</li>
+            <li className="dropdown-list-item" data-type="contact" onClick={handleClick}>Contact</li>
           </ul>
         }
       </div>
@@ -59,7 +90,3 @@ export default function Navbar({ sendModalData }) {
     </div>
   );
 }
-
-Navbar.propTypes = {
-  sendModalData: PropTypes.func
-};

@@ -3,13 +3,34 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getFormalDateString, getConvertedDateTime } from '../common/Utilities';
+import { useModalConfig } from "../../contexts/ModalConfigContext";
+import { useModal } from "../../contexts/ModalContext";
 import { space_banner } from '../../assets/img';
+import ComboComment from './ComboComment';
+import Delete from './Delete';
 
-
-export default function Comment ({ comment, showDeleteModal, showCommentModal }) {
+export default function Comment ({ comment }) {
   const { id, user: comment_user, created_date, text, post } = comment;
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
+  const { updateConfig } = useModalConfig();
+  const { openModal } = useModal();
+
+  const handleClick = (e) => {
+    const type = e.target.getAttribute('data-type');
+    updateConfig({ type });
+
+    switch(type) {
+      case "comment":
+        openModal(<Delete data={{ id, postId: post }} />);
+        break;
+      case "update":
+        openModal(<ComboComment data={{ id, text, postId: post }} />);
+        break;
+      default:
+        return;
+    }
+  }
 
   return (
     <div className="comment-box" style={{ backgroundImage: `url(${space_banner})`}}>
@@ -21,8 +42,8 @@ export default function Comment ({ comment, showDeleteModal, showCommentModal })
 
       {(isAuthenticated && comment_user.id == user.id) &&
         <Fragment>
-          <button type="button" className="comment-delete" onClick={() => showDeleteModal(false, id, '')}>Delete</button>
-          <button type="button" className="comment-edit" onClick={() => showCommentModal(post, id, text)}>Edit</button>
+          <button type="button" className="comment-delete" data-type="comment" onClick={handleClick}>Delete</button>
+          <button type="button" className="comment-edit" data-type="update" onClick={handleClick}>Edit</button>
         </Fragment>
       }
     </div>
@@ -30,9 +51,5 @@ export default function Comment ({ comment, showDeleteModal, showCommentModal })
 }
 
 Comment.propTypes = {
-  isAuthenticated: PropTypes.bool,
-  user: PropTypes.object,
   comment: PropTypes.object,
-  showDeleteModal: PropTypes.func,
-  showCommentModal: PropTypes.func
 };

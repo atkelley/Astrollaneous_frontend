@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
-import PropTypes from "prop-types";
 import { contact } from '../../app/actions/authActions';
+import { useModal } from '../../contexts/ModalContext';
 
-export default function Contact({ closeModal }) {
+export default function Contact() {
   const dispatch = useDispatch();
   const [state, setState] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState({});
+  const { closeModal } = useModal();
 
   const handleOnChange = (event) => {
     setState({ ...state, [event.target.id]: event.target.value});
@@ -76,7 +77,3 @@ export default function Contact({ closeModal }) {
     </form>
   );
 }
-
-Contact.propTypes = {
-  closeModal: PropTypes.func
-};

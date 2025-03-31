@@ -21,7 +21,7 @@
   }
   
   .body {
-    margin: 20px 0px 0px 0px;
+    margin: 10px 0px 0px 0px;
 
     .group {
       margin-bottom: 25px;
@@ -33,34 +33,27 @@
         margin-bottom: 10px;
       }
       
-      input, textarea {
+      textarea {
         width: 100%;
         padding: 8px;
         border-radius: 7px;
         border: 1px solid lightgrey;
-      }
-
-      input[type="image_url"] {
-        background-color: rgba(lightgrey, 0.25);
-      }
-
-      input:focus, textarea:focus {
-        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
-        outline: 1px solid lightgrey;
-      }
-      
-      textarea {
         resize: vertical;
         height: 275px;
       }
+
+      textarea:focus {
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+        outline: 1px solid lightgrey;
+      }
     }
 
-    .button {
+    .buttons {
       width: 100%;
       display: flex;
       flex-flow: row nowrap;
       justify-content: center;
-      column-gap: 10px;
+      column-gap: 25px;
 
       button {
         background-color: rgba(#007bff, 0.95);

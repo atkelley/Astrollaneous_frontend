@@ -1,14 +1,17 @@
 import { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import Gravatar from 'react-gravatar';
+import PropTypes from "prop-types";
 import { getFormalDateString, getConvertedDateTime } from '../common/Utilities';
 import { getUser, getUserPosts, getUserComments } from "../../services/user.service";
+import { useModalConfig } from "../../contexts/ModalConfigContext";
+import { useModal } from "../../contexts/ModalContext";
 import Loader from '../common/Loader';
-import Post from './Post';
 import Comment from './Comment';
+import Post from './Post';
 
 
-export default function User () {
+export default function User() {
   const [state, setState] = useState({ user: {}, posts: null, comments: null, showTruncatedText: {} })
   const { user, posts, comments } = state;
   const { id } = useParams();
@@ -34,6 +37,22 @@ export default function User () {
       console.error('Error fetching data:', error);
     });
   }
+
+  // const handleDeletePost = (id) => {
+  //   removePost(id);
+  //   setState(prevState => ({...prevState, posts: prevState.posts.filter(post => post.id !== id) }));
+  // }
+
+  // const handleDeleteComment = (id) => {
+  //   deleteComment(id);
+  //   const filteredPosts = state.posts.map(post => ({ ...post, comments: post.comments.filter(comment => comment.id !== id) }));
+  //   const filteredComments = state.comments.filter(comment => comment.id !== id);
+  //   setState(prevState => ({...prevState, posts: filteredPosts, comments: filteredComments }));
+  // }
+
+  // const handleUpdatePost = (id, data) => {
+  //   editPost(id, data);
+  // }
 
   return (
     (user && Object.keys(user).length > 0 && posts && comments) ?
@@ -73,7 +92,7 @@ export default function User () {
         <section className="user-posts">
           <h4 className="user-posts-title">User Posts:</h4>
           {posts.length > 0 ?
-            posts.map((post, index) => <Post key={index} post={post} showDeleteModal={() => {}} showCommentModal={() => {}} />)
+            posts.map((post, index) => <Post key={index} post={post} />)
           :
             <p className="user-posts-no-comment">"{user.username}" has not posted anything...yet.</p>
           }
@@ -85,8 +104,8 @@ export default function User () {
             {comments.length > 0 ?
               comments.map((comment, index) => {return (
                 <Fragment key={index} >
-                  <p className="user-comment-post-title">From "{comment.post_title}":</p>
-                  <Comment comment={comment} showDeleteModal={() => {}} showCommentModal={() => {}} />
+                  <p className="user-comment-post-title">From "{comment.post_title}":</p>                 
+                  <Comment comment={comment} />
                 </Fragment>
               )})
             :

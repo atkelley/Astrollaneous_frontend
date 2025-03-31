@@ -33,13 +33,14 @@
 @import "components/audio";
 @import "components/video";
 @import "components/image";
-@import "components/combo";
+@import "components/comboUser";
 @import "components/login";
-@import "components/logout";
 @import "components/register";
 @import "components/contact";
-@import "components/create";
+@import "components/comboPost";
+@import "components/comboComment";
 @import "components/result";
+@import "components/delete";
 
 @import "pages/home";
 @import "pages/mars";

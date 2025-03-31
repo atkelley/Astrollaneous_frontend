@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { NASA_DAILY_PHOTO_BACKUP_DATA } from '../common/Constants';
 import { getDailyPhoto } from '../../api/nasa.api';
 import { getFormalDateString } from '../common/Utilities';
+import { useModal } from '../../contexts/ModalContext';
 import Loader from '../common/Loader';
 
-export default function Home({ sendModalData }) {
+export default function Home() {
   const [dailyData, setDailyData] = useState(NASA_DAILY_PHOTO_BACKUP_DATA);
   const { media_type, date, title, copyright, explanation, url, hdUrl, isLoaded } = dailyData;
+  const { openModal, closeModal } = useModal();
 
   useEffect(() => {
     async function fetchData() {
@@ -32,6 +33,38 @@ export default function Home({ sendModalData }) {
     fetchData();
   }, []);
 
+    const getImageComponent = () => {
+      return (
+        <div className="image-box">
+          <img src={hdUrl} alt={title} />
+  
+          <div className="text-box">
+            <p>{copyright}</p>
+            <button onClick={closeModal}>Close</button>
+          </div>
+        </div>
+      );
+    }
+  
+    const getVideoComponent = () => {
+      return (
+        <video id="video" width="840" height="auto" controls autoPlay>
+          <source src={hdUrl} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video> 
+      );
+    }
+
+  const handleClick = () => {
+    if (media_type === "image") {
+      openModal(getImageComponent());
+    }
+
+    if (media_type === "video") {
+      openModal(getVideoComponent());
+    }
+  }
+
   return (
     <main className="home">
       {isLoaded ?
@@ -40,7 +73,7 @@ export default function Home({ sendModalData }) {
           <hr />    
 
           <div className="content-box">
-            <a onClick={() => sendModalData({ type: media_type, src: hdUrl, alt: title, caption: copyright })}>
+            <a onClick={handleClick}>
               {media_type === 'image' ? 
                 <img src={url} alt={title} />
                 :
@@ -62,7 +95,3 @@ export default function Home({ sendModalData }) {
     </main>
   );
 }
-
-Home.propTypes = {
-  sendModalData: PropTypes.func,
-};

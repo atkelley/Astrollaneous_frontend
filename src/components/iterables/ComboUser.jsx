@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 // import { login, register } from '../../actions/auth';
 import Login from "./Login";
 import Register from "./Register";
+import { useModalConfig } from "../../contexts/ModalConfigContext";
 
-export default function Combo({ tab, closeModal }) {
-  const [active, setActive] = useState(tab);
+export default function ComboUser({ closeModal }) {
+  const { modalConfig: { type } } = useModalConfig();
+  const [active, setActive] = useState(type);
 
   const handleSetState = () => {}
   const handleLoginSubmit = () => {}
@@ -29,7 +31,6 @@ export default function Combo({ tab, closeModal }) {
   )
 }
 
-Combo.propTypes = {
-  tab: PropTypes.string,
+ComboUser.propTypes = {
   closeModal: PropTypes.func
 };

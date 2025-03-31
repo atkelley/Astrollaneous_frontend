@@ -1,15 +1,42 @@
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import { getFormalDateString, getConvertedDateTime } from '../common/Utilities';
-import Comment from './Comment';
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import { getFormalDateString, getConvertedDateTime } from "../common/Utilities";
+import { useModalConfig } from "../../contexts/ModalConfigContext";
+import { useModal } from "../../contexts/ModalContext";
+import ComboComment from "./ComboComment";
+import ComboPost from "./ComboPost";
+import Comment from "./Comment";
+import Delete from "./Delete";
 
-export default function Post({ post, showDeleteModal, showCommentModal }) {
+
+export default function Post({ post }) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
   const [showTruncatedText, setShowTruncatedText] = useState(true);
   const { id, title, created_date, image_url, text, text_html, comments } = post;
+  const { updateConfig } = useModalConfig();
+  const { openModal } = useModal();
+
+  const handleClick = (e) => {
+    const type = e.target.getAttribute('data-type');
+    updateConfig({ type });
+
+    switch(type) {
+      case "post":
+        openModal(<Delete data={{ id, title }} />);
+        break;
+      case "update":
+        openModal(<ComboPost data={{ id, title, image_url, text }} />);
+        break;
+      case "create":
+        openModal(<ComboComment data={{ postId: id }} />);
+        break;
+      default:
+        return;
+    }
+  }
 
   return (
     <div className="post-box">
@@ -29,7 +56,7 @@ export default function Post({ post, showDeleteModal, showCommentModal }) {
           <hr className="post-box-hr" />
           <h4 className="post-box-comments">Comments:</h4>
           {comments.length > 0 ?
-            comments.map((comment, index) => <Comment key={index} comment={comment} showDeleteModal={showDeleteModal} showCommentModal={showCommentModal} />)
+            comments.map((comment, index) => <Comment key={index} comment={comment} />)
           :
             <p className="post-box-text">No comments posted...yet.</p>
           }
@@ -51,29 +78,14 @@ export default function Post({ post, showDeleteModal, showCommentModal }) {
         }
 
         {(isAuthenticated && user.id == post.user.id) &&
-          <>
-            <button type="button" className="btn btn-danger" data-toggle="modal" data-target='#deleteModal' onClick={() => showDeleteModal(true, id, title)}>
-              <span className="fa fa-remove" aria-hidden="true"></span>
-              <span className="icon-label">Delete Post</span>
-            </button>
-
-            {/* <Link to={`/blog/update/${id}`} type="button" className="btn btn-warning">
-              <span className="fa fa-edit" aria-hidden="true"></span>
-              <span className="icon-label">Edit Post</span>
-            </Link> */}
-
-            <button type="button" className="btn btn-warning" data-toggle="modal" data-target='#deleteModal' onClick={() => showDeleteModal(true, id, title)}>
-              <span className="fa fa-edit" aria-hidden="true"></span>
-              <span className="icon-label">Edit Post</span>
-            </button>
+          <> 
+            <button type="button" className="btn btn-danger" data-type="post" onClick={handleClick}>Delete Post</button>
+            <button type="button" className="btn btn-warning" data-type="update" onClick={handleClick}>Edit Post</button>
           </>
         }
 
         {isAuthenticated &&
-          <button type="button" className="btn btn-primary" data-toggle="modal" data-target='#commentModal' onClick={() => showCommentModal(id, -1, '')}>
-            <span className="far fa-comments" aria-hidden="true"></span>
-            <span className="icon-label">Add Comment ({comments.length})</span>
-          </button>
+          <button type="button" className="btn btn-primary" data-type="create" onClick={handleClick}>Add Comment ({comments.length})</button>
         }
       </div>
     </div>
@@ -81,7 +93,5 @@ export default function Post({ post, showDeleteModal, showCommentModal }) {
 }
 
 Post.propTypes = {
-  post: PropTypes.object,
-  showDeleteModal: PropTypes.func,
-  showCommentModal: PropTypes.func,
+  post: PropTypes.object
 };

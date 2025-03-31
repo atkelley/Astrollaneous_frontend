@@ -1,31 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPosts } from "../../app/actions/postsActions";
 import Loader from "../common/Loader";
 import Post from "../iterables/Post";
-import { getPosts } from "../../services/post.service";
 
 export default function Blog() {
-  const [posts, setPosts] = useState(null);
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts);
 
   useEffect(() => {
-    async function fetchData() {
-      await getPosts().then(response => {
-        setPosts([...response.data]);
-      }).catch(error => {
-        console.log(error);
-      });
-    }
-    
-    fetchData();
-  }, []);
-
-  const showDeleteModal = () => {}
-  const showCommentModal = () => {}
+    dispatch(fetchPosts()); 
+  }, [dispatch]);
 
   return (
-    (posts ?
+    (posts.length > 0 ?
       <main className="blog">
         <section>
-        {posts.map((post) => <Post key={post.id} post={post} showDeleteModal={showDeleteModal} showCommentModal={showCommentModal} />)}
+        {posts.map((post, index) => <Post key={index} post={post} />)}
         </section>
       </main>
     :
