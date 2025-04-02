@@ -1,9 +1,9 @@
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { getFormalDateString, getConvertedDateTime } from "../common/Utilities";
 import { useModalConfig } from "../../contexts/ModalConfigContext";
+import { AuthContext } from "../../contexts/AuthContext";
 import { useModal } from "../../contexts/ModalContext";
 import ComboComment from "./ComboComment";
 import ComboPost from "./ComboPost";
@@ -12,10 +12,9 @@ import Delete from "./Delete";
 
 
 export default function Post({ post }) {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const user = useSelector((state) => state.auth.user);
-  const [showTruncatedText, setShowTruncatedText] = useState(true);
   const { id, title, created_date, image_url, text, text_html, comments } = post;
+  const [showTruncatedText, setShowTruncatedText] = useState(true);
+  const { token, user } = useContext(AuthContext);
   const { updateConfig } = useModalConfig();
   const { openModal } = useModal();
 
@@ -77,14 +76,14 @@ export default function Post({ post }) {
           </button>
         }
 
-        {(isAuthenticated && user.id == post.user.id) &&
+        {(token && user && post.user.id === user.id) &&
           <> 
             <button type="button" className="btn btn-danger" data-type="post" onClick={handleClick}>Delete Post</button>
             <button type="button" className="btn btn-warning" data-type="update" onClick={handleClick}>Edit Post</button>
           </>
         }
 
-        {isAuthenticated &&
+        {token &&
           <button type="button" className="btn btn-primary" data-type="create" onClick={handleClick}>Add Comment ({comments.length})</button>
         }
       </div>

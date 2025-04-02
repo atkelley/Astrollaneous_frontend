@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect, useRef, useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useModalConfig } from "../contexts/ModalConfigContext";
 import { useModal } from "../contexts/ModalContext";
@@ -7,14 +6,14 @@ import Contact from "../components/iterables/Contact";
 import ComboPost from "../components/iterables/ComboPost";
 import ComboUser from "../components/iterables/ComboUser";
 import Delete from "../components/iterables/Delete";
+import { AuthContext } from "../contexts/AuthContext";
 import { profile } from "../assets/img";
 
 
 export default function Navbar() {
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const user = useSelector((state) => state.auth.user);
+  const { token, user } = useContext(AuthContext);
   const { updateConfig } = useModalConfig();
   const { openModal } = useModal();
 
@@ -36,7 +35,7 @@ export default function Navbar() {
         openModal(<Contact />);
         break;
       case "create":
-        openModal(<ComboPost data={{ user: user }} />);
+        openModal(<ComboPost data={{}} />);
         break;
       case "logout":
         openModal(<Delete data={{}} />);
@@ -66,7 +65,7 @@ export default function Navbar() {
          
         {isOpen &&
           <ul className="dropdown-list" onMouseLeave={() => setIsOpen(false)}>
-            { isAuthenticated && user ?
+            {token ?
               <>
                 <Link className="dropdown-list-item" to={`/users/${user.id}`}>Profile</Link>
                 <li className="dropdown-list-item" data-type="create" onClick={handleClick}>Create Post</li>

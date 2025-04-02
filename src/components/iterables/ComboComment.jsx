@@ -27,12 +27,12 @@ export default function ComboComment ({ data }) {
 
   const handleSubmit = () => {
     if (type === "create" && state) {
-      dispatch(createComment({ text: state }, postId));
+      dispatch(createComment(postId, state));
       dispatch(showAlert({ message: "A new comment has been successfully created.", type: 'success' }));
     }
     
     if (type === "update" && state) {
-      dispatch(updateComment(id, { text: state }, postId));
+      dispatch(updateComment(id, state, postId));
       dispatch(showAlert({ message: "Your comment has been successfully updated.", type: 'success' }));
     }
 

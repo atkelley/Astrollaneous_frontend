@@ -94,9 +94,17 @@
   .user-posts {
     padding: 55px 0px 30px 0px;
 
-    .user-posts-no-comment {
-      font-size: 14px;
-      font-style: italic;
+    .user-posts-wrapper {
+      border-radius: 7px;
+      padding: 20px 40px;
+      width: 100%;
+      box-shadow: 2px 2px 5px grey;
+      background-color: white;
+
+      .user-posts-no-posts {
+        font-size: 14px;
+        font-style: italic;
+      }
     }
   }
 
@@ -116,7 +124,7 @@
         padding-bottom: 5px;
       }
 
-      .user-comments-no-comment {
+      .user-comments-no-comments {
         font-size: 14px;
         font-style: italic;
       }

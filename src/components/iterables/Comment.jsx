@@ -1,9 +1,10 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getFormalDateString, getConvertedDateTime } from '../common/Utilities';
 import { useModalConfig } from "../../contexts/ModalConfigContext";
+import { AuthContext } from "../../contexts/AuthContext";
 import { useModal } from "../../contexts/ModalContext";
 import { space_banner } from '../../assets/img';
 import ComboComment from './ComboComment';
@@ -11,8 +12,7 @@ import Delete from './Delete';
 
 export default function Comment ({ comment }) {
   const { id, user: comment_user, created_date, text, post } = comment;
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const user = useSelector((state) => state.auth.user);
+  const { token, user } = useContext(AuthContext);
   const { updateConfig } = useModalConfig();
   const { openModal } = useModal();
 
@@ -38,9 +38,9 @@ export default function Comment ({ comment }) {
         <Link to={`/users/${comment_user.id}`}>{ comment_user.username }</Link> on { getFormalDateString(created_date) } at { getConvertedDateTime(created_date) }
       </div>
 
-      <div className={`comment-body${!isAuthenticated ? '-unauth' : ''}`} >{text}</div>
+      <div className={`comment-body${!token ? '-unauth' : ''}`} >{text}</div>
 
-      {(isAuthenticated && comment_user.id == user.id) &&
+      {(token && user && comment_user.id == user.id) &&
         <Fragment>
           <button type="button" className="comment-delete" data-type="comment" onClick={handleClick}>Delete</button>
           <button type="button" className="comment-edit" data-type="update" onClick={handleClick}>Edit</button>

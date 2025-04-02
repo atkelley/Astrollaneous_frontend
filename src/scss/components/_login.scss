@@ -6,7 +6,6 @@
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  margin-bottom: 15px;
 
   img {
     height: 35px;
@@ -59,6 +58,19 @@
   box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
 }
 
+.error {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 600;
+  color: red;
+  line-height: 12px;
+  padding-left: 5px;
+  letter-spacing: 0.1rem;
+  margin-bottom: 12px;
+}
+
 .checkbox-group {
   width: 100%;
   display: flex;
@@ -68,7 +80,6 @@
   column-gap: 7px;
   height: 15px;
   padding: 0px 0px 0px 5px;
-  margin-top: 15px;
 
   input[type="checkbox"] {
     margin-top: 1px;
@@ -105,8 +116,9 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 20px 0px;
+  padding: 30px 0px 0px 0px;
   border-top: 1px solid lightgrey;
+  margin-top: 30px;
 
   button {
     display: flex;

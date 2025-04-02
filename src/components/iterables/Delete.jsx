@@ -1,9 +1,9 @@
+import { useContext } from "react";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { useModalConfig } from '../../contexts/ModalConfigContext';
+import { AuthContext } from "../../contexts/AuthContext";
 import { useModal } from '../../contexts/ModalContext';
-import { showAlert } from "../../app/slices/alertSlice";
-import { logout } from "../../app/actions/authActions";
 import { deletePost } from "../../app/actions/postsActions";
 import { deleteComment } from "../../app/actions/commentsActions";
 
@@ -12,24 +12,22 @@ export default function Delete({ data }) {
   const { id, title, postId } = data;
   const dispatch = useDispatch();
   const { modalConfig: { type } } = useModalConfig();
+  const { logout } = useContext(AuthContext);
   const { closeModal } = useModal();
 
   const handleClick = () => {
     if (type === "post") {
       dispatch(deletePost(id));
-      dispatch(showAlert({ message: "Your post has been successfully deleted.", type: 'success' }));
+      closeModal();
     }
     if (type === "comment") {
-      dispatch(showAlert({ message: "Your comment has been successfully deleted.", type: 'success' }));
       dispatch(deleteComment(id, postId));
+      closeModal();
     }
     if (type === "logout") {
-      dispatch(logout(closeModal));
+      logout(closeModal);
     }
-
-    closeModal();
   }
-
 
   return (
     <div className="delete-content">

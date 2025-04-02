@@ -73,15 +73,10 @@ export default function Home() {
           <hr />    
 
           <div className="content-box">
-            <a onClick={handleClick}>
-              {media_type === 'image' ? 
-                <img src={url} alt={title} />
-                :
-                <div className="iframe-box">
-                  <iframe src={url} alt={title} />
-                </div>
-              }
-            </a> 
+            <div onClick={handleClick}>
+              {media_type === 'image' && <img src={url} alt={title} />}
+              {media_type === "video" && <div className="iframe-box"><iframe src={url} alt={title} /></div>}
+            </div> 
             <div className="text-box">
               <h6>{date}</h6>
               <h3>{title}</h3>

@@ -33,7 +33,7 @@ export default function ComboPost({ data }) {
 
   const handleSubmit = () => {
     if (type === "create" && state.title && state.text) {
-      dispatch(createPost({ title: state.title, image_url: (state.image_url ? state.image_url : null), text: state.text, user: user }));
+      dispatch(createPost({ title: state.title, image_url: (state.image_url ? state.image_url : null), text: state.text }));
       dispatch(showAlert({ message: "A new post has been successfully created.", type: 'success' }));
       navigate("/blog");
     }

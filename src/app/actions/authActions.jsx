@@ -6,59 +6,58 @@ import { api } from "../../api/api";
 
 
 // HELPER FUNCTION - TOKEN SETUP
-export const tokenConfig = (getState) => {
-  const token = getState().auth.token;
-  const config = { headers: { "Content-Type": "application/json" }, };
+// export const tokenConfig = (getState) => {
+//   const token = getState().auth.token;
+//   const config = { headers: { "Content-Type": "application/json" }, };
 
-  if (token) {
-    config.headers["Authorization"] = `Token ${token}`;
-  }
+//   if (token) {
+//     config.headers["Authorization"] = `Token ${token}`;
+//   }
 
-  return config;
-};
+//   return config;
+// };
 
 
-export const loadUser = () => (dispatch, getState) => {
-  dispatch({ type: USER_LOADING });
+export const getCurrentUser = () => (dispatch) => {
+  const token = localStorage.getItem("token");
 
-  axios.get('/auth/user', tokenConfig(getState))
-    .then((res) => {
-      dispatch({ type: USER_LOADED, payload: res.data, });
+  api.get('/users/auth/user', { headers: { 'Authorization': `Token ${token}` } })
+    .then((response) => {
+      dispatch({ type: USER_LOADED, payload: response.data });
     })
     .catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status));
-      dispatch({ type: AUTH_ERROR, });
     });
 };
 
 
-export const login = (username, password, remember, closeModal) => (dispatch) => {
-  const config = { headers: { 'Content-Type': 'application/json' }, };
-
-  api.post('/users/auth/login', JSON.stringify({ username, password }), config)
-    .then((res) => {
+export const login = (username, password, remember, closeModal, setAuthenticated) => (dispatch) => {
+  api.post('/users/auth/login', JSON.stringify({ username, password }))
+    .then((response) => {
       if (remember) {
         localStorage.setItem("user", JSON.stringify({ "username": username, "password": password }));
       }
 
-      dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+      localStorage.setItem("token", response.data.token);
+      setAuthenticated(true);
+      dispatch({ type: LOGIN_SUCCESS, payload: response.data });
       dispatch(showAlert({ message: "You have successfully logged in.", type: 'success' }));
       closeModal();
     })
     .catch((err) => {
-      dispatch({ type: LOGIN_FAIL, });
-      dispatch(returnErrors(err.response.data, err.response.status));
+      console.error(err);
     });
 };
 
 
-export const register = (username, email, password) => (dispatch) => {
-  const config = { headers: { 'Content-Type': 'application/json' }, };
-  
+export const register = (username, email, password, closeModal, setAuthenticated) => (dispatch) => { 
   api.post('/users/auth/register', JSON.stringify({ username, email, password }), config)
-    .then((res) => {
-      dispatch({ type: REGISTER_SUCCESS, payload: res.data });
+    .then((response) => {
+      localStorage.setItem("token", response.data.token);
+      setAuthenticated(true);
+      dispatch({ type: REGISTER_SUCCESS, payload: response.data });
       dispatch(createMessage({ registerSuccess: 'You have successfully registered and have been logged in.'}));
+      closeModal();
     })
     .catch((err) => {
       dispatch({ type: REGISTER_FAIL, });
@@ -67,11 +66,19 @@ export const register = (username, email, password) => (dispatch) => {
 };
 
 
-export const logout = () => (dispatch, getState) => {
-  api.post('/users/auth/logout', null, tokenConfig(getState))
+export const logout = (closeModal, setAuthenticated, setToken) => (dispatch) => {
+  const token = localStorage.getItem("token");
+  if (!token) return;
+  const config = { headers: { Authorization: `Token ${token}` } };
+
+  api.post('/users/auth/logout', {}, config)
     .then((_) => {
+      setAuthenticated(false);
+      localStorage.removeItem("token");
+      setToken(null);
       dispatch({ type: LOGOUT_SUCCESS });
       dispatch(showAlert({ message: "You have successfully logged out.", type: 'success' }));
+      closeModal();
     })
     .catch((err) => {;
       dispatch(returnErrors(err.response.data, err.response.status));

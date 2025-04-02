@@ -1,17 +1,12 @@
-import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-// import { login, register } from '../../actions/auth';
-import Login from "./Login";
-import Register from "./Register";
+import { useState } from "react";
 import { useModalConfig } from "../../contexts/ModalConfigContext";
+import Register from "./Register";
+import Login from "./Login";
 
-export default function ComboUser({ closeModal }) {
+
+export default function ComboUser() {
   const { modalConfig: { type } } = useModalConfig();
   const [active, setActive] = useState(type);
-
-  const handleSetState = () => {}
-  const handleLoginSubmit = () => {}
-  const handleRegisterSubmit = () => {}
 
   const handleTabChange = (event) => {
     setActive(event.target.id);
@@ -23,14 +18,10 @@ export default function ComboUser({ closeModal }) {
         <div className={`${active === "login" ? "combo-tab active" : "combo-tab"}`} id="login" href="" onClick={handleTabChange}>Account Login</div>
         <div className={`${active === "register" ? "combo-tab active" : "combo-tab"}`}  id="register" href="" onClick={handleTabChange}>Create an Account</div>
       </nav>
-      <div className="tab-content" id="tab-content">
-        {active === "login" && <Login handleTabChange={handleTabChange} handleSetState={handleSetState} handleSubmit={handleLoginSubmit} closeModal={closeModal} />}
-        {active === "register" && <Register handleTabChange={handleTabChange} handleSetState={handleSetState} handleSubmit={handleRegisterSubmit} closeModal={closeModal} />}
+      <div className="tab-content">
+        {active === "login" && <Login handleTabChange={handleTabChange} />}
+        {active === "register" && <Register handleTabChange={handleTabChange} />}
       </div>
     </div>
   )
 }
-
-ComboUser.propTypes = {
-  closeModal: PropTypes.func
-};

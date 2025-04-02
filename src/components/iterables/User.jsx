@@ -38,22 +38,6 @@ export default function User() {
     });
   }
 
-  // const handleDeletePost = (id) => {
-  //   removePost(id);
-  //   setState(prevState => ({...prevState, posts: prevState.posts.filter(post => post.id !== id) }));
-  // }
-
-  // const handleDeleteComment = (id) => {
-  //   deleteComment(id);
-  //   const filteredPosts = state.posts.map(post => ({ ...post, comments: post.comments.filter(comment => comment.id !== id) }));
-  //   const filteredComments = state.comments.filter(comment => comment.id !== id);
-  //   setState(prevState => ({...prevState, posts: filteredPosts, comments: filteredComments }));
-  // }
-
-  // const handleUpdatePost = (id, data) => {
-  //   editPost(id, data);
-  // }
-
   return (
     (user && Object.keys(user).length > 0 && posts && comments) ?
       <main className="user">
@@ -91,11 +75,13 @@ export default function User() {
 
         <section className="user-posts">
           <h4 className="user-posts-title">User Posts:</h4>
-          {posts.length > 0 ?
-            posts.map((post, index) => <Post key={index} post={post} />)
-          :
-            <p className="user-posts-no-comment">"{user.username}" has not posted anything...yet.</p>
-          }
+          <div className="user-posts-wrapper"> 
+            {posts.length > 0 ?
+              posts.map((post, index) => <Post key={index} post={post} />)
+            :
+              <p className="user-posts-no-posts">"{user.username}" has not posted anything...yet.</p>
+            }
+          </div>
         </section>
 
         <section className="user-comments">
@@ -109,7 +95,7 @@ export default function User() {
                 </Fragment>
               )})
             :
-              <p className="user-comments-no-comment">"{user.username}" has not commented on any posts...yet.</p>
+              <p className="user-comments-no-comments">"{user.username}" has not commented on any posts...yet.</p>
             }
 
           </div>

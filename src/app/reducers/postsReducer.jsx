@@ -1,6 +1,6 @@
 export const postsReducer = (state = [], action) => {
   switch (action.type) {
-    case "UPDATE_POST":
+    case "SET_POST":
       return state.map((post) => post.id === action.payload.id ? action.payload : post);
     case "SET_POSTS":
       return action.payload; 
