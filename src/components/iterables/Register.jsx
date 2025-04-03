@@ -81,6 +81,7 @@ export default function Register({ handleTabChange }) {
           className="form-control validate input" 
           onChange={handleOnChange}
           value={state.username}
+          autoComplete="off"
         />
       </div>
       <p className="error">{errors.username}&nbsp;</p>
@@ -94,6 +95,7 @@ export default function Register({ handleTabChange }) {
           className="form-control validate input" 
           onChange={handleOnChange}
           value={state.email}
+          autoComplete="off"
         />
       </div>
       <p className="error">{errors.email}&nbsp;</p>
@@ -107,6 +109,7 @@ export default function Register({ handleTabChange }) {
           className="form-control validate input" 
           onChange={handleOnChange}
           value={state.password}
+          autoComplete="off"
         />
         <img 
           name="password"
@@ -128,6 +131,7 @@ export default function Register({ handleTabChange }) {
           className="form-control validate input" 
           onChange={handleOnChange}
           value={state.confirmation}
+          autoComplete="off"
         />
         <img 
           name="confirmation"

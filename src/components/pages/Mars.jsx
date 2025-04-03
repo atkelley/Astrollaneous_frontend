@@ -127,7 +127,7 @@ export default function Mars({ sendModalData }) {
               <p><a href="https://mars.nasa.gov/insight/" target="_blank" rel="noopener noreferrer">Click for more information about NASA&apos;s InSight program.</a></p>
 
     
-              <select value={weatherData.selectedSol['sol']} onChange={selectSol}>
+              <select name="weather" value={weatherData.selectedSol['sol']} onChange={selectSol}>
                 {weatherData.data.length > 0 && (
                   weatherData.data.map((datum, index) => <option key={index} value={datum.sol}>Sol {datum.sol} - {getFormalDateString(datum.First_UTC.split('T')[0])}</option>
                 ))}

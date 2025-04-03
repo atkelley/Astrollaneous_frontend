@@ -57,12 +57,12 @@ export default function Contact() {
       <div className="body">
         <div className="group">
           <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="name" value={state.name} onChange={handleOnChange} />
+          <input type="text" id="name" name="name" value={state.name} onChange={handleOnChange} autoComplete="off" />
           <p className="error">{errors.name}&nbsp;</p>
         </div>
         <div className="group">
           <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" value={state.email} onChange={handleOnChange} />
+          <input type="email" id="email" name="email" value={state.email} onChange={handleOnChange} autoComplete="off" />
           <p className="error">{errors.email}&nbsp;</p>
         </div>
         <div className="group">

@@ -47,7 +47,7 @@ export default function ComboComment ({ data }) {
       <div className="body">
         <div className="group">
           <label htmlFor="text">Text:</label>
-          <textarea type="text" name="text" value={state} onChange={(event) => setState(event.target.value)} />
+          <textarea id="text" type="text" name="text" value={state} onChange={(event) => setState(event.target.value)} />
         </div>
         <div className="buttons">
           <button type="submit" onClick={handleSubmit}>{type === "create" ? "Create" : "Edit"} Comment</button>

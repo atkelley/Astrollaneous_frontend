@@ -67,6 +67,7 @@ export default function Login({ handleTabChange }) {
           className="form-control validate input" 
           onChange={handleOnChange}
           value={state.username}
+          autoComplete="off"
         />
       </div>
       <p className="error">{errors.username}&nbsp;</p>
@@ -80,6 +81,7 @@ export default function Login({ handleTabChange }) {
           className="form-control validate input"
           onChange={handleOnChange}
           value={state.password}
+          autoComplete="off"
         />
         <img 
           name="showPassword" 
@@ -94,13 +96,14 @@ export default function Login({ handleTabChange }) {
 
       <div className="checkbox-group">
         <input 
+          id="remember"
           name="remember"
           type="checkbox" 
           value={remember}
           onChange={() => setRemember(!remember)} 
           checked={remember}
         />
-        <label>Remember me</label>
+        <label forhtml="remember">Remember me</label>
       </div>
 
       <div className="links-group">

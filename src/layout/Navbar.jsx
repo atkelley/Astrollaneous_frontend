@@ -83,7 +83,7 @@ export default function Navbar() {
       </div>
       
       <form>
-        <input type="search" placeholder="Search" aria-label="Search" />
+        <input name="search" type="search" placeholder="Search" aria-label="Search" />
         <button className="btn btn-sm px-3 btn-outline-secondary" type="submit">Search</button>
       </form>
     </div>

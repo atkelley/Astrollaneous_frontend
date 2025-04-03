@@ -76,7 +76,7 @@ export default function Satellites() {
                       return (
                         <p key={id} onClick={() => handleSatelliteSelection(name, type)}>
                           <input type="radio" id={name} name="satellites" value={name} checked={selectedSatellite.name === name} onChange={(event) => handleSatelliteSelection(event.target.value, type)} />
-                          <label htmlFor="satellites">{acronym}</label>
+                          <label htmlFor={name}>{acronym}</label>
                         </p>
                       );
                     })}
