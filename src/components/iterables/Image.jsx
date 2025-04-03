@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
+import { useModal } from '../../contexts/ModalContext';
 import PropTypes from "prop-types";
 import axios from "axios";
 
-export default function Image({ index, total, image: { json_url, author, title, description, preview_image }, sendModalData, handleNextSlide }) {
-  const [state, setState] = useState({
-    showTruncatedText: true,
-    imageUrl: ''
-  });
+export default function Image({ index, total, image: { json_url, author, title, description, preview_image }, handleNextSlide }) {
+  const [state, setState] = useState({ showTruncatedText: true, imageUrl: '' });
+  const { openModal, closeModal } = useModal();
 
   useEffect(() => {
     getImageFile(json_url);
@@ -31,11 +30,24 @@ export default function Image({ index, total, image: { json_url, author, title, 
     handleNextSlide(num);
   }
 
+  const getImageComponent = () => {
+    return (
+      <div className="image-box">
+        <img src={state.imageUrl} alt={title} />
+
+        <div className="text-box">
+          <p>{`${author ? author : title} © 2025`}</p>
+          <button onClick={closeModal}>Close</button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="images" value={index}>
       <div className="images-content">
         <div className="images-counter">{index + 1} / {total}</div>
-        <img src={preview_image} alt={title} onClick={() => sendModalData({ type: "image", src: state.imageUrl, alt: title, caption: `${author ? author : 'NASA'} © 2025` })} />
+        <img src={preview_image} alt={title} onClick={() => openModal(getImageComponent())} />
         <span className="prev" onClick={() => fetchNextSlide(-1)}>&#10094;</span>
         <span className="next" onClick={() => fetchNextSlide(1)}>&#10095;</span> 
       </div>
@@ -57,6 +69,5 @@ Image.propTypes = {
     description: PropTypes.string,
     preview_image: PropTypes.string
   }),
-  sendModalData: PropTypes.func,
   handleNextSlide: PropTypes.func
 };

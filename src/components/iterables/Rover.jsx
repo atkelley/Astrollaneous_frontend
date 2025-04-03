@@ -2,18 +2,19 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { getRoverData } from '../../api/nasa.api';
 import { getFormalDateString, capitalizeEveryFirstLetter, reformatDateString, getNextDate } from '../common/Utilities';
+import { useModal } from '../../contexts/ModalContext';
 import { roverVideos } from '../common/Constants';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function Rover({ rover, sendModalData }) {
+export default function Rover({ rover }) {
   const { name, status, launch_date, landing_date, max_date, max_sol, cameras } = rover;
-
   const [selected, setSelected] = useState({ dateType: "earth", solNumber: 1, cameraData: {} });
   const [earthDate, setEarthDate] = useState(new Date(max_date + "T12:00:00.000Z"));
   const [cameraType, setCameraType] = useState(null);
   const [slideIndex, setSlideIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const { openModal, closeModal } = useModal();
 
   const fetchData = async () => {
     setIsLoaded(false);
@@ -55,6 +56,23 @@ export default function Rover({ rover, sendModalData }) {
   const handleCameraType = (name) => {
     setSlideIndex(0);
     setCameraType(name);
+  }
+
+  const getImageComponent = () => {
+    let src = selected.cameraData[cameraType][slideIndex];
+    let alt = `${name} - ${cameraType}`;
+    let caption = `${name} - ${cameraType} ${cameraType} - (${slideIndex + 1}/${selected.cameraData[cameraType].length})`;
+
+    return (
+      <div className="image-box">
+        <img src={src} alt={alt} />
+
+        <div className="text-box">
+          <p>{caption}</p>
+          <button onClick={closeModal}>Close</button>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -168,7 +186,7 @@ export default function Rover({ rover, sendModalData }) {
                   <button onClick={() => handleNextSlide(1)}>&#10095;&#10095;&#10095;</button> 
                 </div>
                 <div className="slideshow-content">
-                  <a onClick={() => sendModalData({ type: "image", src: selected.cameraData[cameraType][slideIndex], alt: `${name} - ${cameraType}`, caption: `${name} - ${cameraType} ${cameraType} - (${slideIndex + 1}/${selected.cameraData[cameraType].length})` })}>
+                  <a onClick={() => openModal(getImageComponent())}>
                     <img src={selected.cameraData[cameraType][slideIndex]} alt={`${name} - ${cameraType} - ${slideIndex + 1}`} />
                   </a>
                 </div>
@@ -198,5 +216,4 @@ Rover.propTypes = {
       })
     )
   }),
-  sendModalData: PropTypes.func
 };

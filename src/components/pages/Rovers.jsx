@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { getRoverData } from '../../api/nasa.api';
 import Rover from '../iterables/Rover';
 import Spinner from '../common/Spinner';
 
-export default function Rovers({ sendModalData }) {
+export default function Rovers() {
   const [tabSelect, setTabSelect] = useState("perseverance");
   const [selectedRover, setSelectedRover] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -36,12 +35,8 @@ export default function Rovers({ sendModalData }) {
           <button type="button" id="spirit" className={tabSelect === "spirit" ? 'selected' : null} onClick={(event) => fetchData(event.target.id)}>Spirit</button>
           <button type="button" id="opportunity" className={tabSelect === "opportunity" ? 'selected' : null} onClick={(event) => fetchData(event.target.id)}>Opportunity</button>
         </div>
-        {isLoaded ? <Rover rover={selectedRover} sendModalData={sendModalData} /> : <Spinner />}
+        {isLoaded ? <Rover rover={selectedRover} /> : <Spinner />}
       </section>
     </main>
   );
 }
-
-Rovers.propTypes = {
-  sendModalData: PropTypes.func
-};

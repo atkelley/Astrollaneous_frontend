@@ -1,5 +1,4 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 import { capitalizeEveryFirstLetter, getFormalDateString } from "../common/Utilities";
 import { getNasaData } from '../../api/nasa.api';
 import Video from "../iterables/Video";
@@ -8,7 +7,7 @@ import Audio from "../iterables/Audio";
 import Loader from '../common/Loader';
 import search from "../../assets/img/search.png";
 
-export default function Nasa({ sendModalData }) {
+export default function Nasa() {
   const [state, setState] = useState({
     searchTerm: "",
     selectedCollectionType: "",
@@ -165,7 +164,6 @@ export default function Nasa({ sendModalData }) {
                         index={state.slideIndex} 
                         image={state.convertedResults[state.selectedCollectionType][state.slideIndex]} 
                         total={state.convertedResults[state.selectedCollectionType].length} 
-                        sendModalData={(data) => sendModalData(data)} 
                         handleNextSlide={handleNextSlide}
                       />
                     </div>
@@ -173,7 +171,7 @@ export default function Nasa({ sendModalData }) {
 
                   {state.selectedCollectionType == 'video' &&
                     state.convertedResults[state.selectedCollectionType].map((item, index) => {
-                      return <Video key={index} video={item} sendModalData={sendModalData} />
+                      return <Video key={index} video={item} />
                     })
                   }
 
@@ -194,7 +192,3 @@ export default function Nasa({ sendModalData }) {
     </main>
   );
 }
-
-Nasa.propTypes = {
-  sendModalData: PropTypes.func
-};

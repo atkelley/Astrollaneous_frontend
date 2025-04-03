@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import playButton from "../../assets/img/play-button.png";
+import { useModal } from '../../contexts/ModalContext';
 import axios from "axios";
 
-export default function Video({ video: { json_url, title, nasa_id, create_date, description, preview_image }, sendModalData }) {
-  const [state, setState] = useState({
-    showTruncatedText: true,
-    videoUrl: ""
-  });
+export default function Video({ video: { json_url, title, nasa_id, create_date, description, preview_image } }) {
+  const { openModal } = useModal();
+  const [state, setState] = useState({ showTruncatedText: true, videoUrl: "" });
 
   useEffect(() => {
     getVideoFile();
@@ -28,9 +27,18 @@ export default function Video({ video: { json_url, title, nasa_id, create_date, 
     setState({ ...state, showTruncatedText: !state.showTruncatedText });
   }
 
+  const getVideoComponent = () => {
+    return (
+      <video id="video" width="840" height="auto" controls autoPlay>
+        <source src={state.videoUrl} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video> 
+    );
+  }
+
   return (
     <div className="video-container">
-      <div className="video-image-wrapper" onClick={() => sendModalData({ type: "video", src: state.videoUrl, alt: title, caption: null })}>
+      <div className="video-image-wrapper" onClick={() => openModal(getVideoComponent())}>
         <div 
           className="video-image-box" 
           style={{ backgroundImage: `url(${preview_image})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}  
@@ -73,5 +81,4 @@ Video.propTypes = {
     description: PropTypes.string,
     preview_image: PropTypes.string
   }),
-  sendModalData: PropTypes.func
 };
