@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-import { getTechportData } from "../../api/nasa.api";
 import { api } from "../../api/api";
 
 export default function Result({ projectId }) {
   const [project, setProject] = useState({});
-  console.log(project)
   const {
     acronym, 
     description, 
