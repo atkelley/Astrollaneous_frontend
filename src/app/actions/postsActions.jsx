@@ -1,4 +1,5 @@
 import { getPost, getPosts, addPost, editPost, removePost } from "../../services/post.service";
+import { getUserPosts } from "../../services/user.service";
 import { showAlert } from "../../app/slices/alertSlice";
 
 export const fetchPost = (postId) => async (dispatch) => {
@@ -12,6 +13,14 @@ export const fetchPost = (postId) => async (dispatch) => {
 export const fetchPosts = () => async (dispatch) => {
   await getPosts().then(response => {
     dispatch({ type: 'SET_POSTS', payload: response.data });
+  }).catch(error => {
+    console.log(error);
+  });
+};
+
+export const fetchUserPosts = (userId) => async (dispatch) => {
+  await getUserPosts(userId).then(response => {
+    dispatch({ type: "SET_USER_POSTS", payload: response.data });
   }).catch(error => {
     console.log(error);
   });

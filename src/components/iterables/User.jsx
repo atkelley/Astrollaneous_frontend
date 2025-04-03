@@ -1,57 +1,51 @@
 import { useState, useEffect, Fragment } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import Gravatar from 'react-gravatar';
-import PropTypes from "prop-types";
 import { getFormalDateString, getConvertedDateTime } from '../common/Utilities';
-import { getUser, getUserPosts, getUserComments } from "../../services/user.service";
-import { useModalConfig } from "../../contexts/ModalConfigContext";
-import { useModal } from "../../contexts/ModalContext";
+import { fetchUserComments } from '../../app/actions/commentsActions';
+import { fetchUserPosts } from "../../app/actions/postsActions";
+import { getUser } from "../../services/user.service";
 import Loader from '../common/Loader';
 import Comment from './Comment';
 import Post from './Post';
 
 
 export default function User() {
-  const [state, setState] = useState({ user: {}, posts: null, comments: null, showTruncatedText: {} })
-  const { user, posts, comments } = state;
+  const dispatch = useDispatch();
+  const [state, setState] = useState({ user: {}, showTruncatedText: {} })
+  const comments = useSelector((state) => state.comments); 
+  const posts = useSelector((state) => state.posts);
   const { id } = useParams();
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    dispatch(fetchUserPosts(id)); 
+    dispatch(fetchUserComments(id));
+    fetchUser();
+  }, [dispatch, id]);
 
-  const fetchData = async () => {
-    await Promise.all([
-      getUser(id),
-      getUserPosts(id),
-      getUserComments(id),
-    ]).then(([user, { data: posts }, {data: comments }]) => {
-      let showTruncatedText = {};
-
-      posts.forEach((_, index) => {
-        showTruncatedText[index] = true;
-      })
-
-      setState({ user: user.data[0].fields, posts, comments, showTruncatedText });
+  const fetchUser = async () => {
+    await getUser(id).then(response => {
+      setState({ ...state, user: response.data[0].fields });
     }).catch(error => {
-      console.error('Error fetching data:', error);
+      console.log(error);
     });
-  }
+  };
 
   return (
-    (user && Object.keys(user).length > 0 && posts && comments) ?
+    (Object.keys(state.user).length > 0 && posts && comments) ?
       <main className="user">
         <section className="user-header">
           <div className="user-header-info">
-            <Gravatar email={user.email} className="user-gravatar" />
+            <Gravatar email={state.user.email} className="user-gravatar" />
             <div className="user-header-text">
               <p>
                 <span className="user-header-attribute">Username: </span>
-                <span className="user-header-value">{user.username}</span>
+                <span className="user-header-value">{state.user.username}</span>
               </p>
               <p>
                 <span className="user-header-attribute">Email: </span>
-                <span className="user-header-value">{user.email}</span>
+                <span className="user-header-value">{state.user.email}</span>
               </p>
               <p>
                 <span className="user-header-attribute">Total posts: </span>
@@ -63,11 +57,11 @@ export default function User() {
               </p>
               <p>
                 <span className="user-header-attribute">Joined: </span>
-                <span className="user-header-value">{getFormalDateString(user.date_joined)}</span>
+                <span className="user-header-value">{getFormalDateString(state.user.date_joined)}</span>
               </p>
               <p>
                 <span className="user-header-attribute">Last login: </span>
-                <span className="user-header-value">{getFormalDateString(user.last_login)} at {getConvertedDateTime(user.last_login)}</span>
+                <span className="user-header-value">{getFormalDateString(state.user.last_login)} at {getConvertedDateTime(state.user.last_login)}</span>
               </p>
             </div>
           </div>
@@ -79,7 +73,7 @@ export default function User() {
             {posts.length > 0 ?
               posts.map((post, index) => <Post key={index} post={post} />)
             :
-              <p className="user-posts-no-posts">"{user.username}" has not posted anything...yet.</p>
+              <p className="user-posts-no-posts">"{state.user.username}" has not posted anything...yet.</p>
             }
           </div>
         </section>
@@ -95,7 +89,7 @@ export default function User() {
                 </Fragment>
               )})
             :
-              <p className="user-comments-no-comments">"{user.username}" has not commented on any posts...yet.</p>
+              <p className="user-comments-no-comments">"{state.user.username}" has not commented on any posts...yet.</p>
             }
 
           </div>
