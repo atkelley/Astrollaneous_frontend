@@ -2,7 +2,7 @@ import { useState } from "react";
 import { capitalizeEveryFirstLetter, getFormalDateString } from "../common/Utilities";
 import { getNasaData } from '../../api/nasa.api';
 import Video from "../iterables/Video";
-import Image from "../iterables/Image";
+import Slide from "../iterables/Slide";
 import Audio from "../iterables/Audio";
 import Loader from '../common/Loader';
 import search from "../../assets/img/search.png";
@@ -160,7 +160,7 @@ export default function Nasa() {
                 <div className="results-content-box">
                   {state.selectedCollectionType == 'image' &&
                     <div className="slideshow-container">
-                      <Image 
+                      <Slide 
                         index={state.slideIndex} 
                         image={state.convertedResults[state.selectedCollectionType][state.slideIndex]} 
                         total={state.convertedResults[state.selectedCollectionType].length} 

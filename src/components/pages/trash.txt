@@ -1,0 +1,84 @@
+disclaimer_en    
+			The information contained into this file is provided by Centro de Astrobiologia
+			(CAB) and is intended for outreach purposes only. Any other use is discouraged.
+			CAB will take no responsibility for any result or publication made base on the 
+			content of this file. To access REMS scientific data, visit PDS at http://pds.nasa.gov.
+
+			The environmental magnitudes given into this file are obtained from the values
+			read by the Rover Environmental Monitoring Station (REMS) on board the Mars Science
+			Laboratory (MSL) rover on Mars. This file provides the environmental magnitudes at REMS
+			location, so MSL rover influences those magnitudes (rover position,
+			rover temperature, rover orientation, rover shade, dust depositions on the rover, etc.)
+
+			REMS does not take measurements continuously and it takes measurements at different
+			times from one day to another. This fact has influence on the variation of the values
+			given in this file from one day to another .
+
+			For different reasons (instrument maintenance, instrument calibration, instrument degradation, etc.), 
+			some or all of the magnitudes in this file may not be available.
+		
+sol_desc_en
+			The term sol is used to refer to the duration of a day on Mars. A sol is about 24 hours and 40 minutes. For Curiosity,
+			sol 0 corresponds with its landing day on Mars.
+		
+temp_desc_en
+				Mars is farther from the Sun than Earth, it makes that Mars is colder than our planet.
+				Moreover, Martian�s atmosphere, which is extremely tenuous, does not retain the heat; 
+				hence the difference between day and night's temperatures is more pronounced than in our planet.
+			
+pressure_desc_en
+				Pressure is a measure of the total mass in a column of air above us. Because
+				Martian�s atmosphere is extremely tenuous, pressure on Mars' surface is about
+				160 times smaller than pressure on Earth. Average pressure on Martian surface 
+				is about 700 Pascals (100000 Pascals on Earth) Curiosity is into Gale crater,
+				which is about 5 kilometers (3 miles) depth. For this reason, pressure measured
+				by REMS is usually higher than average pressure on the entire planet.
+			
+abs_humidity_desc_en
+				Martian's atmosphere contains water vapor, and humidity measures the amount 
+				of water vapor present in the air. REMS records the relative humidity, 
+				which is a measure of the amount of water vapor in the air compared 
+				with the amount of water vapor the air can hold at the temperature it happens
+				to be when you measure it. Water on Mars is also present as water ice, 
+				for instance, at Mars poles. Until today, however, proof of liquid water 
+				in present-day Mars remains elusive.
+			
+wind_desc_en
+				NASA Viking landers and NASA Pathfinder rover showed that the average wind speed
+				on their location was pretty weak: 1 to 4 meters/second (4 to 15 kilometers/hour - 
+				2.5 to 9 miles/hour). However, during a dust storm, winds can reach 30 meters/second 
+				(110 kilometers/hour - 68 miles/hour) or more.
+			
+gts_temp_desc_en
+				Martian's atmosphere is extremely tenuous, about 160 times thinner than Earth's,
+				so heat from the Sun can easily escape. It makes that there are big differences
+				between ground temperature and air temperature. Imagine you were on the Martian equator 
+				at noon, you would feel like summer at your feet, but winter in your head.
+			
+local_uv_irradiance_index_desc_en
+				Local ultraviolet (UV) irradiance index is an indicator of the intensity of the ultraviolet
+				radiation from the Sun at Curiosity location. UV radiation is a damaging agent for life. 
+				On Earth, ozone layer prevents damaging ultraviolet light from reaching the surface, to 
+				the benefit of both plants and animals. However, on Mars, due to the absence of ozone in the 
+				atmosphere, ultraviolet radiation reaches the Martian surface.
+			
+atmo_opacity_desc_en
+				Weather on Mars is more extreme than Earth's. Mars is cooler and with
+				bigger differences between day and night temperatures. Moreover, 
+				dust storms lash its surface. However, Mars' and Earth's climates have
+				important similarities, such as the polar ice caps or seasonal changes.
+				As on Earth, on Mars we can have sunny, cloudy or windy days, for example.  
+			
+season_desc_en
+				A Martian year is divided in 12 months, as Earth's. However, Martian months are
+				from 46 to 67 sols (Martian days) long. The longest one is the month 3 (67 sols),
+				and the shortest one is the month 9 (46 sols) Martian months mark seasonal changes. 
+				In the southern hemisphere (Curiosity rover location) the autumn starts in month 1; 
+				the winter in month 4; the spring in month 7; and the summer in month 10.
+			
+sunrise_sunset_desc_en
+				The duration of a Martian day (sol) is about 24 hours and 40 minutes. The duration
+				of daylight varies along the Martian year, as on Earth.
+
+
+

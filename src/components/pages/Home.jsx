@@ -1,14 +1,16 @@
-import { useState, useEffect } from 'react';
-import { NASA_DAILY_PHOTO_BACKUP_DATA } from '../common/Constants';
-import { getDailyPhoto } from '../../api/nasa.api';
-import { getFormalDateString } from '../common/Utilities';
-import { useModal } from '../../contexts/ModalContext';
-import Loader from '../common/Loader';
+import { useState, useEffect } from "react";
+import { NASA_DAILY_PHOTO_BACKUP_DATA } from "../common/Constants";
+import { getDailyPhoto } from "../../api/nasa.api";
+import { getFormalDateString } from "../common/Utilities";
+import { useModal } from "../../contexts/ModalContext";
+import Image from "../iterables/Image";
+import Youtube from "../iterables/Youtube";
+import Loader from "../common/Loader";
 
 export default function Home() {
   const [dailyData, setDailyData] = useState(NASA_DAILY_PHOTO_BACKUP_DATA);
   const { media_type, date, title, copyright, explanation, url, hdUrl, isLoaded } = dailyData;
-  const { openModal, closeModal } = useModal();
+  const { openModal } = useModal();
 
   useEffect(() => {
     async function fetchData() {
@@ -33,35 +35,13 @@ export default function Home() {
     fetchData();
   }, []);
 
-    const getImageComponent = () => {
-      return (
-        <div className="image-box">
-          <img src={hdUrl} alt={title} />
-  
-          <div className="text-box">
-            <p>{copyright}</p>
-            <button onClick={closeModal}>Close</button>
-          </div>
-        </div>
-      );
-    }
-  
-    const getVideoComponent = () => {
-      return (
-        <video id="video" width="840" height="auto" controls autoPlay>
-          <source src={hdUrl} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video> 
-      );
-    }
-
   const handleClick = () => {
     if (media_type === "image") {
-      openModal(getImageComponent());
+      openModal(<Image data={{ src: hdUrl, alt: title, caption: copyright }} />);
     }
 
     if (media_type === "video") {
-      openModal(getVideoComponent());
+      openModal(<Youtube src={hdUrl} />);
     }
   }
 

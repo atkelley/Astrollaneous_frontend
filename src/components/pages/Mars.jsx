@@ -1,13 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { getMarsWeather } from '../../api/nasa.api';
 import { getFormalDateString } from '../common/Utilities';
+import { useModal } from '../../contexts/ModalContext';
 import mars_orange from '../../assets/img/mars_round.png';
 import elysium_planitia from '../../assets/img/elysium_planitia.jpg';
+import Image from '../iterables/Image';
 import Loader from '../common/Loader';
+import axios from 'axios';
 
-export default function Mars({ sendModalData }) {
+export default function Mars() {
   const tdRefs = useRef([]);
   const [weatherData, setWeatherData] = useState({ 
     data: [], 
@@ -18,6 +20,30 @@ export default function Mars({ sendModalData }) {
     conversions: { 'temperature': 'celsius', 'pressure': 'pascal', 'speed': 'm/s' }, 
   });
   const [isLoaded, setIsLoaded] = useState(false);
+  const { openModal } = useModal();
+
+  // useEffect(() => {
+  //   async function getMarsWeather () {
+  //     axios.get("https://mars.nasa.gov/rss/api/?feed=weather&category=msl&feedtype=json")
+  //     .then((response) => {
+  //       // console.log(response.data);
+  //       for (let temp in response.data.descriptions) {
+  //         if (temp.endsWith("_en")) {
+  //           console.log(temp)
+  //           console.log(response.data.descriptions[temp])
+  //         }
+  //       }
+
+  //       for (let temp in response.data.soles.slice(0, 7)) {
+  //         // console.log(temp, response.data.soles[temp])
+  //       }
+
+  //     }).catch(error => console.error(error));
+
+  //   }
+
+  //   getMarsWeather();
+  // }, [])
 
   useEffect(() => {
     async function fetchData() {
@@ -121,7 +147,7 @@ export default function Mars({ sendModalData }) {
 
             <div className="text-box">
               <h1>Mars Daily Weather</h1>
-              <p>The <a href="https://en.wikipedia.org/wiki/InSight" target="_blank" rel="noopener noreferrer">InSight</a> lander took daily weather measurements on Mars from <Link className="elysium" onClick={() => sendModalData({ type: "image", src: elysium_planitia, alt: "Elysium Planitia", caption: "NASA/JPL-Caltech © 2021" })}><b>Elysium Planitia</b></Link> (a flat, smooth plain near Mars&apos; equator).</p>
+              <p>The <a href="https://en.wikipedia.org/wiki/InSight" target="_blank" rel="noopener noreferrer">InSight</a> lander took daily weather measurements on Mars from <Link className="elysium" onClick={() => openModal(<Image data={{ src: elysium_planitia, alt: "Elysium Planitia", caption: "NASA/JPL-Caltech © 2021" }} />)}><b>Elysium Planitia</b></Link> (a flat, smooth plain near Mars&apos; equator).</p>
               <p>Sadly, InSight stopped transmitting on <a href="https://www.nasa.gov/missions/insight/nasa-retires-insight-mars-lander-mission-after-years-of-science/" target="_blank" rel="noopener noreferrer">Dec. 15th, 2022</a>, but 
               we preserved this page to illustrate some of the data that it was transmitting.</p>
               <p><a href="https://mars.nasa.gov/insight/" target="_blank" rel="noopener noreferrer">Click for more information about NASA&apos;s InSight program.</a></p>
@@ -172,7 +198,3 @@ export default function Mars({ sendModalData }) {
     </main>
   );
 }
-
-Mars.propTypes = {
-  sendModalData: PropTypes.func,
-};

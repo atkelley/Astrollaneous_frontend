@@ -4,6 +4,7 @@ import { getRoverData } from '../../api/nasa.api';
 import { getFormalDateString, capitalizeEveryFirstLetter, reformatDateString, getNextDate } from '../common/Utilities';
 import { useModal } from '../../contexts/ModalContext';
 import { roverVideos } from '../common/Constants';
+import Image from '../iterables/Image';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -14,7 +15,7 @@ export default function Rover({ rover }) {
   const [cameraType, setCameraType] = useState(null);
   const [slideIndex, setSlideIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const { openModal, closeModal } = useModal();
+  const { openModal } = useModal();
 
   const fetchData = async () => {
     setIsLoaded(false);
@@ -56,23 +57,6 @@ export default function Rover({ rover }) {
   const handleCameraType = (name) => {
     setSlideIndex(0);
     setCameraType(name);
-  }
-
-  const getImageComponent = () => {
-    let src = selected.cameraData[cameraType][slideIndex];
-    let alt = `${name} - ${cameraType}`;
-    let caption = `${name} - ${cameraType} ${cameraType} - (${slideIndex + 1}/${selected.cameraData[cameraType].length})`;
-
-    return (
-      <div className="image-box">
-        <img src={src} alt={alt} />
-
-        <div className="text-box">
-          <p>{caption}</p>
-          <button onClick={closeModal}>Close</button>
-        </div>
-      </div>
-    );
   }
 
   return (
@@ -186,7 +170,7 @@ export default function Rover({ rover }) {
                   <button onClick={() => handleNextSlide(1)}>&#10095;&#10095;&#10095;</button> 
                 </div>
                 <div className="slideshow-content">
-                  <a onClick={() => openModal(getImageComponent())}>
+                  <a onClick={() => openModal(<Image data={{ src: selected.cameraData[cameraType][slideIndex], alt: `${name} - ${cameraType}`, caption: `${name} - ${cameraType} ${cameraType} - (${slideIndex + 1}/${selected.cameraData[cameraType].length})` }} />)}>
                     <img src={selected.cameraData[cameraType][slideIndex]} alt={`${name} - ${cameraType} - ${slideIndex + 1}`} />
                   </a>
                 </div>

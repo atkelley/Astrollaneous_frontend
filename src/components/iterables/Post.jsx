@@ -44,7 +44,14 @@ export default function Post({ post }) {
         Posted by <Link to={`/users/${post.user.id}`}>{ post.user.username }</Link> on {getFormalDateString(created_date)} at {getConvertedDateTime(created_date)}
       </p>
       <hr className="post-box-hr" />
-      <img className="post-box-image" src={image_url} alt="" />
+      <div
+        className="post-box-image"
+        style={{
+          backgroundImage: image_url ? `url(${image_url})` : "linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet)",
+          backgroundSize: 'cover', 
+          backgroundRepeat: 'no-repeat'
+        }}
+      ></div>
       <hr className="post-box-hr" />
 
       {showTruncatedText ?
