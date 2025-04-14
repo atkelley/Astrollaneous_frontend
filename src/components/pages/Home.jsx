@@ -22,7 +22,7 @@ export default function Home() {
           title, 
           media_type,
           copyright: copyright ? `${copyright} © 2025` : 'NASA © 2025',
-          explanation: explanation.split(/\w+\s(Hemisphere Alert :|Gallery:|Universe:|Challenge:|Surprise:|Coverage:)/)[0],
+          explanation: explanation.split(/\w+\s(Open Science:|Hemisphere Alert :|Gallery:|Universe:|Challenge:|Surprise:|Coverage:)/)[0],
           hdUrl: (media_type == 'image') ? hdurl : url,
           url: (media_type == 'image') ? url : url,
           isLoaded: true,
