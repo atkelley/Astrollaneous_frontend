@@ -7,7 +7,7 @@ import mars_orange from '../../assets/img/mars_round.png';
 import elysium_planitia from '../../assets/img/elysium_planitia.jpg';
 import Image from '../iterables/Image';
 import Loader from '../common/Loader';
-import axios from 'axios';
+
 
 export default function Mars() {
   const tdRefs = useRef([]);
@@ -21,29 +21,6 @@ export default function Mars() {
   });
   const [isLoaded, setIsLoaded] = useState(false);
   const { openModal } = useModal();
-
-  // useEffect(() => {
-  //   async function getMarsWeather () {
-  //     axios.get("https://mars.nasa.gov/rss/api/?feed=weather&category=msl&feedtype=json")
-  //     .then((response) => {
-  //       // console.log(response.data);
-  //       for (let temp in response.data.descriptions) {
-  //         if (temp.endsWith("_en")) {
-  //           console.log(temp)
-  //           console.log(response.data.descriptions[temp])
-  //         }
-  //       }
-
-  //       for (let temp in response.data.soles.slice(0, 7)) {
-  //         // console.log(temp, response.data.soles[temp])
-  //       }
-
-  //     }).catch(error => console.error(error));
-
-  //   }
-
-  //   getMarsWeather();
-  // }, [])
 
   useEffect(() => {
     async function fetchData() {

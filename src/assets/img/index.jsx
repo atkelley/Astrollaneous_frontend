@@ -16,6 +16,8 @@ import thumb_sunshield from "./thumb_sunshield.jpg";
 import large_sunshield from "./large_sunshield.jpg";
 import thumb_space from "./thumb_space.jpg";
 import large_space from "./large_space.jpg";
+import mars_orange from './mars_round.png';
+import elysium_planitia from './elysium_planitia.jpg';
 
 export {
   check,
@@ -35,5 +37,7 @@ export {
   thumb_sunshield,
   large_sunshield,
   thumb_space,
-  large_space
+  large_space,
+  mars_orange,
+  elysium_planitia
 };

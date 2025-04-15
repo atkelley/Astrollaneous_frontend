@@ -53,6 +53,7 @@ export default function Navbar() {
     <div className="nav">
       <NavLink to="/" className={({ isActive }) => (isActive ? 'navlink active' : 'navlink')} >Home</NavLink>
       <NavLink to="/mars" className={({ isActive }) => (isActive ? 'navlink active' : 'navlink')} >Mars</NavLink>
+      <NavLink to="/mars2" className={({ isActive }) => (isActive ? 'navlink active' : 'navlink')} >Mars2</NavLink>
       <NavLink to="/rovers" className={({ isActive }) => (isActive ? 'navlink active' : 'navlink')} >Rovers</NavLink>
       <NavLink to="/satellites" className={({ isActive }) => (isActive ? 'navlink active' : 'navlink')} >Satellites</NavLink>
       <NavLink to="/nasa" className={({ isActive }) => (isActive ? 'navlink active' : 'navlink')} >NASA</NavLink>

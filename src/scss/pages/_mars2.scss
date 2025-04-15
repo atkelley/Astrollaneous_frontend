@@ -1,0 +1,166 @@
+.mars2 {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+
+  section {
+    background-color: white;
+    border-radius: 7px;
+    padding: 35px;
+    width: 80vw;
+    height: fit-content;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    .title-box {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 80px;
+      padding: 0px 100px;
+
+      a {
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .elysium {
+        font-weight: 600;
+      }
+
+      .elysium:hover {
+        text-decoration: none;
+      }
+
+      img {
+        height: 200px;
+      }
+
+      .text-box {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: flex-start;
+        row-gap: 25px;
+
+        h1 {
+          font-size: 2.25rem;
+          font-weight: 800;
+        }
+
+        p {
+          font-size: 16px;
+          font-weight: 400;
+        }
+
+        select, option {
+          padding: 2px 5px;
+          cursor: pointer;
+        }
+
+        select {
+          border-radius: 5px;
+          border: 2px solid grey;
+        }
+      }
+    }
+
+    table {
+      width: 90%;
+      margin: 20px auto 0px auto;
+      border-spacing: 0;
+      border-collapse: separate;
+      border-radius: 5px;
+      border: 2px solid darkgrey;
+
+      thead {
+        background-color: lightgrey;
+        color: black;
+
+        tr {
+          text-align: center;
+
+          th {
+            border-bottom: 2px solid darkgrey;
+            border-right: 2px solid darkgrey;
+            vertical-align: middle;
+
+            .th-param {
+              font-size: 17px;
+              height: fit-content;
+            }
+
+            .th-sol {
+              font-size: 15px;
+            }
+
+            .th-param, .th-sol {
+              font-weight: 800;
+              letter-spacing: 2px;
+              color: rgba($base-dark-color, 0.65);
+            }
+      
+            .th-date {
+              font-size: 11px;
+              font-style: italic;
+              font-weight: 500;
+              margin-top: 5px;
+              color: grey;
+            }
+          }
+
+          th:last-of-type {
+            border-right: none;
+          }
+        }
+      }
+
+      tbody {
+        tr td {
+          text-align: right;
+          border-bottom: 1px solid darkgrey;
+          border-right: 1px solid darkgrey;
+        }
+
+        tr td:first-of-type {
+          text-align: left;
+        }
+  
+        tr:last-of-type td {
+          border-bottom: none;
+        }
+  
+        tr td:last-of-type {
+          border-right: none;
+        }
+
+        tr td button {
+          border: none;
+          background-color: white;
+        }
+
+        tr td button:hover {
+          text-decoration: underline;
+          font-weight: 600;
+        }
+
+        .selected {
+          text-decoration: underline;
+          font-weight: 600;
+        }
+      }
+
+      th, td {
+        padding: 10px;
+      }
+    }
+  }
+}
