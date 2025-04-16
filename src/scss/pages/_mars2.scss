@@ -10,7 +10,6 @@
     padding: 35px;
     width: 80vw;
     height: fit-content;
-
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -21,27 +20,11 @@
       flex-flow: row nowrap;
       justify-content: space-between;
       align-items: center;
-      column-gap: 80px;
+      column-gap: 45px;
       padding: 0px 100px;
 
-      a {
-        text-decoration: none;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      .elysium {
-        font-weight: 600;
-      }
-
-      .elysium:hover {
-        text-decoration: none;
-      }
-
       img {
-        height: 200px;
+        height: 250px;
       }
 
       .text-box {
@@ -49,7 +32,7 @@
         flex-flow: column nowrap;
         justify-content: center;
         align-items: flex-start;
-        row-gap: 25px;
+        row-gap: 20px;
 
         h1 {
           font-size: 2.25rem;
@@ -57,25 +40,27 @@
         }
 
         p {
-          font-size: 16px;
+          font-size: 15px;
           font-weight: 400;
-        }
 
-        select, option {
-          padding: 2px 5px;
-          cursor: pointer;
-        }
-
-        select {
-          border-radius: 5px;
-          border: 2px solid grey;
+          a {
+            text-decoration: none;
+          }
+    
+          a:hover {
+            text-decoration: underline;
+          }
+    
+          .link {
+            font-weight: 600;
+          }
         }
       }
     }
 
     table {
       width: 90%;
-      margin: 20px auto 0px auto;
+      margin: 30px auto 0px auto;
       border-spacing: 0;
       border-collapse: separate;
       border-radius: 5px;
@@ -107,13 +92,20 @@
               letter-spacing: 2px;
               color: rgba($base-dark-color, 0.65);
             }
+
+            .th-season {
+              font-size: 12px;
+              font-weight: 600;
+              letter-spacing: 2px;
+              padding: 3px 0px 0px 0px;
+              color: grey;
+            }
       
             .th-date {
               font-size: 11px;
               font-style: italic;
               font-weight: 500;
               margin-top: 5px;
-              color: grey;
             }
           }
 
@@ -124,6 +116,21 @@
       }
 
       tbody {
+        .float-right {
+          float: right;
+          font-size: 14px;
+          font-weight: 600;
+
+          button {
+            padding: 0px 4px 0px 3px;
+          }
+
+          .selected {
+            font-weight: 800;
+            color: rgba($base-dark-color, 0.65);
+          }
+        }
+
         tr td {
           text-align: right;
           border-bottom: 1px solid darkgrey;
@@ -160,6 +167,16 @@
 
       th, td {
         padding: 10px;
+      }
+    }
+
+    .footnotes {
+      width: 90%;
+      margin: 10px auto 0px auto;
+
+      p {
+        font-size: 13px;
+        margin: 0px 0px 5px 0px;
       }
     }
   }
