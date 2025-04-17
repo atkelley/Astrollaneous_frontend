@@ -1,4 +1,4 @@
-.mars {
+.mars2 {
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
@@ -10,7 +10,6 @@
     padding: 35px;
     width: 80vw;
     height: fit-content;
-
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -21,27 +20,11 @@
       flex-flow: row nowrap;
       justify-content: space-between;
       align-items: center;
-      column-gap: 80px;
+      column-gap: 45px;
       padding: 0px 100px;
 
-      a {
-        text-decoration: none;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      .elysium {
-        font-weight: 600;
-      }
-
-      .elysium:hover {
-        text-decoration: none;
-      }
-
       img {
-        height: 200px;
+        height: 250px;
       }
 
       .text-box {
@@ -49,7 +32,7 @@
         flex-flow: column nowrap;
         justify-content: center;
         align-items: flex-start;
-        row-gap: 25px;
+        row-gap: 20px;
 
         h1 {
           font-size: 2.25rem;
@@ -57,88 +40,143 @@
         }
 
         p {
-          font-size: 16px;
+          font-size: 15px;
           font-weight: 400;
-        }
 
-        select, option {
-          padding: 2px 5px;
-          cursor: pointer;
-        }
-
-        select {
-          border-radius: 5px;
-          border: 2px solid grey;
+          a {
+            text-decoration: none;
+          }
+    
+          a:hover {
+            text-decoration: underline;
+          }
+    
+          .link {
+            font-weight: 600;
+          }
         }
       }
     }
 
     table {
       width: 90%;
-      margin: 20px auto 0px auto;
+      margin: 30px auto 0px auto;
       border-spacing: 0;
       border-collapse: separate;
       border-radius: 5px;
       border: 2px solid darkgrey;
 
       thead {
-        text-align: center;
-        background-color: lightgrey;
         color: black;
-        font-weight: 500;
+        background-color: lightgrey;
 
-        tr th:first-of-type {
-          width: 40%
-        }
+        tr {
+          text-align: center;
 
-        tr th {
-          width: 20%;
-          border-bottom: 2px solid darkgrey;
-          border-right: 2px solid darkgrey;
-        }
-  
-        tr th:last-of-type {
-          border-right: none;
+          th {
+            border-bottom: 2px solid darkgrey;
+            border-right: 2px solid darkgrey;
+            vertical-align: middle;
+            padding: 10px;
+
+            .th-param {
+              font-size: 17px;
+              height: fit-content;
+            }
+
+            .th-sol {
+              font-size: 15px;
+            }
+
+            .th-param, .th-sol {
+              font-weight: 800;
+              letter-spacing: 2px;
+              color: rgba($base-dark-color, 0.65);
+            }
+
+            .th-season {
+              font-size: 12px;
+              font-weight: 600;
+              letter-spacing: 2px;
+              padding: 3px 0px 0px 0px;
+              color: grey;
+            }
+      
+            .th-date {
+              font-size: 11px;
+              font-style: italic;
+              font-weight: 500;
+              margin-top: 5px;
+            }
+          }
+
+          th:last-of-type {
+            border-right: none;
+          }
         }
       }
 
       tbody {
-        tr td {
-          text-align: right;
-          border-bottom: 1px solid darkgrey;
-          border-right: 1px solid darkgrey;
+        tr {
+          td {
+            text-align: right;
+            border-bottom: 1px solid darkgrey;
+            border-right: 1px solid darkgrey;
+            padding: 10px;
+  
+            button {
+              border: none;
+              background-color: white;
+              padding: 0px 4px 0px 3px;
+              font-size: 15px;
+              font-weight: 400;
+            }
+    
+            button:hover {
+              text-decoration: underline;
+            }
+  
+            .selected {
+              font-weight: 700;
+              color: rgba($base-dark-color, 0.65);
+              text-decoration: underline;
+            }
+          }
+
+          td:first-of-type {
+            text-align: left;
+          }
+    
+          td:last-of-type {
+            border-right: none;
+          }
         }
 
-        tr td:first-of-type {
-          text-align: left;
-        }
-  
         tr:last-of-type td {
           border-bottom: none;
         }
-  
-        tr td:last-of-type {
-          border-right: none;
-        }
 
-        tr td button {
-          border: none;
-          background-color: white;
-        }
+        .parameter {
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-between;
+          align-items: center;
 
-        tr td button:hover {
-          text-decoration: underline;
-          font-weight: 600;
-        }
-
-        .selected {
-          text-decoration: underline;
-          font-weight: 600;
+          .symbol {
+            font-size: 13px;
+            padding: 0px 0px 0px 3px;
+          }
         }
       }
+    }
 
-      th, td {
-        padding: 10px;
+    .footnotes {
+      width: 90%;
+      margin: 10px auto 0px auto;
+
+      p {
+        font-size: 13px;
+        margin: 0px 0px 5px 0px;
       }
     }
   }

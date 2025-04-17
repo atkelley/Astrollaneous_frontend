@@ -13,7 +13,6 @@ import Techport from "./components/pages/Techport";
 import About from "./components/pages/About";
 import User from "./components/iterables/User";
 import Alerts from "./layout/Alerts";
-import Mars2 from "./components/pages/Mars2";
 
 
 export default function App() {
@@ -26,7 +25,6 @@ export default function App() {
         <Route path="/" exact element={<Wrapper><Home /></Wrapper>} />
         <Route path="/blog" exact element={<Wrapper><Blog /></Wrapper>} />
         <Route path="/mars" exact element={<Wrapper><Mars /></Wrapper>} />
-        <Route path="/mars2" exact element={<Wrapper><Mars2 /></Wrapper>} />
         <Route path="/rovers" exact element={<Wrapper><Rovers /></Wrapper>} />
         <Route path="/satellites" exact element={<Wrapper><Satellites /></Wrapper>} />
         <Route path="/nasa" exact element={<Wrapper><Nasa /></Wrapper>} />

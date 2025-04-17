@@ -1,6 +1,5 @@
-import backup_image from '../../assets/img/backup_image.jpg';
-import backup_image_large from '../../assets/img/backup_image_large.jpg';
-
+import { backup_image, backup_image_large } from "../../assets/img/index";
+import { curiosity, perseverance, opportunity, spirit } from "../../assets/mp4/index";
 import { getFormalDateString } from './Utilities';
 
 export const NASA_DAILY_PHOTO_BACKUP_DATA = {
@@ -31,14 +30,45 @@ export const NASA_DAILY_PHOTO_BACKUP_DATA = {
   isLoaded: false,
 };
 
-import curiosity from "../../assets/mp4/curiosity-3d.mp4";
-import opportunity from "../../assets/mp4/opportunity-3d.mp4";
-import spirit from "../../assets/mp4/spirit-3d.mp4";
-import perseverance from "../../assets/mp4/perseverance-3d.mp4";
-
 export const roverVideos = { 
   "Curiosity": curiosity, 
   "Perseverance": perseverance, 
   "Opportunity": opportunity, 
   "Spirit": spirit 
 };
+
+export const parameters = {
+    min_temp: { title: "Wind Temp. (min.)", symbol: "*" },
+    max_temp: { title: "Wind Temp. (max.)", symbol: "*" },
+    min_gts_temp: { title: "Ground Temp. (min.)", symbol: "**" },
+    max_gts_temp: { title: "Ground Temp. (max.)", symbol: "**" },
+    pressure: { title: "Pressure", symbol: "†" },
+    wind_speed: { title: "Wind Speed", symbol: "‡" },
+    wind_direction: { title: "Wind Direction", symbol: null },
+    abs_humidity: { title: "Relative Humidity", symbol: "§" },
+    atmo_opacity: { title: "Atmos. Opacity", symbol: "¶" },
+    local_uv_irradiance_index: { title: "UV Index", symbol: "#" },
+    sunrise: { title: "Sunrise", symbol: null },
+    sunset: { title: "Sunset", symbol: null },
+  };
+
+  export const footnotes = [
+    `* Mars is colder than our planet. Moreover, Mars' atmosphere does not retain the heat. Hence, the difference between day and night temperatures 
+    is more pronounced than our planet.`,
+    `** Because of Mars' thin atmosphere, heat from the Sun can easily escape and cause big differences between Mars' ground and air temperatures. 
+    Imagine if you were on the Martian equator at noon, it would feel like summer at your feet, but winter at your head.`,
+    `† Pressure is a measure of the total mass in a column of air above us. Because Mars' atmosphere is extremely tenuous, pressure on Mars' surface 
+    is about 160 times less than Earth's. The average pressure on the Martian surface is about 700 Pascals (Earth's average is 100,000 Pascals). 
+    Curiosity is in the Gale crater, which is about 5 kilometers (3 miles) deep. For this reason, the pressure measured is usually higher than average.`,
+    `‡ NASA's Viking landers and Pathfinder rover showed that the average wind speeds at their locations were pretty weak (about 1-4 m/s, 4-15 km/h or 2.5-9 mph). 
+    However, during a dust storm, the winds can get quite strong (30 m/s, 110 km/h, 68 mph or more).`,
+    `§ Mars' atmosphere contains water vapor and REMS records its relative humidity, which is a measurement of the amount of water vapor in the air compared 
+    with the amount of water vapor the air can hold at its measured temperature. Water is also present on Mars as water ice, at Mars' poles. However, 
+    proof of liquid water in present-day Mars remains elusive.`,
+    `¶ Weather on Mars is more extreme than Earth's. Mars is cooler and with bigger differences between day and night temperatures. Also, dust storms are more common. 
+    However, Mars (like Earth) also has polar ice caps and seasonal changes. Therefore, like Earth, Mars can have sunny, cloudy or windy days, which effect its 
+    atmospheric opacity.`,
+    `# The ultraviolet (UV) irradiance index indicates the intensity of the ultraviolet radiation from the Sun at Curiosity's location. 
+    UV radiation is a damaging agent for life. On Earth, ozone layer prevents damaging UV light from reaching the surface. However, since Mars
+    lacks any ozone in the atmosphere, UV radiation can reach the Martian surface.`
+  ];
