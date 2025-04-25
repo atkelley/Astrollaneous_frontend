@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./layout/Header";
 import Navbar from "./layout/Navbar";
 import Wrapper from "./layout/Wrapper";
@@ -31,6 +31,7 @@ export default function App() {
         <Route path="/techport" exact element={<Wrapper><Techport /></Wrapper>} />
         <Route path="/about" exact element={<Wrapper><About /></Wrapper>} />
         <Route path="/users/:id" exact element={<Wrapper><User /></Wrapper>} />   
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
       <Alerts />

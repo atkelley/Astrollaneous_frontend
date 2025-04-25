@@ -1,4 +1,4 @@
-.mars2 {
+.mars {
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
@@ -108,6 +108,10 @@
               font-weight: 500;
               margin-top: 5px;
             }
+          }
+
+          th:first-of-type {
+            min-width: 240px;
           }
 
           th:last-of-type {

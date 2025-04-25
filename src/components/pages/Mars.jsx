@@ -103,7 +103,7 @@ export default function Mars2() {
   }
 
   return (
-    <main className="mars2">      
+    <main className="mars">      
       {isLoaded ?
         <section>
           <div className="title-box">
