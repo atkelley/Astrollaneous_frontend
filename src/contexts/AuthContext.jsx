@@ -1,25 +1,40 @@
 import { createContext, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { login as loginService, logout as logoutService, register as registerService } from "../services/auth.service";
+import { 
+  login as loginService, 
+  logout as logoutService, 
+  register as registerService,
+  validate as validateService
+} from "../services/auth.service";
 import { showAlert } from "../app/slices/alertSlice";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const user = localStorage.getItem("user");
+    const interval = setInterval(() => {
+      validate();
+    }, 5 * 60 * 1000);
 
-    if (token && user) {
-      setToken(token);
-      setUser(JSON.parse(user));
+    return () => clearInterval(interval);
+  }, [token]);
+
+  const validate = async () => {
+    if (token) {
+      await validateService().then((response) => {
+        if (response.status === 200) {
+          setIsAuthenticated(true);
+        }
+      }).catch((err) => {
+        logout();
+      });
     }
-  }, []); 
+  };
 
   const login = async (username, password, remember, closeModal) => {
     const result = await loginService(username, password);
@@ -32,6 +47,7 @@ export const AuthProvider = ({ children }) => {
       dispatch(showAlert({ message: "You have successfully logged in.", type: 'success' }));
       localStorage.setItem("token", result.token);
       localStorage.setItem("user", JSON.stringify(result.user));
+      setIsAuthenticated(true);
       setToken(result.token);
       setUser(result.user);
       closeModal();
@@ -44,12 +60,18 @@ export const AuthProvider = ({ children }) => {
     const result = await logoutService();
     
     if (result.success) {
-      dispatch(showAlert({ message: "You have successfully logged out.", type: 'success' }));
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      setIsAuthenticated(false);
       setToken(null);
       setUser(null);
-      closeModal();
+
+      if (closeModal) {
+        dispatch(showAlert({ message: "You have successfully logged out.", type: 'success' }));
+        closeModal();
+      } else {
+        dispatch(showAlert({ message: "You have been logged out due to invalid or expired token.", type: 'warning' }));
+      }
     }
   }
 
@@ -69,7 +91,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, register }}>
+    <AuthContext.Provider value={{ user, login, logout, register, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );

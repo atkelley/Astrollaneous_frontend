@@ -14,7 +14,7 @@ import Delete from "./Delete";
 export default function Post({ post }) {
   const { id, title, created_date, image_url, text, text_html, comments } = post;
   const [showTruncatedText, setShowTruncatedText] = useState(true);
-  const { token, user } = useContext(AuthContext);
+  const { isAuthenticated, user } = useContext(AuthContext);
   const { updateConfig } = useModalConfig();
   const { openModal } = useModal();
 
@@ -83,14 +83,14 @@ export default function Post({ post }) {
           </button>
         }
 
-        {(token && user && post.user.id === user.id) &&
+        {(isAuthenticated && user && post.user.id === user.id) &&
           <> 
             <button type="button" className="btn btn-danger" data-type="post" onClick={handleClick}>Delete Post</button>
             <button type="button" className="btn btn-warning" data-type="update" onClick={handleClick}>Edit Post</button>
           </>
         }
 
-        {token &&
+        {isAuthenticated &&
           <button type="button" className="btn btn-primary" data-type="create" onClick={handleClick}>Add Comment ({comments.length})</button>
         }
       </div>

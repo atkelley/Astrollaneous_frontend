@@ -13,7 +13,7 @@ import { profile } from "../assets/img";
 export default function Navbar() {
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
-  const { token, user } = useContext(AuthContext);
+  const { isAuthenticated, user } = useContext(AuthContext);
   const { updateConfig } = useModalConfig();
   const { openModal } = useModal();
 
@@ -65,7 +65,7 @@ export default function Navbar() {
          
         {isOpen &&
           <ul className="dropdown-list" onMouseLeave={() => setIsOpen(false)}>
-            {token ?
+            {isAuthenticated ?
               <>
                 <Link className="dropdown-list-item" to={`/users/${user.id}`}>Profile</Link>
                 <li className="dropdown-list-item" data-type="create" onClick={handleClick}>Create Post</li>

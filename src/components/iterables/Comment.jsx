@@ -1,6 +1,5 @@
 import { Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getFormalDateString, getConvertedDateTime } from '../common/Utilities';
 import { useModalConfig } from "../../contexts/ModalConfigContext";
@@ -12,7 +11,7 @@ import Delete from './Delete';
 
 export default function Comment ({ comment }) {
   const { id, user: comment_user, created_date, text, post } = comment;
-  const { token, user } = useContext(AuthContext);
+  const { isAuthenticated, user } = useContext(AuthContext);
   const { updateConfig } = useModalConfig();
   const { openModal } = useModal();
 
@@ -38,9 +37,9 @@ export default function Comment ({ comment }) {
         <Link to={`/users/${comment_user.id}`}>{ comment_user.username }</Link> on { getFormalDateString(created_date) } at { getConvertedDateTime(created_date) }
       </div>
 
-      <div className={`comment-body${!token ? '-unauth' : ''}`} >{text}</div>
+      <div className={`comment-body${!isAuthenticated ? '-unauth' : ''}`} >{text}</div>
 
-      {(token && user && comment_user.id == user.id) &&
+      {(isAuthenticated && user && comment_user.id == user.id) &&
         <Fragment>
           <button type="button" className="comment-delete" data-type="comment" onClick={handleClick}>Delete</button>
           <button type="button" className="comment-edit" data-type="update" onClick={handleClick}>Edit</button>
