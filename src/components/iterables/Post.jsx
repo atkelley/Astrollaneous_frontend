@@ -27,7 +27,7 @@ export default function Post({ post }) {
         openModal(<Delete data={{ id, title }} />);
         break;
       case "update":
-        openModal(<ComboPost data={{ id, title, image_url, text }} />);
+        openModal(<ComboPost data={{ id, title, image_url, text_html }} />);
         break;
       case "create":
         openModal(<ComboComment data={{ postId: id }} />);
@@ -55,7 +55,7 @@ export default function Post({ post }) {
       <hr className="post-box-hr" />
 
       {showTruncatedText ?
-        <p className="post-box-text">{text.substring(0, 200) + "..."}</p>
+        <span className="post-box-text" dangerouslySetInnerHTML={{__html: text_html.substring(0, 200) + "..."}}></span>
       :
         <>
           <span className="post-box-text" dangerouslySetInnerHTML={{__html: text_html}}></span>

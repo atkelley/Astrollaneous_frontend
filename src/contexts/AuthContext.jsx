@@ -13,27 +13,35 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [token, setToken] = useState(null);
+  const [expiry, setExpiry] = useState(null);
   const [user, setUser] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!token || !expiry) return;
+
     const interval = setInterval(() => {
-      validate();
+      const expiryTime = new Date(expiry).getTime();
+      const now = new Date().getTime();
+
+      if (now >= expiryTime) {
+        logout();
+      } else {
+        validate();
+      }
     }, 5 * 60 * 1000);
 
     return () => clearInterval(interval);
-  }, [token]);
+  }, [token, expiry]);
 
   const validate = async () => {
-    if (token) {
-      await validateService().then((response) => {
-        if (response.status === 200) {
-          setIsAuthenticated(true);
-        }
-      }).catch((err) => {
-        logout();
-      });
-    }
+    await validateService().then((response) => {
+      if (response.status === 200) {
+        setIsAuthenticated(true);
+      }
+    }).catch((err) => {
+      logout();
+    });
   };
 
   const login = async (username, password, remember, closeModal) => {
@@ -45,10 +53,11 @@ export const AuthProvider = ({ children }) => {
       }
 
       dispatch(showAlert({ message: "You have successfully logged in.", type: 'success' }));
-      localStorage.setItem("token", result.token);
+      localStorage.setItem("token", result.data.token);
       localStorage.setItem("user", JSON.stringify(result.user));
       setIsAuthenticated(true);
-      setToken(result.token);
+      setToken(result.data.token);
+      setExpiry(result.data.expiry);
       setUser(result.user);
       closeModal();
     }
@@ -64,6 +73,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem("user");
       setIsAuthenticated(false);
       setToken(null);
+      setExpiry(null);
       setUser(null);
 
       if (closeModal) {
@@ -80,9 +90,10 @@ export const AuthProvider = ({ children }) => {
 
     if (result.success) {
       dispatch(showAlert({ message: "You have successfully registered and have been logged in.", type: "success" }));
-      localStorage.setItem("token", result.token);
+      localStorage.setItem("token", result.data.token);
       localStorage.setItem("user", JSON.stringify(result.user));
-      setToken(result.token);
+      setToken(result.data.token);
+      setExpiry(result.data.expiry);
       setUser(result.user);
       closeModal();
     }

@@ -9,7 +9,7 @@ import { showAlert } from "../../app/slices/alertSlice";
 
 
 export default function ComboPost({ data }) {
-  const { title, image_url, text, id, user } = data;
+  const { title, image_url, text_html, id, user } = data;
   const [state, setState] = useState({ title: "", image_url: "", text: "" });
   const { modalConfig: { type } } = useModalConfig();
   const { closeModal } = useModal();
@@ -18,7 +18,7 @@ export default function ComboPost({ data }) {
 
   useEffect(() => {
     if (type === "update") {
-      setState({ title, image_url, text });
+      setState({ title, image_url, text: text_html });
     }
   }, [])
 
