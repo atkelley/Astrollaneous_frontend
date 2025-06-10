@@ -32,8 +32,8 @@ export default function Rovers() {
         <div className="rovers-nav-list">
           <button type="button" id="perseverance" className={tabSelect === "perseverance" ? 'selected' : null} onClick={(event) => fetchData(event.target.id)}>Perseverance</button>
           <button type="button" id="curiosity" className={tabSelect === "curiosity" ? 'selected' : null} onClick={(event) => fetchData(event.target.id)}>Curiosity</button>
-          <button type="button" id="spirit" className={tabSelect === "spirit" ? 'selected' : null} onClick={(event) => fetchData(event.target.id)}>Spirit</button>
-          <button type="button" id="opportunity" className={tabSelect === "opportunity" ? 'selected' : null} onClick={(event) => fetchData(event.target.id)}>Opportunity</button>
+          <button type="button" id="spirit" className={tabSelect === "spirit" ? 'selected' : null} onClick={(event) => fetchData(event.target.id)} disabled={true}>Spirit</button>
+          <button type="button" id="opportunity" className={tabSelect === "opportunity" ? 'selected' : null} onClick={(event) => fetchData(event.target.id)} disabled={true}>Opportunity</button>
         </div>
         {isLoaded ? <Rover rover={selectedRover} /> : <Spinner />}
       </section>
