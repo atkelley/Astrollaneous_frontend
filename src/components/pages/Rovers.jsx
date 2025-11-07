@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { getRoverData } from '../../api/nasa.api';
 import Rover from '../iterables/Rover';
 import Spinner from '../common/Spinner';
+import Error from '../common/Error';
 
 export default function Rovers() {
   const [tabSelect, setTabSelect] = useState("perseverance");
   const [selectedRover, setSelectedRover] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const fetchData = async (name) => {
     setIsLoaded(false);
@@ -19,6 +21,7 @@ export default function Rovers() {
       setIsLoaded(true);
     }).catch(error => {
       console.log(error);
+      setIsError(true);
     });
   };
 
@@ -35,7 +38,7 @@ export default function Rovers() {
           <button type="button" id="spirit" className={tabSelect === "spirit" ? 'selected' : null} onClick={(event) => fetchData(event.target.id)} disabled={true}>Spirit</button>
           <button type="button" id="opportunity" className={tabSelect === "opportunity" ? 'selected' : null} onClick={(event) => fetchData(event.target.id)} disabled={true}>Opportunity</button>
         </div>
-        {isLoaded ? <Rover rover={selectedRover} /> : <Spinner />}
+        {isLoaded ? <Rover rover={selectedRover} /> : !isLoaded && isError ? <Error /> : <Spinner />}
       </section>
     </main>
   );

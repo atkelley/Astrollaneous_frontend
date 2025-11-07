@@ -8,8 +8,9 @@ import Youtube from "../iterables/Youtube";
 import Loader from "../common/Loader";
 
 export default function Home() {
+  const [isLoaded, setIsLoaded] = useState(false);
   const [dailyData, setDailyData] = useState(NASA_DAILY_PHOTO_BACKUP_DATA);
-  const { media_type, date, title, copyright, explanation, url, hdUrl, isLoaded } = dailyData;
+  const { media_type, date, title, copyright, explanation, url, hdUrl } = dailyData;
   const { openModal } = useModal();
 
   useEffect(() => {
@@ -24,14 +25,15 @@ export default function Home() {
           copyright: copyright ? `${copyright} © 2025` : 'NASA © 2025',
           explanation: explanation.split(/(\w+\s){0,4}(Science:|Hemisphere Alert :|Gallery:|Universe:|Challenge:|Surprise:|Coverage:|Dial-A-Moon:|APOD Turns 30!:)/)[0],
           hdUrl: (media_type == 'image') ? hdurl : url,
-          url: (media_type == 'image') ? url : url,
-          isLoaded: true,
+          url: (media_type == 'image') ? url : url
         });
+        setIsLoaded(true);
       }).catch(error => {
         console.log(error);
+        setIsLoaded(true);
       });
     }
-  
+
     fetchData();
   }, []);
 

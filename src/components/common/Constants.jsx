@@ -26,8 +26,7 @@ export const NASA_DAILY_PHOTO_BACKUP_DATA = {
   The southern pair at the bottom of the image has two clusters that are close to approaching 
   each other for the first time.`,
   hdUrl: backup_image_large,
-  url: backup_image,
-  isLoaded: false,
+  url: backup_image
 };
 
 export const roverVideos = { 
