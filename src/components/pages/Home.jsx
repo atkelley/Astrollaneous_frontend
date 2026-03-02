@@ -23,7 +23,7 @@ export default function Home() {
           title, 
           media_type,
           copyright: copyright ? `${copyright} © 2025` : 'NASA © 2025',
-          explanation: explanation.split(/(\w+\s){0,4}(Science:|Hemisphere Alert :|Gallery:|Universe:|Challenge:|Surprise:|Coverage:|Dial-A-Moon:|APOD Turns 30!:|Did you know:)/)[0],
+          explanation: explanation.split(/(\w+\s){0,4}(Science:|Hemisphere Alert :|Gallery:|Universe:|Challenge:|Surprise:|Coverage:|Dial-A-Moon:|APOD Turns 30!:|Did you know:|Tonight:)/)[0],
           hdUrl: (media_type == 'image') ? hdurl : url,
           url: (media_type == 'image') ? url : url
         });
